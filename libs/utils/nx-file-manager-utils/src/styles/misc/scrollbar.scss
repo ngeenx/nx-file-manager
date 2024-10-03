@@ -1,5 +1,5 @@
 $scrollbar-size: 6px;
-$scrollbar-bg-color: white;
+$scrollbar-bg-color: transparent;
 $scrollbar-thumb-color: #d1d1d1;
 
 .custom-scrollbar {
@@ -14,7 +14,6 @@ $scrollbar-thumb-color: #d1d1d1;
   }
 
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: $scrollbar-bg-color;
     border-radius: $scrollbar-size;
   }
