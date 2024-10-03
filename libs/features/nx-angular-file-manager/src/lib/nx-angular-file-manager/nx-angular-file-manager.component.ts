@@ -5,11 +5,12 @@ import { folderIconData, fileIconData } from "@ngeenx/nx-file-manager-icons";
 
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
 import { ISidebarGroup } from "@ngeenx/nx-file-manager-utils";
+import { ExplorerComponent } from "./components/explorer/explorer.component";
 
 @Component({
   selector: "nx-angular-file-manager",
   standalone: true,
-  imports: [CommonModule, NxAngularSidebarComponent],
+  imports: [CommonModule, NxAngularSidebarComponent, ExplorerComponent],
   templateUrl: "./nx-angular-file-manager.component.html",
 })
 export class NxAngularFileManagerComponent implements OnInit {

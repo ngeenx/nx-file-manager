@@ -1,0 +1,11 @@
+.nx-file-manager-explorer {
+  @apply flex gap-2 w-full h-full bg-white;
+
+  &.grid-view {
+    @apply flex-row flex-wrap;
+  }
+
+  &.list-view {
+    @apply flex-col;
+  }
+}

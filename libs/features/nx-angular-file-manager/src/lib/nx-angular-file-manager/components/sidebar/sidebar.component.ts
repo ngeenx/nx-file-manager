@@ -14,12 +14,12 @@ export class NxAngularSidebarComponent implements AfterViewInit {
   @Input()
   public iconSet!: { [key: string]: string };
 
+  @Input()
+  public sidebarGroups!: ISidebarGroup[];
+
   public hasScrollableArea = false;
   public groupScrollPosition: ScrollPosition = ScrollPosition.MIDDLE;
   public ScrollPosition: typeof ScrollPosition = ScrollPosition;
-
-  @Input()
-  public sidebarGroups!: ISidebarGroup[];
 
   public ngAfterViewInit() {
     this.checkHasScroll();
