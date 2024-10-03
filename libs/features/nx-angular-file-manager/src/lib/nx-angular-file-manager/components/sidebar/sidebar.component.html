@@ -9,8 +9,8 @@
     [class]="{
       'bottom-scrollable-area-shadow':
         hasScrollableArea &&
-        (sidebarGroupScrollPosition === ScrollPosition.TOP ||
-          sidebarGroupScrollPosition === ScrollPosition.MIDDLE)
+        (groupScrollPosition === ScrollPosition.TOP ||
+          groupScrollPosition === ScrollPosition.MIDDLE)
     }"
     (scroll)="onGroupContainerScroll($event)"
   >

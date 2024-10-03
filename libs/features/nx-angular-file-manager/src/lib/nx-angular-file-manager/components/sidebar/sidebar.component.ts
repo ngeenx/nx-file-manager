@@ -12,44 +12,27 @@ export class NxAngularSidebarComponent implements AfterViewInit {
   public iconSet!: { [key: string]: string };
 
   public hasScrollableArea = false;
-  public sidebarGroupScrollPosition: ScrollPosition = ScrollPosition.MIDDLE;
+  public groupScrollPosition: ScrollPosition = ScrollPosition.MIDDLE;
   public ScrollPosition: typeof ScrollPosition = ScrollPosition;
 
   public ngAfterViewInit() {
     this.checkHasScroll();
   }
 
-  private checkHasScroll(): void {
-    const groupContainer = document.getElementById("group-container");
-
-    if (groupContainer) {
-      this.hasScrollableArea = ScrollUtils.hasScrollbar(groupContainer);
-    }
-  }
-
-  public onGroupContainerScroll(event: Event) {
+  public onGroupContainerScroll(event: Event): void {
     if (event.target) {
-      this.sidebarGroupScrollPosition = ScrollUtils.isScrollbarClosestTo(
+      this.groupScrollPosition = ScrollUtils.isScrollbarClosestTo(
         event.target as HTMLElement,
         15
       );
     }
 
     const scrollHeightTop = (event.target as HTMLElement).scrollTop,
-      scrollHeightBottom =
-        (event.target as HTMLElement).scrollTop -
-        (event.target as HTMLElement).scrollHeight,
       currentElement = ScrollUtils.getTopVisibleElement(event);
 
     let curentElementTitleId = (currentElement as HTMLElement).querySelector(
       "h2"
     )?.id;
-
-    console.log(
-      scrollHeightBottom,
-      (event.target as HTMLElement).scrollTop,
-      (event.target as HTMLElement).scrollHeight
-    );
 
     if (scrollHeightTop < 15) {
       curentElementTitleId = "none";
@@ -65,6 +48,14 @@ export class NxAngularSidebarComponent implements AfterViewInit {
             element.classList.remove("fixed-title");
           }
         });
+    }
+  }
+
+  private checkHasScroll(): void {
+    const groupContainer = document.getElementById("group-container");
+
+    if (groupContainer) {
+      this.hasScrollableArea = ScrollUtils.hasScrollbar(groupContainer);
     }
   }
 }
