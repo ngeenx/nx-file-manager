@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ngeenx/nx-file-manager-icons": [
+        "libs/utils/nx-file-manager-icons/src/index.ts"
+      ],
+      "@ngeenx/nx-file-manager-utils": [
+        "libs/utils/nx-file-manager-utils/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

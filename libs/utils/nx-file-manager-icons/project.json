@@ -1,0 +1,32 @@
+{
+  "name": "nx-file-manager-icons",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/utils/nx-file-manager-icons/src",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/utils/nx-file-manager-icons",
+        "main": "libs/utils/nx-file-manager-icons/src/index.ts",
+        "tsConfig": "libs/utils/nx-file-manager-icons/tsconfig.lib.json",
+        "assets": ["libs/utils/nx-file-manager-icons/*.md"]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    }
+  }
+}

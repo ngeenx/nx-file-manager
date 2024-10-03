@@ -1,0 +1,29 @@
+{
+  "name": "@ngeenx/nx-file-manager-utils",
+  "version": "0.0.1",
+  "dependencies": {},
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/js:tsc",
+        "options": {
+          "main": "libs/utils/nx-file-manager-utils/src/index.ts",
+          "additionalEntryPoints": [
+            "libs/utils/nx-file-manager-utils/src/icons.ts",
+            "libs/utils/nx-file-manager-utils/src/utils.ts"
+          ],
+          "generateExportsField": true
+        }
+      }
+    }
+  },
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "typings": "./index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts",
+    "./icons": "./src/icons.ts",
+    "./utils": "./src/utils.ts"
+  }
+}
