@@ -9,16 +9,19 @@
 
     <!-- Group Container -->
     <div
+      id="group-container"
       class="relative flex flex-col gap-5 pr-4 overflow-auto"
+      [class]="{
+        'shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px]':
+          hasScrollableArea &&
+          (sidebarGroupScrollPosition === ScrollPosition.TOP ||
+            sidebarGroupScrollPosition === ScrollPosition.MIDDLE)
+      }"
       (scroll)="onGroupContainerScroll($event)"
     >
       @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
       <!-- Group -->
-      <div
-        [id]="'group-' + item"
-        class="flex flex-col gap-3"
-        data-group-container=""
-      >
+      <div [id]="'group-' + item" class="flex flex-col gap-3">
         <h2
           [id]="'group-title-' + item"
           class="px-2 py-1 text-sm font-bold transition-all duration-300 ease-in-out rounded-md bg-gray-50"

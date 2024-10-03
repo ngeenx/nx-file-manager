@@ -1,3 +1,9 @@
+export enum ScrollPosition {
+  TOP = "top",
+  BOTTOM = "bottom",
+  MIDDLE = "middle",
+}
+
 export class ScrollUtils {
   static getTopVisibleElement(event: Event): Element | null {
     if (!event.target) {
@@ -21,5 +27,34 @@ export class ScrollUtils {
     });
 
     return closestElement ?? null;
+  }
+
+  static hasScrollbar(element: Element): boolean {
+    return (
+      element.scrollHeight > element.clientHeight ||
+      element.scrollWidth > element.clientWidth
+    );
+  }
+
+  static isScrollbarClosestTo(
+    element: Element,
+    threshold: number
+  ): ScrollPosition {
+    const scrollTop = element.scrollTop,
+      scrollHeight = element.scrollHeight,
+      clientHeight = element.clientHeight;
+
+    // check distance to top and bottom
+    const distanceToTop = scrollTop,
+      distanceToBottom = scrollHeight - clientHeight - scrollTop;
+
+    // determine if closer to top or bottom
+    if (distanceToTop <= threshold) {
+      return ScrollPosition.TOP;
+    } else if (distanceToBottom <= threshold) {
+      return ScrollPosition.BOTTOM;
+    }
+
+    return ScrollPosition.MIDDLE;
   }
 }

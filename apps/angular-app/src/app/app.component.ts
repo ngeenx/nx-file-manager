@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { NxWelcomeComponent } from "./nx-welcome.component";
 
 import { folderIconData, fileIconData } from "@ngeenx/nx-file-manager-icons";
-import { ScrollUtils } from "@ngeenx/nx-file-manager-utils";
+import { ScrollPosition, ScrollUtils } from "@ngeenx/nx-file-manager-utils";
 
 @Component({
   standalone: true,
@@ -12,22 +12,53 @@ import { ScrollUtils } from "@ngeenx/nx-file-manager-utils";
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   public iconSet: { [key: string]: string } = {
     folderIconData,
     fileIconData,
   };
 
+  public hasScrollableArea = false;
+  public sidebarGroupScrollPosition: ScrollPosition = ScrollPosition.MIDDLE;
+  public ScrollPosition: typeof ScrollPosition = ScrollPosition;
+
+  public ngAfterViewInit() {
+    const groupContainer = document.getElementById("group-container");
+
+    if (groupContainer) {
+      console.log(groupContainer, ScrollUtils.hasScrollbar(groupContainer));
+      this.hasScrollableArea = ScrollUtils.hasScrollbar(groupContainer);
+    }
+  }
+
   public onGroupContainerScroll(event: Event) {
+    if (event.target) {
+      this.sidebarGroupScrollPosition = ScrollUtils.isScrollbarClosestTo(
+        event.target as HTMLElement,
+        15
+      );
+    }
+
     const scrollHeightTop = (event.target as HTMLElement).scrollTop,
+      scrollHeightBottom =
+        (event.target as HTMLElement).scrollTop -
+        (event.target as HTMLElement).scrollHeight,
       currentElement = ScrollUtils.getTopVisibleElement(event);
 
     let curentElementTitleId = (currentElement as HTMLElement).querySelector(
       "h2"
     )?.id;
 
+    console.log(
+      scrollHeightBottom,
+      (event.target as HTMLElement).scrollTop,
+      (event.target as HTMLElement).scrollHeight
+    );
+
     if (scrollHeightTop < 15) {
       curentElementTitleId = "none";
+    } else {
+      // this.isScrollbarReachEnd =
     }
 
     if (currentElement) {
