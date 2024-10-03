@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { folderIconData, fileIconData } from "@ngeenx/nx-file-manager-icons";
 
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
-import { ISidebarGroup } from "@ngeenx/nx-file-manager-utils";
+import { IFileGroup } from "@ngeenx/nx-file-manager-utils";
 import { ExplorerComponent } from "./components/explorer/explorer.component";
 
 @Component({
@@ -19,7 +19,7 @@ export class NxAngularFileManagerComponent implements OnInit {
     fileIconData,
   };
 
-  public sidebarGroups: ISidebarGroup[] = [];
+  public sidebarGroups: IFileGroup[] = [];
 
   public ngOnInit(): void {
     this.sidebarGroups = Array.from({ length: 10 }).map((_, i) => ({

@@ -1,10 +1,11 @@
-export interface ISidebarGroup {
+export interface IFileGroup {
   id: string | number;
   name: string;
-  items: ISidebarItem[];
+  items?: IFile[];
+  preview?: string;
 }
 
-export interface ISidebarItem {
+export interface IFile {
   icon: string;
   name: string;
   path: string;

@@ -1,6 +1,6 @@
 import { Component, Input, AfterViewInit } from "@angular/core";
 import {
-  ISidebarGroup,
+  IFileGroup,
   ScrollPosition,
   ScrollUtils,
 } from "@ngeenx/nx-file-manager-utils";
@@ -15,7 +15,7 @@ export class NxAngularSidebarComponent implements AfterViewInit {
   public iconSet!: { [key: string]: string };
 
   @Input()
-  public sidebarGroups!: ISidebarGroup[];
+  public sidebarGroups!: IFileGroup[];
 
   public hasScrollableArea = false;
   public groupScrollPosition: ScrollPosition = ScrollPosition.MIDDLE;
