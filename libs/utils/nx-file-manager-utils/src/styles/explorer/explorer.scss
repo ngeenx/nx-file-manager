@@ -1,5 +1,5 @@
 .nx-file-manager-explorer {
-  @apply flex flex-col bg-white p-6;
+  @apply flex flex-col bg-white p-6 h-full w-full overflow-auto;
 
   .files {
     @apply flex gap-2 w-full h-full;

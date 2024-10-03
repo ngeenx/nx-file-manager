@@ -5,6 +5,7 @@ import {
   ScrollUtils,
 } from "@ngeenx/nx-file-manager-utils";
 import { NxAngularSidebarGroupComponent } from "./sidebar-group/sidebar-group.component";
+import { timer } from "rxjs";
 
 @Component({
   selector: "nx-angular-sidebar",
@@ -24,7 +25,7 @@ export class NxAngularSidebarComponent implements AfterViewInit {
   public ScrollPosition: typeof ScrollPosition = ScrollPosition;
 
   public ngAfterViewInit() {
-    this.checkHasScroll();
+    timer(100).subscribe(() => this.checkHasScroll());
   }
 
   public onGroupContainerScroll(event: Event): void {
