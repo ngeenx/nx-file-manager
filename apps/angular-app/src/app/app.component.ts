@@ -19,11 +19,8 @@ export class AppComponent {
   };
 
   public onGroupContainerScroll(event: Event) {
-    const scrollHeightTop = (event.target as HTMLElement).scrollTop;
-
-    console.log(scrollHeightTop);
-
-    const currentElement = ScrollUtils.getTopVisibleElement(event);
+    const scrollHeightTop = (event.target as HTMLElement).scrollTop,
+      currentElement = ScrollUtils.getTopVisibleElement(event);
 
     let curentElementTitleId = (currentElement as HTMLElement).querySelector(
       "h2"
