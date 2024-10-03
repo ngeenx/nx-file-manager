@@ -2,7 +2,7 @@
 <div class="flex flex-row h-full cursor-default">
   <!-- Sidebar -->
   <div
-    class="flex flex-col w-[300px] h-full gap-5 pl-8 py-8 pr-6 bg-gray-50 backdrop-blur-md"
+    class="flex flex-col w-[300px] h-full gap-5 pl-8 py-8 pr-4 bg-gray-50 backdrop-blur-md"
   >
     <!-- Sidebar Title -->
     <h1 class="text-lg font-bold">nx-file-manger</h1>
@@ -34,9 +34,13 @@
           @for (item of [1,1,1,1,1,1,1]; track $index) {
           <!-- Folder -->
           <li
-            class="flex flex-row items-center justify-center gap-2 px-2 text-gray-800 transition-all duration-300 ease-in-out rounded hover:bg-gray-200/60"
+            class="flex flex-row items-center justify-center gap-2 px-2 py-2 text-gray-800 transition-all duration-300 ease-in-out rounded cursor-pointer hover:bg-gray-200/60"
           >
-            <svg viewBox="0 0 24 24" class="fill-current stroke-current size-8">
+            <svg
+              viewBox="0 0 24 24"
+              class="fill-current stroke-current"
+              width="50"
+            >
               <path [attr.d]="iconSet['folderIconData']" />
             </svg>
 
@@ -47,9 +51,13 @@
 
           <!-- File -->
           <li
-            class="flex flex-row items-center justify-center gap-2 px-2 text-gray-800 transition-all duration-300 ease-in-out rounded hover:bg-gray-200/60"
+            class="flex flex-row items-center justify-center gap-2 px-2 py-2 text-gray-800 transition-all duration-300 ease-in-out rounded cursor-pointer hover:bg-gray-200/60"
           >
-            <svg viewBox="0 0 24 24" class="fill-current stroke-current size-8">
+            <svg
+              viewBox="0 0 24 24"
+              class="fill-current stroke-current"
+              width="50"
+            >
               <path [attr.d]="iconSet['fileIconData']" />
             </svg>
 
