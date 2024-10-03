@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ngeenx/nx-angular-file-manager": [
+        "libs/features/nx-angular-file-manager/src/index.ts"
+      ],
       "@ngeenx/nx-file-manager-icons": [
         "libs/utils/nx-file-manager-icons/src/index.ts"
       ],
