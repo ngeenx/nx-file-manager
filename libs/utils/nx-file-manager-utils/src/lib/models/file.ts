@@ -1,3 +1,9 @@
+export enum FileType {
+  FOLDER = "folder",
+  FILE = "file",
+  SYMLINK = "symlink",
+}
+
 export interface IFileGroup {
   id: string | number;
   name: string;
@@ -10,6 +16,6 @@ export interface IFile {
   icon: string;
   name: string;
   path: string;
-  type: string;
+  type: FileType;
   selected?: boolean;
 }

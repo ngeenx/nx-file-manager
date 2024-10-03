@@ -1,1 +1,15 @@
-<div class="nx-file-manager-explorer grid-view"></div>
+<div class="nx-file-manager-explorer">
+  <div class="files grid-view">
+    @for (file of files; track $index) {
+    <div class="file">
+      <svg viewBox="0 0 24 24" width="20" class="icon">
+        <path [attr.d]="iconSet[file.icon]" />
+      </svg>
+
+      <span class="name">
+        {{ file.name }}
+      </span>
+    </div>
+    }
+  </div>
+</div>

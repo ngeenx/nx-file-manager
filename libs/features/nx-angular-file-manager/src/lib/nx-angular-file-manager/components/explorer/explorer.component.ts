@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { IFile } from "@ngeenx/nx-file-manager-utils";
 
 @Component({
   selector: "nx-angular-explorer",
@@ -8,4 +9,7 @@ import { Component, Input } from "@angular/core";
 export class ExplorerComponent {
   @Input()
   public iconSet!: { [key: string]: string };
+
+  @Input()
+  public files?: IFile[] = [];
 }

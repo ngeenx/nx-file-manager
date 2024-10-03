@@ -1,5 +1,5 @@
 .nx-file-manager-sidebar {
-  @apply flex flex-col w-[300px] h-full gap-5 pl-4 py-8 pr-4 bg-gray-50 backdrop-blur-md;
+  @apply flex flex-col w-[300px] h-full gap-5 pl-4 py-6 pr-4 bg-gray-50 backdrop-blur-md;
 
   .group-container {
     @apply relative flex flex-col gap-2 pr-4 overflow-auto;
