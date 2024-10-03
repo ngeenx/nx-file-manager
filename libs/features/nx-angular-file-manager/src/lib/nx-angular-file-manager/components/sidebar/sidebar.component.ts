@@ -1,5 +1,9 @@
 import { Component, Input, AfterViewInit } from "@angular/core";
-import { ScrollPosition, ScrollUtils } from "@ngeenx/nx-file-manager-utils";
+import {
+  ISidebarGroup,
+  ScrollPosition,
+  ScrollUtils,
+} from "@ngeenx/nx-file-manager-utils";
 
 @Component({
   selector: "nx-angular-sidebar",
@@ -13,6 +17,9 @@ export class NxAngularSidebarComponent implements AfterViewInit {
   public hasScrollableArea = false;
   public groupScrollPosition: ScrollPosition = ScrollPosition.MIDDLE;
   public ScrollPosition: typeof ScrollPosition = ScrollPosition;
+
+  @Input()
+  public sidebarGroups!: ISidebarGroup[];
 
   public ngAfterViewInit() {
     this.checkHasScroll();
