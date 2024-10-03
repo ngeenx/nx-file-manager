@@ -4,7 +4,6 @@ import { ScrollPosition, ScrollUtils } from "@ngeenx/nx-file-manager-utils";
 @Component({
   selector: "nx-angular-sidebar",
   templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"],
   standalone: true,
 })
 export class NxAngularSidebarComponent implements AfterViewInit {

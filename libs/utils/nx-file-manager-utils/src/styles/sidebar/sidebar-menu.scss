@@ -4,7 +4,7 @@
   .group-container {
     @apply relative flex flex-col gap-5 pr-4 overflow-auto;
 
-    .bottom-scrollable-area-shadow {
+    &.bottom-scrollable-area-shadow {
       @apply shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px];
     }
 
