@@ -1,0 +1,41 @@
+.nx-file-manager-sidebar {
+  @apply flex flex-col w-[300px] h-full gap-5 pl-8 py-8 pr-4 bg-gray-50 backdrop-blur-md;
+
+  .group-container {
+    @apply relative flex flex-col gap-5 pr-4 overflow-auto;
+
+    .bottom-scrollable-area-shadow {
+      @apply shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px];
+    }
+
+    .group {
+      @apply flex flex-col gap-3;
+
+      .title {
+        @apply px-2 py-1 text-sm font-bold transition-all duration-300
+          ease-in-out rounded-md bg-gray-50;
+
+        &.fixed-title {
+          @apply sticky top-0 shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px];
+        }
+      }
+
+      .file-list {
+        @apply flex flex-col gap-1 text-xs;
+
+        .file {
+          @apply flex flex-row items-center justify-center gap-2 px-2 py-2 text-gray-800
+            transition-all duration-300 ease-in-out rounded cursor-pointer hover:bg-gray-200/60;
+
+          .icon {
+            @apply fill-current stroke-current;
+          }
+
+          .name {
+            @apply truncate;
+          }
+        }
+      }
+    }
+  }
+}

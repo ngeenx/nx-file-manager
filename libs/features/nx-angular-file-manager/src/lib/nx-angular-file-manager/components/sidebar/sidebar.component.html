@@ -1,0 +1,52 @@
+<div class="nx-file-manager-sidebar">
+  <!-- Sidebar Title -->
+  <h1 class="text-lg font-bold">nx-file-manger</h1>
+
+  <!-- Group Container -->
+  <div
+    id="group-container"
+    class="group-container"
+    [class]="{
+      'bottom-scrollable-area-shadow':
+        hasScrollableArea &&
+        (sidebarGroupScrollPosition === ScrollPosition.TOP ||
+          sidebarGroupScrollPosition === ScrollPosition.MIDDLE)
+    }"
+    (scroll)="onGroupContainerScroll($event)"
+  >
+    @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+    <!-- Group -->
+    <div [id]="'group-' + item" class="group">
+      <!-- Group Title -->
+      <h2 [id]="'group-title-' + item" class="title">Group Group {{ item }}</h2>
+
+      <!-- Group Inner Container -->
+      <ul class="file-list">
+        @for (item of [1,1,1,1,1,1,1]; track $index) {
+        <!-- Folder -->
+        <li class="file">
+          <svg viewBox="0 0 24 24" width="50" class="icon">
+            <path [attr.d]="iconSet['folderIconData']" />
+          </svg>
+
+          <span class="name">
+            Folder Folder Folder Folder 1234454535 43545345 34r43543543 345345
+          </span>
+        </li>
+
+        <!-- File -->
+        <li class="file">
+          <svg viewBox="0 0 24 24" width="50" class="icon">
+            <path [attr.d]="iconSet['fileIconData']" />
+          </svg>
+
+          <span class="name">
+            Folder Folder Folder Folder 1234454535 43545345 34r43543543 345345
+          </span>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+</div>
