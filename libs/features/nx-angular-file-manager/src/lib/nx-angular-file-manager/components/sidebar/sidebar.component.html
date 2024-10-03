@@ -15,29 +15,7 @@
     (scroll)="onGroupContainerScroll($event)"
   >
     @for (group of sidebarGroups; track $index) {
-    <!-- Group -->
-    <div [id]="'group-' + group.id" class="group">
-      <!-- Group Title -->
-      <h2 [id]="'group-title-' + group.id" class="title">
-        Group Group {{ group.id }}
-      </h2>
-
-      <!-- Group Inner Container -->
-      <ul class="file-list">
-        @for (item of group.items; track $index) {
-        <!-- File/Folder -->
-        <li class="file">
-          <svg viewBox="0 0 24 24" width="20" class="icon">
-            <path [attr.d]="iconSet[item.icon]" />
-          </svg>
-
-          <span class="name">
-            {{ item.name }}
-          </span>
-        </li>
-        }
-      </ul>
-    </div>
+    <nx-angular-sidebar-group [group]="group" [iconSet]="iconSet" />
     }
   </div>
 </div>

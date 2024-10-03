@@ -3,6 +3,7 @@ export interface IFileGroup {
   name: string;
   items?: IFile[];
   preview?: string;
+  isCollapsed?: boolean;
 }
 
 export interface IFile {
