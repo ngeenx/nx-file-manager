@@ -2,7 +2,9 @@
   "name": "@nx-file-manager/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "angular:start": "nx serve angular-app"
+  },
   "private": false,
   "devDependencies": {
     "@angular-devkit/build-angular": "~18.2.0",
