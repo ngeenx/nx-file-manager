@@ -1,20 +1,28 @@
 .nx-file-manager-explorer {
-  @apply flex flex-col bg-white p-6 h-full w-full overflow-auto;
+  @apply flex flex-col bg-white/90 backdrop-blur-lg p-6 h-full w-full
+    overflow-auto;
 
   .files {
-    @apply flex gap-2 w-full h-full;
+    @apply flex gap-2 w-full h-full justify-center items-center;
 
     &.grid-view {
       @apply flex-row flex-wrap;
 
       .file {
         @apply flex-col justify-center items-center gap-2 p-3
-          hover:bg-gray-100 rounded-md cursor-pointer
+          hover:bg-gray-100/70 hover:border hover:border-gray-300
+          rounded-md cursor-pointer
           transition-all duration-300 ease-in-out
           size-20;
 
+        &:hover {
+          .icon {
+            @apply scale-110;
+          }
+        }
+
         .icon {
-          @apply size-8;
+          @apply size-8 transition-all duration-300 ease-in-out;
 
           &.image {
             @apply object-cover w-full rounded-sm;
