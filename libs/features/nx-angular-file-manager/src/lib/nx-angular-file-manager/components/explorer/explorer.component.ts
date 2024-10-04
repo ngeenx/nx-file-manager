@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IFile } from "@ngeenx/nx-file-manager-utils";
+import { IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 
 @Component({
   selector: "nx-angular-explorer",
@@ -12,4 +12,6 @@ export class ExplorerComponent {
 
   @Input()
   public files?: IFile[] = [];
+
+  public UrlUtils: typeof UrlUtils = UrlUtils;
 }

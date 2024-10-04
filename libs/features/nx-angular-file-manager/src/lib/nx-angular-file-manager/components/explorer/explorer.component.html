@@ -2,9 +2,13 @@
   <div class="files grid-view">
     @for (file of files; track $index) {
     <div class="file">
+      @if (UrlUtils.isHttpUrl(file.icon)) {
+      <img [src]="file.icon" class="icon image" [alt]="file.name" />
+      } @else {
       <svg viewBox="0 0 24 24" width="20" class="icon">
         <path [attr.d]="iconSet[file.icon]" />
       </svg>
+      }
 
       <span class="name">
         {{ file.name }}

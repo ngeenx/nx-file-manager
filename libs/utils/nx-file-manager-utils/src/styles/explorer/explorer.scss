@@ -15,6 +15,10 @@
 
         .icon {
           @apply size-8;
+
+          &.image {
+            @apply object-cover w-full rounded-sm;
+          }
         }
 
         .name {

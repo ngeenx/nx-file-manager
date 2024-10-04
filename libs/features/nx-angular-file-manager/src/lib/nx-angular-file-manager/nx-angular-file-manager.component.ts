@@ -41,5 +41,12 @@ export class NxAngularFileManagerComponent implements OnInit {
       path: `file-${i + 1}`,
       type: i % 2 === 0 ? FileType.FILE : FileType.FOLDER,
     }));
+
+    this.files.push({
+      icon: "https://images.unsplash.com/photo-1727042395792-803ce6f1b9bb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: `File file File file File ${this.files.length + 1}`,
+      path: `file-${this.files.length + 1}`,
+      type: this.files.length % 2 === 0 ? FileType.FILE : FileType.FOLDER,
+    });
   }
 }
