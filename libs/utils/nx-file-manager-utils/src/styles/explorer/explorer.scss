@@ -1,25 +1,18 @@
 .nx-file-manager-explorer {
-  @apply flex flex-col bg-white/90 backdrop-blur-lg p-6 h-full w-full
+  @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full
     overflow-auto;
 
   .files {
-    @apply flex gap-2 w-full h-full justify-center items-center;
+    @apply flex gap-2 w-full h-full justify-center items-center p-6;
 
     &.grid-view {
       @apply flex-row flex-wrap;
 
       .file {
         @apply flex-col justify-center items-center gap-2 p-3
-          hover:bg-gray-100/70 hover:border hover:border-gray-300
           rounded-md cursor-pointer
           transition-all duration-300 ease-in-out
           size-20;
-
-        &:hover {
-          .icon {
-            @apply scale-110;
-          }
-        }
 
         .icon {
           @apply size-8 transition-all duration-300 ease-in-out;
@@ -41,6 +34,20 @@
 
     .file {
       @apply flex;
+
+      &.hoverable {
+        &:hover {
+          @apply hover:bg-gray-100/70 hover:border hover:border-gray-300;
+
+          .icon {
+            @apply scale-110;
+          }
+        }
+      }
+
+      &.selected {
+        @apply bg-gray-100/70 border border-gray-300;
+      }
     }
   }
 }

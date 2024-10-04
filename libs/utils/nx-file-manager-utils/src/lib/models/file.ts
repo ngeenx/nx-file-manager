@@ -13,9 +13,10 @@ export interface IFileGroup {
 }
 
 export interface IFile {
+  id: string | number;
   icon: string;
   name: string;
   path: string;
   type: FileType;
-  selected?: boolean;
+  isSelected?: boolean;
 }

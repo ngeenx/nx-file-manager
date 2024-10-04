@@ -1,7 +1,14 @@
-<div class="nx-file-manager-explorer">
+<div class="nx-file-manager-explorer selection-area-container">
   <div class="files grid-view">
     @for (file of files; track $index) {
-    <div class="file">
+    <div
+      [id]="file.id"
+      class="file"
+      [class]="{
+        selected: file.isSelected,
+        hoverable: !isSelecting
+      }"
+    >
       @if (UrlUtils.isHttpUrl(file.icon)) {
       <img [src]="file.icon" class="icon image" [alt]="file.name" />
       } @else {

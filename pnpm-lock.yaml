@@ -32,6 +32,9 @@ importers:
       '@angular/router':
         specifier: ~18.2.0
         version: 18.2.7(@angular/common@18.2.7(@angular/core@18.2.7(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.7(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@18.2.7(@angular/animations@18.2.7(@angular/core@18.2.7(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@18.2.7(@angular/core@18.2.7(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.7(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
+      '@viselect/vanilla':
+        specifier: ^3.6.0
+        version: 3.6.0
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1
@@ -2778,6 +2781,9 @@ packages:
   '@verdaccio/utils@7.0.1-next-8.1':
     resolution: {integrity: sha512-cyJdRrVa+8CS7UuIQb3K3IJFjMe64v38tYiBnohSmhRbX7dX9IT3jWbjrwkqWh4KeS1CS6BYENrGG1evJ2ggrQ==}
     engines: {node: '>=12'}
+
+  '@viselect/vanilla@3.6.0':
+    resolution: {integrity: sha512-YVr1zr53vCZ9HLlLF3xURB4JpVzl8ZPI2InCxXPbjup6EmsO9aNG8v6z5AepjekRqj8R0l58sVCXx9S9+2mg0w==}
 
   '@vitejs/plugin-basic-ssl@1.1.0':
     resolution: {integrity: sha512-wO4Dk/rm8u7RNhOf95ZzcEmC9rYOncYgvq4z3duaJrCgjN8BxAnDVyndanfcJZ0O6XZzHz6Q0hTimxTg8Y9g/A==}
@@ -12070,6 +12076,8 @@ snapshots:
       lodash: 4.17.21
       minimatch: 7.4.6
       semver: 7.6.3
+
+  '@viselect/vanilla@3.6.0': {}
 
   '@vitejs/plugin-basic-ssl@1.1.0(vite@5.4.6(@types/node@18.16.9)(less@4.1.3)(sass@1.79.4)(stylus@0.59.0)(terser@5.31.6))':
     dependencies:

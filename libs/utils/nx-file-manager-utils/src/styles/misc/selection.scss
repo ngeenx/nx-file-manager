@@ -1,0 +1,7 @@
+.selection-area {
+  @apply border border-yellow-600 bg-yellow-200/40 rounded-md;
+}
+
+.selection-area-container {
+  @apply select-none;
+}

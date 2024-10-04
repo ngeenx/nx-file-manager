@@ -4,8 +4,8 @@ export class UrlUtils {
 
     try {
       url = new URL(text);
-    } catch (error) {
-      console.error(error);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       return false;
     }
 
