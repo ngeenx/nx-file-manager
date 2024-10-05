@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: "nx-angular-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
+  imports: [DragDropModule],
 })
 export class ExplorerComponent implements OnInit {
   @Input()
@@ -120,42 +122,42 @@ export class ExplorerComponent implements OnInit {
       },
     });
 
+    const isTargetElementFile = (event: SelectionEvent): boolean => {
+      return (
+        (
+          event.event?.target as HTMLElement
+        )?.parentElement?.classList?.contains("file") ||
+        (event.event?.target as HTMLElement)?.classList?.contains("file") ||
+        false
+      );
+    };
+
     selection
       .on("beforestart", (event: SelectionEvent) => {
-        if (
-          (
-            event.event?.target as HTMLElement
-          )?.parentElement?.classList?.contains("file")
-        ) {
+        if (isTargetElementFile(event)) {
           this.isSelecting = false;
 
           return false;
         }
 
-        // this.files?.forEach((file: IFile) => {
-        //   file.isSelected = false;
+        this.files?.forEach((file: IFile) => {
+          file.isSelected = false;
 
-        //   return file;
-        // });
+          return file;
+        });
 
         this.isSelecting = true;
 
         return true;
       })
       .on("beforedrag", (event: SelectionEvent) => {
-        if (
-          (
-            event.event?.target as HTMLElement
-          )?.parentElement?.classList?.contains("file")
-        ) {
+        if (isTargetElementFile(event)) {
           this.isSelecting = false;
 
           return false;
         }
 
         return true;
-        // Same as 'beforestart' but before a selection via dragging happens.
-        // console.log("beforedrag", evt);
       })
       .on("start", (evt) => {
         // A selection got initiated, you could now clear the previous selection or
