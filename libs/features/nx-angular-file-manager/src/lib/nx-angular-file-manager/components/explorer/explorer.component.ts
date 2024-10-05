@@ -132,17 +132,17 @@ export class ExplorerComponent implements OnInit {
           return false;
         }
 
-        this.files?.forEach((file: IFile) => {
-          file.isSelected = false;
+        // this.files?.forEach((file: IFile) => {
+        //   file.isSelected = false;
 
-          return file;
-        });
+        //   return file;
+        // });
 
         this.isSelecting = true;
 
         return true;
       })
-      .on("beforedrag", (event) => {
+      .on("beforedrag", (event: SelectionEvent) => {
         if (
           (
             event.event?.target as HTMLElement
@@ -164,7 +164,7 @@ export class ExplorerComponent implements OnInit {
       })
       .on("move", (evt) => {
         // Here you can update elements based on their state.
-        // console.log("move", evt);
+        console.log("move", evt);
       })
       .on("stop", (event: SelectionEvent) => {
         console.log("stop", event);
@@ -180,5 +180,19 @@ export class ExplorerComponent implements OnInit {
 
         this.isSelecting = false;
       });
+  }
+
+  public onFilesAreaClick(event: Event): void {
+    const classList = Array.from((event.target as HTMLElement).classList || []),
+      excludedClasses = ["files", "file"];
+
+    // if classList is not empty and contains any of the excluded classes, it means
+    // that the click happened on a file or a group of files.
+    if (
+      classList &&
+      classList.some((item: string) => excludedClasses.includes(item))
+    ) {
+      this.isSelecting = false;
+    }
   }
 }

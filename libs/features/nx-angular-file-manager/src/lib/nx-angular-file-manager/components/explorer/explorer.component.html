@@ -2,7 +2,7 @@
   <h1>
     {{ isSelecting }}
   </h1>
-  <div class="files grid-view">
+  <div class="files grid-view" (click)="onFilesAreaClick($event)">
     @for (file of files; track $index) {
     <div
       [id]="file.id"

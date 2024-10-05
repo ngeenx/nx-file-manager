@@ -9,8 +9,8 @@
       @apply flex-row flex-wrap;
 
       .file {
-        @apply flex-col justify-center items-center gap-2 p-3
-          rounded-md cursor-pointer size-20;
+        @apply flex-col justify-center items-center gap-2 px-3 py-2
+          rounded-md cursor-pointer size-24;
 
         .icon {
           @apply size-8 transition-all duration-300 ease-in-out;
@@ -31,7 +31,8 @@
     }
 
     .file {
-      @apply flex transition-all duration-100 ease-in-out;
+      @apply flex border border-gray-200
+        transition-all duration-100 ease-in-out;
 
       &.hoverable {
         &:hover {
