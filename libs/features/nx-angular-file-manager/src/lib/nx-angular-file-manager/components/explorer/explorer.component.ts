@@ -121,7 +121,17 @@ export class ExplorerComponent implements OnInit {
     });
 
     selection
-      .on("beforestart", () => {
+      .on("beforestart", (event: SelectionEvent) => {
+        if (
+          (
+            event.event?.target as HTMLElement
+          )?.parentElement?.classList?.contains("file")
+        ) {
+          this.isSelecting = false;
+
+          return false;
+        }
+
         this.files?.forEach((file: IFile) => {
           file.isSelected = false;
 
@@ -129,10 +139,23 @@ export class ExplorerComponent implements OnInit {
         });
 
         this.isSelecting = true;
+
+        return true;
       })
-      .on("beforedrag", (evt) => {
+      .on("beforedrag", (event) => {
+        if (
+          (
+            event.event?.target as HTMLElement
+          )?.parentElement?.classList?.contains("file")
+        ) {
+          this.isSelecting = false;
+
+          return false;
+        }
+
+        return true;
         // Same as 'beforestart' but before a selection via dragging happens.
-        console.log("beforedrag", evt);
+        // console.log("beforedrag", evt);
       })
       .on("start", (evt) => {
         // A selection got initiated, you could now clear the previous selection or
@@ -141,9 +164,10 @@ export class ExplorerComponent implements OnInit {
       })
       .on("move", (evt) => {
         // Here you can update elements based on their state.
-        console.log("move", evt);
+        // console.log("move", evt);
       })
       .on("stop", (event: SelectionEvent) => {
+        console.log("stop", event);
         const selectedFileIds: string[] = event.store.selected?.map(
           (fileElement: Element) => fileElement.id
         );
