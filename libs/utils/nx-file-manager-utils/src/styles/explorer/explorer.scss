@@ -1,9 +1,9 @@
 .nx-file-manager-explorer {
-  @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full
-    overflow-auto;
+  @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
 
   .files {
-    @apply flex gap-2 w-full h-full justify-center items-center p-6;
+    @apply flex gap-2 w-full h-full justify-center items-center p-6
+      overflow-auto;
 
     &.grid-view {
       @apply flex-row flex-wrap;
@@ -46,7 +46,7 @@
       }
 
       &.selected {
-        @apply bg-gray-100/70 border border-gray-300;
+        @apply bg-yellow-100/70 border border-yellow-300;
       }
     }
   }

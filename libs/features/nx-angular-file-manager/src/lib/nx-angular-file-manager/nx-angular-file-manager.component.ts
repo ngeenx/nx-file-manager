@@ -36,7 +36,7 @@ export class NxAngularFileManagerComponent implements OnInit {
       isCollapsed: false,
     }));
 
-    this.files = Array.from({ length: 1000 }).map((_, i) => ({
+    this.files = Array.from({ length: 200 }).map((_, i) => ({
       id: i + 1,
       icon: i % 2 === 0 ? "fileIconData" : "folderIconData",
       name: `File file File file File ${i + 1}`,

@@ -1,4 +1,7 @@
-<div class="nx-file-manager-explorer selection-area-container">
+<div class="nx-file-manager-explorer">
+  <h1>
+    {{ isSelecting }}
+  </h1>
   <div class="files grid-view">
     @for (file of files; track $index) {
     <div
