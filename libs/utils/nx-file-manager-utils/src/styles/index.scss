@@ -2,10 +2,14 @@
 @import "./misc/scrollbar.scss";
 @import "./misc/selection.scss";
 
+// base
+@import "./nx-file-manager.scss";
+
 // sidebar
 @import "./sidebar/sidebar-menu.scss";
 
 // explorer
 @import "./explorer/explorer.scss";
 
-@import "./nx-file-manager.scss";
+// third party
+@import "./third-party/vercel-toast.scss";
