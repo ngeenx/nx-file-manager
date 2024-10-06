@@ -142,6 +142,8 @@ export class ExplorerComponent implements OnInit {
           return false;
         }
 
+        selection.clearSelection();
+
         this.files?.forEach((file: IFile) => {
           file.isSelected = false;
           file.isDroppable = false;
@@ -166,8 +168,6 @@ export class ExplorerComponent implements OnInit {
       //   console.log("start", event);
       // })
       .on("move", (event: SelectionEvent) => {
-        console.log("move", event);
-
         const selectedFileIds: string[] = event.store.selected?.map(
           (fileElement: Element) => fileElement.id
         );
@@ -178,9 +178,9 @@ export class ExplorerComponent implements OnInit {
           }
         });
 
-        const removedFileIds: string[] = event.store.changed?.removed?.map(
-          (fileElement: Element) => fileElement.id
-        );
+        const removedFileIds: string[] = event.store.changed?.removed
+          ?.map((fileElement: Element) => fileElement.id)
+          .filter((fileId: string) => !selectedFileIds?.includes(fileId));
 
         this.files?.forEach((file: IFile) => {
           if (removedFileIds?.includes(file.id.toString())) {
@@ -203,6 +203,14 @@ export class ExplorerComponent implements OnInit {
 
         this.selectedFiles =
           this.files?.filter((file: IFile) => file.isSelected) || [];
+
+        if (this.selectedFiles.length > 0) {
+          this.files?.forEach((file: IFile) => {
+            file.isDropUnavailable =
+              file.type !== FileType.FOLDER &&
+              !selectedFileIds?.includes(file.id.toString());
+          });
+        }
       });
   }
 

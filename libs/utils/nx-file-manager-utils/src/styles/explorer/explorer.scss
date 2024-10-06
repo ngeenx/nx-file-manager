@@ -59,6 +59,10 @@
       &.drop-not-allowed {
         @apply bg-red-100/70 border border-red-300 #{!important};
       }
+
+      &.drop-unavailable {
+        @apply opacity-50;
+      }
     }
 
     .drag-ghost {
