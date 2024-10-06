@@ -147,6 +147,7 @@ export class ExplorerComponent implements OnInit {
 
         this.files?.forEach((file: IFile) => {
           file.isSelected = false;
+          file.isDroppable = false;
 
           return file;
         });
@@ -241,8 +242,24 @@ export class ExplorerComponent implements OnInit {
     this.isFileMoving = false;
   }
 
-  public onFileDragOver(event: DragEvent): void {
+  public onFileDragOver(event: DragEvent, file: IFile): void {
     event.preventDefault();
+
+    console.log("onFileDragOver", event);
+
+    if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
+      file.isDroppable = true;
+    }
+  }
+
+  public onFileDropLeave(event: DragEvent, file: IFile): void {
+    event.preventDefault();
+    file.isDroppable = false;
+  }
+
+  public onFileDrop(event: DragEvent, file: IFile): void {
+    event.preventDefault();
+    file.isDroppable = false;
   }
 
   // #endregion

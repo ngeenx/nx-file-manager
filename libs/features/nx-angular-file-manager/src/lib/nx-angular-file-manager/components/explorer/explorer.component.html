@@ -13,13 +13,16 @@
       class="file"
       [class]="{
         selected: file.isSelected,
-        hoverable: !isSelecting
+        hoverable: !isSelecting,
+        droppable: file.isDroppable
       }"
       [draggable]="true"
       (dragstart)="onFileDragStart($event)"
       (drag)="onFileDragging($event)"
       (dragend)="onFileDragEnd($event)"
-      (dragover)="onFileDragOver($event)"
+      (dragover)="onFileDragOver($event, file)"
+      (dragleave)="onFileDropLeave($event, file)"
+      (drop)="onFileDrop($event, file)"
     >
       @if (UrlUtils.isHttpUrl(file.icon)) {
       <img [src]="file.icon" class="icon image" [alt]="file.name" />

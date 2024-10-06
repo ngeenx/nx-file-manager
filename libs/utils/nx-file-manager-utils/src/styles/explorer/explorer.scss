@@ -40,8 +40,16 @@
         }
       }
 
+      &.droppable {
+        @apply border-gray-300 scale-105 shadow-lg bg-yellow-200/60;
+      }
+
       &.selected {
-        @apply bg-yellow-100/70 border border-yellow-300;
+        @apply bg-yellow-100/70 border border-yellow-300 #{!important};
+
+        &:hover {
+          @apply bg-yellow-200/70 border border-yellow-400/80 #{!important};
+        }
       }
     }
 
