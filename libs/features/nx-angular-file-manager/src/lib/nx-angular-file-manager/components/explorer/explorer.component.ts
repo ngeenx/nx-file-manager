@@ -25,12 +25,14 @@ export class ExplorerComponent implements OnInit {
   public selectedFiles: IFile[] = [];
   public isFileMoving = false;
 
+  private selection: SelectionArea | undefined;
+
   public ngOnInit(): void {
     this.initSelection();
   }
 
   private initSelection(): void {
-    const selection = new SelectionArea({
+    this.selection = new SelectionArea({
       // Class for the selection-area itself (the element).
       selectionAreaClass: "selection-area",
 
@@ -134,7 +136,7 @@ export class ExplorerComponent implements OnInit {
       (event.event?.target as HTMLElement)?.classList?.contains("file") ||
       false;
 
-    selection
+    this.selection
       .on("beforestart", (event: SelectionEvent) => {
         if (isTargetElementFile(event) || this.isFileMoving) {
           this.isSelecting = false;
@@ -142,7 +144,7 @@ export class ExplorerComponent implements OnInit {
           return false;
         }
 
-        selection.clearSelection();
+        this.selection?.clearSelection();
 
         this.files?.forEach((file: IFile) => {
           file.isSelected = false;
@@ -222,7 +224,17 @@ export class ExplorerComponent implements OnInit {
       classList &&
       classList.some((item: string) => excludedClasses.includes(item))
     ) {
-      this.isSelecting = false;
+      if (this.isSelecting && this.selectedFiles.length) {
+        this.isSelecting = false;
+        this.selection?.clearSelection();
+        this.selectedFiles = [];
+
+        this.files?.forEach((file: IFile) => {
+          file.isSelected = false;
+          file.isDropUnavailable = false;
+          file.isDroppable = false;
+        });
+      }
     }
   }
 
