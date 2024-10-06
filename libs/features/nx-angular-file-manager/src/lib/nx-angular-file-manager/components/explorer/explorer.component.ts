@@ -201,18 +201,7 @@ export class ExplorerComponent implements OnInit {
           ));
         });
 
-        this.isSelecting = false;
-
-        this.selectedFiles =
-          this.files?.filter((file: IFile) => file.isSelected) || [];
-
-        if (this.selectedFiles.length > 0) {
-          this.files?.forEach((file: IFile) => {
-            file.isDropUnavailable =
-              file.type !== FileType.FOLDER &&
-              !selectedFileIds?.includes(file.id.toString());
-          });
-        }
+        this.checkUnavailableFiles();
       });
   }
 
@@ -241,6 +230,8 @@ export class ExplorerComponent implements OnInit {
   public onFileClick(event: MouseEvent, file: IFile): void {
     if (event.ctrlKey) {
       file.isSelected = !file.isSelected;
+
+      this.checkUnavailableFiles();
     }
   }
 
@@ -251,6 +242,8 @@ export class ExplorerComponent implements OnInit {
       event.dataTransfer.setDragImage(new Image(), 0, 0);
       event.dataTransfer.effectAllowed = "copyMove";
     }
+
+    console.log("drag start", this.selectedFiles);
 
     this.isFileMoving = true;
   }
@@ -300,6 +293,35 @@ export class ExplorerComponent implements OnInit {
     event.preventDefault();
 
     file.isDroppable = false;
+  }
+
+  // #endregion
+
+  // #region Helpers
+
+  /**
+   * When selecting files, this method is called to determine which files are unavailable to drop (i.e. not a folder, and not in the list of selected files).
+   *
+   * The method iterates over the list of files and marks each file as unavailable if it is not a folder and not in the list of selected files.
+   * If there are no selected files, it clears the `isDropUnavailable` flag for all files.
+   */
+  private checkUnavailableFiles(): void {
+    this.isSelecting = false;
+
+    this.selectedFiles =
+      this.files?.filter((file: IFile) => file.isSelected) || [];
+
+    const selectedFileIds: string[] = this.selectedFiles?.map((file: IFile) =>
+      file.id.toString()
+    );
+
+    if (this.selectedFiles.length > 0) {
+      this.files?.forEach((file: IFile) => {
+        file.isDropUnavailable =
+          file.type !== FileType.FOLDER &&
+          !selectedFileIds?.includes(file.id.toString());
+      });
+    }
   }
 
   // #endregion
