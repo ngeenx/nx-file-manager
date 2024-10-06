@@ -2,8 +2,8 @@
   @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
 
   .files {
-    @apply relative flex gap-2 w-full justify-center items-center p-6
-      overflow-auto;
+    @apply relative flex gap-2 w-full h-full justify-center items-center p-6
+      overflow-auto place-content-start;
 
     &.grid-view {
       @apply flex-row flex-wrap justify-start items-baseline;
