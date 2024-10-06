@@ -9,11 +9,13 @@ import {
 import { FileType, IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
 import { timer } from "rxjs";
+import { FileActionsService } from "../../services/file-actions.service";
 
 @Component({
   selector: "nx-angular-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
+  providers: [FileActionsService],
 })
 export class ExplorerComponent implements OnInit {
   @HostListener("document:keydown", ["$event"])
@@ -41,6 +43,8 @@ export class ExplorerComponent implements OnInit {
   public isFileMoving = false;
 
   private selection: SelectionArea | undefined;
+
+  public constructor(private fileActionsService: FileActionsService) {}
 
   public ngOnInit(): void {
     this.initSelection();
@@ -315,10 +319,20 @@ export class ExplorerComponent implements OnInit {
     file.isDroppable = false;
   }
 
-  public onFileDrop(event: DragEvent, file: IFile): void {
+  public async onFileDrop(event: DragEvent, file: IFile): Promise<void> {
     event.preventDefault();
 
     file.isDroppable = false;
+
+    if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
+      await this.fileActionsService.moveFiles(this.selectedFiles, file);
+
+      this.checkUnavailableFiles();
+
+      this.files = this.files?.filter((file: IFile) => !file.isSelected);
+
+      this.clearAllSelections();
+    }
   }
 
   // #endregion
