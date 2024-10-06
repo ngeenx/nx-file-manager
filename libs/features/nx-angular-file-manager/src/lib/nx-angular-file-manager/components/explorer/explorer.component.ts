@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
+import { FileType, IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
 
 @Component({
@@ -260,6 +260,7 @@ export class ExplorerComponent implements OnInit {
 
     if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
       file.isDroppable = true;
+      file.isDropAllowed = file.type === FileType.FOLDER;
     }
   }
 

@@ -11,7 +11,9 @@
       [class]="{
         selected: file.isSelected,
         hoverable: !isSelecting,
-        droppable: file.isDroppable
+        droppable: file.isDroppable,
+        'drop-not-allowed': file.isDroppable && !file.isDropAllowed,
+        'drop-allowed': file.isDroppable && file.isDropAllowed
       }"
       [draggable]="true"
       (dragstart)="onFileDragStart($event)"

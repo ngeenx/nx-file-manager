@@ -41,7 +41,7 @@
       }
 
       &.droppable {
-        @apply border-gray-300 scale-105 shadow-lg bg-yellow-200/60;
+        @apply border-gray-300 shadow-lg bg-yellow-200/60;
       }
 
       &.selected {
@@ -50,6 +50,14 @@
         &:hover {
           @apply bg-yellow-200/70 border border-yellow-400/80 #{!important};
         }
+      }
+
+      &.drop-allowed {
+        @apply bg-green-200/60 border border-green-300 scale-105 #{!important};
+      }
+
+      &.drop-not-allowed {
+        @apply bg-red-100/70 border border-red-300 #{!important};
       }
     }
 

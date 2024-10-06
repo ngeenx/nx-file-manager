@@ -20,4 +20,5 @@ export interface IFile {
   type: FileType;
   isSelected?: boolean;
   isDroppable?: boolean;
+  isDropAllowed?: boolean;
 }
