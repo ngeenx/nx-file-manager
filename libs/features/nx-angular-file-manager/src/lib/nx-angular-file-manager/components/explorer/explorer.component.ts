@@ -162,14 +162,33 @@ export class ExplorerComponent implements OnInit {
 
         return true;
       })
-      // .on("start", (evt) => {
-      //   console.log("start", evt);
+      // .on("start", (event: SelectionEvent) => {
+      //   console.log("start", event);
       // })
-      // .on("move", (evt) => {
-      //   console.log("move", evt);
-      // })
+      .on("move", (event: SelectionEvent) => {
+        console.log("move", event);
+
+        const selectedFileIds: string[] = event.store.selected?.map(
+          (fileElement: Element) => fileElement.id
+        );
+
+        this.files?.forEach((file: IFile) => {
+          if (selectedFileIds?.includes(file.id.toString())) {
+            file.isSelected = true;
+          }
+        });
+
+        const removedFileIds: string[] = event.store.changed?.removed?.map(
+          (fileElement: Element) => fileElement.id
+        );
+
+        this.files?.forEach((file: IFile) => {
+          if (removedFileIds?.includes(file.id.toString())) {
+            file.isSelected = false;
+          }
+        });
+      })
       .on("stop", (event: SelectionEvent) => {
-        console.log("stop", event);
         const selectedFileIds: string[] = event.store.selected?.map(
           (fileElement: Element) => fileElement.id
         );
