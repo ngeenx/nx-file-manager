@@ -1,6 +1,14 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { FileType, IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
+import { timer } from "rxjs";
 
 @Component({
   selector: "nx-angular-explorer",
@@ -8,6 +16,13 @@ import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
   standalone: true,
 })
 export class ExplorerComponent implements OnInit {
+  @HostListener("document:keydown", ["$event"])
+  private onKeydownHandler(event: KeyboardEvent): void {
+    if (event.key === "Escape") {
+      this.clearAllSelections();
+    }
+  }
+
   @ViewChild("dragGhost", { static: true })
   public dragGhost: ElementRef | undefined;
 
@@ -144,14 +159,9 @@ export class ExplorerComponent implements OnInit {
           return false;
         }
 
-        this.selection?.clearSelection();
+        console.log("BEFORESTART");
 
-        this.files?.forEach((file: IFile) => {
-          file.isSelected = false;
-          file.isDroppable = false;
-
-          return file;
-        });
+        this.clearAllSelections(event.event);
 
         this.isSelecting = true;
 
@@ -164,12 +174,16 @@ export class ExplorerComponent implements OnInit {
           return false;
         }
 
+        this.isSelecting = true;
+
         return true;
       })
-      // .on("start", (event: SelectionEvent) => {
-      //   console.log("start", event);
-      // })
+      .on("start", (event: SelectionEvent) => {
+        console.log("start", event);
+      })
       .on("move", (event: SelectionEvent) => {
+        this.isSelecting = true;
+
         const selectedFileIds: string[] = event.store.selected?.map(
           (fileElement: Element) => fileElement.id
         );
@@ -201,11 +215,32 @@ export class ExplorerComponent implements OnInit {
           ));
         });
 
+        console.log("STOP");
+
         this.checkUnavailableFiles();
+
+        timer(500).subscribe(() => {
+          this.isSelecting = false;
+        });
       });
   }
 
-  public onFilesAreaClick(event: Event): void {
+  public onFilesAreaClick(event: MouseEvent): void {
+    // console.log(event, {
+    //   files: (event.target as HTMLElement).classList?.contains("files"),
+    //   ctrl: event.ctrlKey === false,
+    // });
+
+    if (
+      (event.target as HTMLElement).classList?.contains("files") &&
+      !event.ctrlKey
+    ) {
+      console.log("onFilesAreaClick", event);
+      this.clearAllSelections(event);
+    }
+
+    return;
+
     const classList = Array.from((event.target as HTMLElement).classList || []),
       excludedClasses = ["files", "file"];
 
@@ -213,21 +248,12 @@ export class ExplorerComponent implements OnInit {
       classList &&
       classList.some((item: string) => excludedClasses.includes(item))
     ) {
-      if (this.isSelecting && this.selectedFiles.length) {
-        this.isSelecting = false;
-        this.selection?.clearSelection();
-        this.selectedFiles = [];
-
-        this.files?.forEach((file: IFile) => {
-          file.isSelected = false;
-          file.isDropUnavailable = false;
-          file.isDroppable = false;
-        });
-      }
+      this.clearAllSelections();
     }
   }
 
   public onFileClick(event: MouseEvent, file: IFile): void {
+    // console.log("!!!!!", event.ctrlKey);
     if (event.ctrlKey) {
       file.isSelected = !file.isSelected;
 
@@ -306,8 +332,6 @@ export class ExplorerComponent implements OnInit {
    * If there are no selected files, it clears the `isDropUnavailable` flag for all files.
    */
   private checkUnavailableFiles(): void {
-    this.isSelecting = false;
-
     this.selectedFiles =
       this.files?.filter((file: IFile) => file.isSelected) || [];
 
@@ -320,6 +344,27 @@ export class ExplorerComponent implements OnInit {
         file.isDropUnavailable =
           file.type !== FileType.FOLDER &&
           !selectedFileIds?.includes(file.id.toString());
+      });
+    }
+  }
+
+  private clearAllSelections(
+    mouseEvent: MouseEvent | TouchEvent | null | undefined = undefined
+  ): void {
+    if (mouseEvent && mouseEvent.ctrlKey) {
+      return;
+    }
+
+    if (!this.isSelecting && this.selectedFiles.length) {
+      console.log("CLEARALL");
+      this.isSelecting = false;
+      this.selection?.clearSelection();
+      this.selectedFiles = [];
+
+      this.files?.forEach((file: IFile) => {
+        file.isSelected = false;
+        file.isDroppable = false;
+        file.isDropUnavailable = false;
       });
     }
   }

@@ -2,11 +2,11 @@
   @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
 
   .files {
-    @apply relative flex gap-2 w-full h-full justify-center items-center p-6
+    @apply relative flex gap-2 w-full justify-center items-center p-6
       overflow-auto;
 
     &.grid-view {
-      @apply flex-row flex-wrap;
+      @apply flex-row flex-wrap justify-start items-baseline;
 
       .file {
         @apply flex-col justify-center items-center gap-2 px-3 py-2
