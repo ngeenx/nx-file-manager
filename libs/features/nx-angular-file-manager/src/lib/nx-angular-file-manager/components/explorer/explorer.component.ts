@@ -127,15 +127,12 @@ export class ExplorerComponent implements OnInit {
       },
     });
 
-    const isTargetElementFile = (event: SelectionEvent): boolean => {
-      return (
-        (
-          event.event?.target as HTMLElement
-        )?.parentElement?.classList?.contains("file") ||
-        (event.event?.target as HTMLElement)?.classList?.contains("file") ||
-        false
-      );
-    };
+    const isTargetElementFile = (event: SelectionEvent): boolean =>
+      (event.event?.target as HTMLElement)?.parentElement?.classList?.contains(
+        "file"
+      ) ||
+      (event.event?.target as HTMLElement)?.classList?.contains("file") ||
+      false;
 
     selection
       .on("beforestart", (event: SelectionEvent) => {
@@ -165,15 +162,12 @@ export class ExplorerComponent implements OnInit {
 
         return true;
       })
-      .on("start", (evt) => {
-        // A selection got initiated, you could now clear the previous selection or
-        // keep it if in case of multi-selection.
-        console.log("start", evt);
-      })
-      .on("move", (evt) => {
-        // Here you can update elements based on their state.
-        console.log("move", evt);
-      })
+      // .on("start", (evt) => {
+      //   console.log("start", evt);
+      // })
+      // .on("move", (evt) => {
+      //   console.log("move", evt);
+      // })
       .on("stop", (event: SelectionEvent) => {
         console.log("stop", event);
         const selectedFileIds: string[] = event.store.selected?.map(
@@ -245,8 +239,6 @@ export class ExplorerComponent implements OnInit {
   public onFileDragOver(event: DragEvent, file: IFile): void {
     event.preventDefault();
 
-    console.log("onFileDragOver", event);
-
     if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
       file.isDroppable = true;
     }
@@ -254,11 +246,13 @@ export class ExplorerComponent implements OnInit {
 
   public onFileDropLeave(event: DragEvent, file: IFile): void {
     event.preventDefault();
+
     file.isDroppable = false;
   }
 
   public onFileDrop(event: DragEvent, file: IFile): void {
     event.preventDefault();
+
     file.isDroppable = false;
   }
 
