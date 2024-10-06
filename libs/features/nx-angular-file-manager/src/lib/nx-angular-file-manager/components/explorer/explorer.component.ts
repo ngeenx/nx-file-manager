@@ -10,6 +10,7 @@ import { FileType, IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
 import { timer } from "rxjs";
 import { FileActionsService } from "../../services/file-actions.service";
+import { createToast, ToastOptions } from "vercel-toast";
 
 @Component({
   selector: "nx-angular-explorer",
@@ -301,6 +302,10 @@ export class ExplorerComponent implements OnInit {
     file.isDroppable = false;
 
     if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
+      createToast("Files moving...", <ToastOptions>{
+        timeout: 1500,
+      });
+
       await this.fileActionsService.moveFiles(this.selectedFiles, file);
 
       this.checkUnavailableFiles();

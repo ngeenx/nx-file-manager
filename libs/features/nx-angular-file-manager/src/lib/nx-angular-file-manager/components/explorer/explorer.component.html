@@ -17,6 +17,9 @@
         'drop-unavailable':
           selectedFiles.length > 0 && !file.isSelected && file.isDropUnavailable
       }"
+      [disabled]="
+        selectedFiles.length > 0 && !file.isSelected && file.isDropUnavailable
+      "
       [draggable]="true"
       (dragstart)="onFileDragStart($event)"
       (drag)="onFileDragging($event)"

@@ -23,7 +23,7 @@ export class FileActionsService {
 
     if (result) {
       createToast(`${files.length} files moved`, <ToastOptions>{
-        timeout: 4000,
+        timeout: 3000,
       });
     }
   }
