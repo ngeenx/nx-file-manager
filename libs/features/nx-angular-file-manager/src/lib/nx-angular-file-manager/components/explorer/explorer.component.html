@@ -18,7 +18,8 @@
       [draggable]="true"
       (dragstart)="onFileDragStart($event)"
       (drag)="onFileDragging($event)"
-      (dragend)="onFileDragEnd()"
+      (dragend)="onFileDragEnd($event)"
+      (dragover)="onFileDragOver($event)"
     >
       @if (UrlUtils.isHttpUrl(file.icon)) {
       <img [src]="file.icon" class="icon image" [alt]="file.name" />

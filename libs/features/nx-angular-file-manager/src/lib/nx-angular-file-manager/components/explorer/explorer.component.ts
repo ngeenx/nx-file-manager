@@ -23,6 +23,7 @@ export class ExplorerComponent implements OnInit {
   public UrlUtils: typeof UrlUtils = UrlUtils;
   public isSelecting = false;
   public selectedFiles: IFile[] = [];
+  public isFileMoving = false;
 
   public ngOnInit(): void {
     this.initSelection();
@@ -138,7 +139,7 @@ export class ExplorerComponent implements OnInit {
 
     selection
       .on("beforestart", (event: SelectionEvent) => {
-        if (isTargetElementFile(event)) {
+        if (isTargetElementFile(event) || this.isFileMoving) {
           this.isSelecting = false;
 
           return false;
@@ -206,10 +207,19 @@ export class ExplorerComponent implements OnInit {
   // #region File DND
 
   public onFileDragStart(event: DragEvent): void {
-    event.dataTransfer?.setDragImage(new Image(), 0, 0);
+    if (event.dataTransfer) {
+      event.dataTransfer.setDragImage(new Image(), 0, 0);
+      event.dataTransfer.effectAllowed = "copyMove";
+    }
+
+    this.isFileMoving = true;
   }
 
   public onFileDragging(event: DragEvent): void {
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = "copyMove";
+    }
+
     const dragGhostElement = this.dragGhost?.nativeElement,
       filesContainerRect =
         this.filesContainer?.nativeElement?.getBoundingClientRect();
@@ -221,8 +231,18 @@ export class ExplorerComponent implements OnInit {
     dragGhostElement.style.top = `${event.clientY - filesContainerRect.top}px`;
   }
 
-  public onFileDragEnd(): void {
+  public onFileDragEnd(event: DragEvent): void {
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = "copy";
+    }
+
     this.dragGhost?.nativeElement?.classList?.remove("dragging");
+
+    this.isFileMoving = false;
+  }
+
+  public onFileDragOver(event: DragEvent): void {
+    event.preventDefault();
   }
 
   // #endregion
