@@ -218,6 +218,12 @@ export class ExplorerComponent implements OnInit {
     }
   }
 
+  public onFileClick(event: MouseEvent, file: IFile): void {
+    if (event.ctrlKey) {
+      file.isSelected = !file.isSelected;
+    }
+  }
+
   // #region File DND
 
   public onFileDragStart(event: DragEvent): void {
