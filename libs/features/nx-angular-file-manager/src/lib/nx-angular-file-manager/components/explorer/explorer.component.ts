@@ -230,29 +230,12 @@ export class ExplorerComponent implements OnInit {
   }
 
   public onFilesAreaClick(event: MouseEvent): void {
-    // console.log(event, {
-    //   files: (event.target as HTMLElement).classList?.contains("files"),
-    //   ctrl: event.ctrlKey === false,
-    // });
-
     if (
       (event.target as HTMLElement).classList?.contains("files") &&
       !event.ctrlKey
     ) {
       console.log("onFilesAreaClick", event);
       this.clearAllSelections(event);
-    }
-
-    return;
-
-    const classList = Array.from((event.target as HTMLElement).classList || []),
-      excludedClasses = ["files", "file"];
-
-    if (
-      classList &&
-      classList.some((item: string) => excludedClasses.includes(item))
-    ) {
-      this.clearAllSelections();
     }
   }
 
@@ -273,7 +256,8 @@ export class ExplorerComponent implements OnInit {
       event.dataTransfer.effectAllowed = "copyMove";
     }
 
-    console.log("drag start", this.selectedFiles);
+    const dragGhostElement = this.dragGhost?.nativeElement;
+    dragGhostElement?.classList?.add("dragging");
 
     this.isFileMoving = true;
   }
@@ -283,15 +267,7 @@ export class ExplorerComponent implements OnInit {
       event.dataTransfer.effectAllowed = "copyMove";
     }
 
-    const dragGhostElement = this.dragGhost?.nativeElement,
-      filesContainerRect =
-        this.filesContainer?.nativeElement?.getBoundingClientRect();
-
-    dragGhostElement?.classList?.add("dragging");
-    dragGhostElement.style.left = `${
-      event.clientX - filesContainerRect.left
-    }px`;
-    dragGhostElement.style.top = `${event.clientY - filesContainerRect.top}px`;
+    this.updateGhostPosition(event);
   }
 
   public onFileDragEnd(event: DragEvent): void {
@@ -332,6 +308,21 @@ export class ExplorerComponent implements OnInit {
       this.files = this.files?.filter((file: IFile) => !file.isSelected);
 
       this.clearAllSelections();
+    }
+  }
+
+  private updateGhostPosition(event: MouseEvent): void {
+    const dragGhostElement = this.dragGhost?.nativeElement,
+      filesContainerRect =
+        this.filesContainer?.nativeElement?.getBoundingClientRect(),
+      scrollTop = this.filesContainer?.nativeElement?.scrollTop,
+      scrollLeft = this.filesContainer?.nativeElement?.scrollLeft;
+
+    if (dragGhostElement) {
+      dragGhostElement.style.left =
+        event.pageX - filesContainerRect.left + scrollLeft + "px";
+      dragGhostElement.style.top =
+        event.pageY - filesContainerRect.top + scrollTop + "px";
     }
   }
 
