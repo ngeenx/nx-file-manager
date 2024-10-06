@@ -19,6 +19,8 @@ import { createToast, ToastOptions } from "vercel-toast";
   providers: [FileActionsService],
 })
 export class ExplorerComponent implements OnInit {
+  // #region ViewChilds and HostListeners
+
   @HostListener("document:keydown", ["$event"])
   private onKeydownHandler(event: KeyboardEvent): void {
     if (event.key === "Escape") {
@@ -32,16 +34,22 @@ export class ExplorerComponent implements OnInit {
   @ViewChild("filesContainer", { static: true })
   public filesContainer: ElementRef | undefined;
 
+  // #endregion
+
+  // #region Inputs
+
   @Input()
   public iconSet!: { [key: string]: string };
 
   @Input()
   public files?: IFile[] = [];
 
+  // #endregion
+
   public UrlUtils: typeof UrlUtils = UrlUtils;
   public isSelecting = false;
   public selectedFiles: IFile[] = [];
-  public isFileMoving = false;
+  public isFileDragging = false;
 
   private selection: SelectionArea | undefined;
 
@@ -51,6 +59,27 @@ export class ExplorerComponent implements OnInit {
     this.initSelection();
   }
 
+  /**
+   * Initialize the selection area.
+   *
+   * This method initializes the selection area by creating a new instance of the
+   * SelectionArea class and setting up the necessary event listeners.
+   *
+   * The selection area is configured to select elements with the class "file"
+   * when the user clicks and drags the mouse over them. The selection area is
+   * also configured to automatically select the parent element of the element
+   * that the user clicks on, if the element is not already selected.
+   *
+   * The selection area is also configured to trigger the selection when the user
+   * clicks on the "files" container, and to trigger the selection when the user
+   * touches the "files" container on a touch device.
+   *
+   * The selection area is configured to scroll the container when the user drags
+   * the selection area over the edges of the container.
+   *
+   * The selection area is also configured to clear all selections when the user
+   * clicks outside of the selection area.
+   */
   private initSelection(): void {
     this.selection = new SelectionArea({
       // Class for the selection-area itself (the element).
@@ -158,7 +187,7 @@ export class ExplorerComponent implements OnInit {
 
     this.selection
       .on("beforestart", (event: SelectionEvent) => {
-        if (isTargetElementFile(event) || this.isFileMoving) {
+        if (isTargetElementFile(event) || this.isFileDragging) {
           this.isSelecting = false;
 
           return false;
@@ -230,6 +259,12 @@ export class ExplorerComponent implements OnInit {
       });
   }
 
+  /**
+   * Called when the user clicks on the files area.
+   * If the click was on the files area and not on a file, and the user did not
+   * hold the Ctrl key, then clear all selections.
+   * @param event
+   */
   public onFilesAreaClick(event: MouseEvent): void {
     if (
       (event.target as HTMLElement).classList?.contains("files") &&
@@ -240,6 +275,13 @@ export class ExplorerComponent implements OnInit {
     }
   }
 
+  /**
+   * Called when the user clicks on a file.
+   * If the user held the Ctrl key while clicking, then toggle the file's
+   * selection state.
+   * @param event
+   * @param file
+   */
   public onFileClick(event: MouseEvent, file: IFile): void {
     // console.log("!!!!!", event.ctrlKey);
     if (event.ctrlKey) {
@@ -260,7 +302,7 @@ export class ExplorerComponent implements OnInit {
     const dragGhostElement = this.dragGhost?.nativeElement;
     dragGhostElement?.classList?.add("dragging");
 
-    this.isFileMoving = true;
+    this.isFileDragging = true;
   }
 
   public onFileDragging(event: DragEvent): void {
@@ -278,7 +320,7 @@ export class ExplorerComponent implements OnInit {
 
     this.dragGhost?.nativeElement?.classList?.remove("dragging");
 
-    this.isFileMoving = false;
+    this.isFileDragging = false;
   }
 
   public onFileDragOver(event: DragEvent, file: IFile): void {
