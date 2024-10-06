@@ -1,15 +1,19 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
-import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: "nx-angular-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
-  imports: [DragDropModule],
 })
 export class ExplorerComponent implements OnInit {
+  @ViewChild("dragGhost", { static: true })
+  public dragGhost: ElementRef | undefined;
+
+  @ViewChild("filesContainer", { static: true })
+  public filesContainer: ElementRef | undefined;
+
   @Input()
   public iconSet!: { [key: string]: string };
 
@@ -17,8 +21,8 @@ export class ExplorerComponent implements OnInit {
   public files?: IFile[] = [];
 
   public UrlUtils: typeof UrlUtils = UrlUtils;
-
   public isSelecting = false;
+  public selectedFiles: IFile[] = [];
 
   public ngOnInit(): void {
     this.initSelection();
@@ -181,6 +185,9 @@ export class ExplorerComponent implements OnInit {
         });
 
         this.isSelecting = false;
+
+        this.selectedFiles =
+          this.files?.filter((file: IFile) => file.isSelected) || [];
       });
   }
 
@@ -188,8 +195,6 @@ export class ExplorerComponent implements OnInit {
     const classList = Array.from((event.target as HTMLElement).classList || []),
       excludedClasses = ["files", "file"];
 
-    // if classList is not empty and contains any of the excluded classes, it means
-    // that the click happened on a file or a group of files.
     if (
       classList &&
       classList.some((item: string) => excludedClasses.includes(item))
@@ -197,4 +202,28 @@ export class ExplorerComponent implements OnInit {
       this.isSelecting = false;
     }
   }
+
+  // #region File DND
+
+  public onFileDragStart(event: DragEvent): void {
+    event.dataTransfer?.setDragImage(new Image(), 0, 0);
+  }
+
+  public onFileDragging(event: DragEvent): void {
+    const dragGhostElement = this.dragGhost?.nativeElement,
+      filesContainerRect =
+        this.filesContainer?.nativeElement?.getBoundingClientRect();
+
+    dragGhostElement?.classList?.add("dragging");
+    dragGhostElement.style.left = `${
+      event.clientX - filesContainerRect.left
+    }px`;
+    dragGhostElement.style.top = `${event.clientY - filesContainerRect.top}px`;
+  }
+
+  public onFileDragEnd(): void {
+    this.dragGhost?.nativeElement?.classList?.remove("dragging");
+  }
+
+  // #endregion
 }

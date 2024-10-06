@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { folderIconData, fileIconData } from "@ngeenx/nx-file-manager-icons";
+import {
+  folderIconData,
+  fileIconData,
+  fileMultipleIconData,
+} from "@ngeenx/nx-file-manager-icons";
 
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
 import { FileType, IFile, IFileGroup } from "@ngeenx/nx-file-manager-utils";
@@ -17,6 +21,7 @@ export class NxAngularFileManagerComponent implements OnInit {
   public iconSet: { [key: string]: string } = {
     folderIconData,
     fileIconData,
+    fileMultipleIconData,
   };
 
   public sidebarGroups: IFileGroup[] = [];

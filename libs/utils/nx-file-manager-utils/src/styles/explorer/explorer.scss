@@ -2,7 +2,7 @@
   @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
 
   .files {
-    @apply flex gap-2 w-full h-full justify-center items-center p-6
+    @apply relative flex gap-2 w-full h-full justify-center items-center p-6
       overflow-auto;
 
     &.grid-view {
@@ -42,6 +42,19 @@
 
       &.selected {
         @apply bg-yellow-100/70 border border-yellow-300;
+      }
+    }
+
+    .drag-ghost {
+      @apply absolute hidden bg-yellow-100/50 backdrop-blur-sm border border-yellow-300
+        size-24 rounded-md text-center text-xs p-3;
+
+      svg {
+        @apply size-7;
+      }
+
+      &.dragging {
+        @apply flex flex-col justify-center items-center gap-2;
       }
     }
   }

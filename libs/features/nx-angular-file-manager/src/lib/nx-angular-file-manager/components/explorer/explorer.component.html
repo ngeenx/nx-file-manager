@@ -2,15 +2,23 @@
   <h1>
     {{ isSelecting }}
   </h1>
-  <div class="files grid-view" (click)="onFilesAreaClick($event)">
+  <div
+    #filesContainer
+    class="files grid-view"
+    (click)="onFilesAreaClick($event)"
+  >
     @for (file of files; track $index) {
-    <div
+    <button
       [id]="file.id"
       class="file"
       [class]="{
         selected: file.isSelected,
         hoverable: !isSelecting
       }"
+      [draggable]="true"
+      (dragstart)="onFileDragStart($event)"
+      (drag)="onFileDragging($event)"
+      (dragend)="onFileDragEnd()"
     >
       @if (UrlUtils.isHttpUrl(file.icon)) {
       <img [src]="file.icon" class="icon image" [alt]="file.name" />
@@ -23,7 +31,18 @@
       <span class="name">
         {{ file.name }}
       </span>
-    </div>
+    </button>
     }
+
+    <!-- Drag Ghost -->
+    <div #dragGhost class="drag-ghost">
+      <svg viewBox="0 0 24 24" width="20" class="icon">
+        <path [attr.d]="iconSet['fileMultipleIconData']" />
+      </svg>
+
+      <span>
+        {{ selectedFiles ? selectedFiles.length : 0 }} files selected
+      </span>
+    </div>
   </div>
 </div>
