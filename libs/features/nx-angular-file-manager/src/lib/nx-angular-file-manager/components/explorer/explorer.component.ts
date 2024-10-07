@@ -6,8 +6,10 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
+  SimpleChanges,
+  OnChanges,
 } from "@angular/core";
-import { FileType, IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
+import { FileType, IFile, ITab, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
 import { timer } from "rxjs";
 import { FileActionsService } from "../../services/file-actions.service";
@@ -20,7 +22,7 @@ import tippy, { Instance, Props } from "tippy.js";
   standalone: true,
   providers: [FileActionsService],
 })
-export class ExplorerComponent implements OnInit, AfterViewInit {
+export class ExplorerComponent implements AfterViewInit, OnChanges {
   // #region ViewChilds and HostListeners
 
   @HostListener("document:keydown", ["$event"])
@@ -46,6 +48,12 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
   @Input()
   public files?: IFile[] = [];
 
+  @Input()
+  public isFreezed = true;
+
+  @Input()
+  public tabData!: ITab;
+
   // #endregion
 
   public UrlUtils: typeof UrlUtils = UrlUtils;
@@ -58,10 +66,6 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
 
   public constructor(private fileActionsService: FileActionsService) {}
 
-  public ngOnInit(): void {
-    this.initSelection();
-  }
-
   public ngAfterViewInit(): void {
     this.tippyInstance = tippy("[data-tippy-content]", {
       delay: [1000, 100],
@@ -71,6 +75,15 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
       offset: [0, 5],
       maxWidth: 300,
     });
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (!changes["isFreezed"].currentValue) {
+      this.clearAllSelections();
+      this.removeSelection();
+    } else {
+      this.initSelection();
+    }
   }
 
   /**
@@ -271,6 +284,10 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
           this.isSelecting = false;
         });
       });
+  }
+
+  private removeSelection(): void {
+    this.selection?.destroy();
   }
 
   /**

@@ -4,10 +4,17 @@
   <nx-angular-sidebar [iconSet]="iconSet" [sidebarGroups]="sidebarGroups" />
 
   <!-- Content -->
-  <nx-angular-tabs (addNewTab)="onNewTabClick()">
+  <nx-angular-tabs
+    (addNewTab)="onNewTabClick()"
+    (tabClick)="onTabClick($event)"
+  >
     @for (tab of tabs; track $index) {
     <nx-angular-tab [tabData]="tab">
-      <nx-angular-explorer [iconSet]="iconSet" [files]="tab.files" />
+      <nx-angular-explorer
+        [iconSet]="iconSet"
+        [files]="tab.files"
+        [isFreezed]="tab.isSelected || false"
+      />
     </nx-angular-tab>
     }
   </nx-angular-tabs>

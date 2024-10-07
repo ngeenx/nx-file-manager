@@ -91,4 +91,10 @@ export class NxAngularFileManagerComponent implements OnInit {
       tab.isSelected = index === this.tabs.length - 1;
     });
   }
+
+  public onTabClick(targetTab: ITab): void {
+    this.tabs.forEach((tab: ITab) => {
+      tab.isSelected = tab === targetTab;
+    });
+  }
 }

@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input } from "@angular/core";
 import { ITab } from "@ngeenx/nx-file-manager-utils";
 
@@ -5,11 +6,9 @@ import { ITab } from "@ngeenx/nx-file-manager-utils";
   selector: "nx-angular-tab",
   templateUrl: "./tab.component.html",
   standalone: true,
+  imports: [CommonModule],
 })
 export class NxAngularTabComponent {
   @Input()
-  public tabData: ITab = {
-    id: 0,
-    isSelected: false,
-  } as ITab;
+  public tabData: ITab = {} as ITab;
 }

@@ -7,6 +7,7 @@ import {
   EventEmitter,
 } from "@angular/core";
 import { NxAngularTabComponent } from "../tab/tab.component";
+import { ITab } from "@ngeenx/nx-file-manager-utils";
 
 @Component({
   selector: "nx-angular-tabs",
@@ -19,6 +20,9 @@ export class NxAngularTabsComponent implements AfterContentInit {
 
   @Output()
   public addNewTab: EventEmitter<void> = new EventEmitter();
+
+  @Output()
+  public tabClick: EventEmitter<ITab> = new EventEmitter();
 
   public ngAfterContentInit(): void {
     if (
@@ -33,6 +37,8 @@ export class NxAngularTabsComponent implements AfterContentInit {
     this.tabs.forEach((tab: NxAngularTabComponent) => {
       tab.tabData.isSelected = tab === targetTab;
     });
+
+    this.tabClick.emit(targetTab.tabData);
   }
 
   public onNewTabClick(): void {
