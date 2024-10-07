@@ -8,11 +8,13 @@ import {
 } from "@angular/core";
 import { NxAngularTabComponent } from "../tab/tab.component";
 import { ITab } from "@ngeenx/nx-file-manager-utils";
+import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
 
 @Component({
   selector: "nx-angular-tabs",
   templateUrl: "./tabs.component.html",
   standalone: true,
+  imports: [ContextMenuModule],
 })
 export class NxAngularTabsComponent implements AfterContentInit {
   @ContentChildren(NxAngularTabComponent)
@@ -53,4 +55,12 @@ export class NxAngularTabsComponent implements AfterContentInit {
 
     this.tabClose.emit(targetTab);
   }
+
+  // #region Tab Context Menu
+
+  public execute(text: string, value: unknown): void {
+    console.log(text, value);
+  }
+
+  // #endregion
 }
