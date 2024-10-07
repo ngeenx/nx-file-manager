@@ -40,10 +40,6 @@
         }
       }
 
-      &.droppable {
-        @apply border-gray-300 shadow-lg bg-yellow-200/60;
-      }
-
       &.selected {
         @apply bg-yellow-100/70 border border-yellow-300 #{!important};
 
@@ -53,11 +49,11 @@
       }
 
       &.drop-allowed {
-        @apply bg-green-200/60 border border-green-300 scale-105 #{!important};
+        @apply bg-green-200/60 border shadow-lg border-green-300 scale-105 #{!important};
       }
 
       &.drop-not-allowed {
-        @apply bg-red-100/70 border border-red-300 #{!important};
+        @apply bg-red-100/70 border border-red-200 cursor-not-allowed #{!important};
       }
 
       &.drop-unavailable {

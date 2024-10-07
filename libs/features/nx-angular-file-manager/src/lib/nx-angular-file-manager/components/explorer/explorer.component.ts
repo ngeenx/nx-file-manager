@@ -3,7 +3,6 @@ import {
   ElementRef,
   HostListener,
   Input,
-  OnInit,
   ViewChild,
   AfterViewInit,
   SimpleChanges,
@@ -57,6 +56,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   // #endregion
 
   public UrlUtils: typeof UrlUtils = UrlUtils;
+  public FileType: typeof FileType = FileType;
   public isSelecting = false;
   public selectedFiles: IFile[] = [];
   public isFileDragging = false;
@@ -64,7 +64,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   private selection: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
 
-  public constructor(private fileActionsService: FileActionsService) {}
+  public constructor(private readonly fileActionsService: FileActionsService) {}
 
   public ngAfterViewInit(): void {
     timer(200).subscribe(() => this.initTippy());
@@ -385,7 +385,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   public onFileDragEnd(event: DragEvent): void {
     if (event.dataTransfer) {
-      event.dataTransfer.effectAllowed = "copy";
+      event.dataTransfer.effectAllowed = "link";
     }
 
     this.dragGhost?.nativeElement?.classList?.remove("dragging");
@@ -405,6 +405,10 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
       file.isDroppable = true;
       file.isDropAllowed = file.type === FileType.FOLDER;
+
+      if (event.dataTransfer) {
+        event.dataTransfer.effectAllowed = "copyMove";
+      }
     }
   }
 
