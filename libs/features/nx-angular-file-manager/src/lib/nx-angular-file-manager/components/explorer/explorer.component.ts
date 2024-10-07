@@ -369,6 +369,15 @@ export class ExplorerComponent implements OnInit, AfterViewInit {
 
     file.isDroppable = false;
 
+    if (file.type !== FileType.FOLDER) {
+      createToast("You select only folders for moving", <ToastOptions>{
+        timeout: 3000,
+        type: "error",
+      });
+
+      return;
+    }
+
     if (this.selectedFiles.length > 0 && !this.selectedFiles.includes(file)) {
       createToast("Files moving...", <ToastOptions>{
         timeout: 1500,
