@@ -81,12 +81,45 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (changes["isFreezed"]) {
       if (!changes["isFreezed"]?.currentValue) {
         this.clearAllSelections();
-        this.removeSelection();
+        this.destroyViselect();
       } else {
-        this.initSelection();
+        this.initViselect();
       }
     }
   }
+
+  /**
+   * Called when the user clicks on the files area.
+   * If the click was on the files area and not on a file, and the user did not
+   * hold the Ctrl key, then clear all selections.
+   * @param event
+   */
+  public onFilesAreaClick(event: MouseEvent): void {
+    if (
+      (event.target as HTMLElement).classList?.contains("files") &&
+      (!event.ctrlKey || !event.metaKey)
+    ) {
+      console.log("onFilesAreaClick", event);
+      this.clearAllSelections(event);
+    }
+  }
+
+  /**
+   * Called when the user clicks on a file.
+   * If the user held the Ctrl key while clicking, then toggle the file's
+   * selection state.
+   * @param event
+   * @param file
+   */
+  public onFileClick(event: MouseEvent, file: IFile): void {
+    if (event.ctrlKey || event.metaKey) {
+      file.isSelected = !file.isSelected;
+
+      this.checkUnavailableFiles();
+    }
+  }
+
+  // #region Viselect
 
   /**
    * Initialize the selection area.
@@ -109,7 +142,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
    * The selection area is also configured to clear all selections when the user
    * clicks outside of the selection area.
    */
-  private initSelection(): void {
+  private initViselect(): void {
     this.selection = new SelectionArea({
       // Class for the selection-area itself (the element).
       selectionAreaClass: "selection-area",
@@ -288,40 +321,11 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
       });
   }
 
-  private removeSelection(): void {
+  private destroyViselect(): void {
     this.selection?.destroy();
   }
 
-  /**
-   * Called when the user clicks on the files area.
-   * If the click was on the files area and not on a file, and the user did not
-   * hold the Ctrl key, then clear all selections.
-   * @param event
-   */
-  public onFilesAreaClick(event: MouseEvent): void {
-    if (
-      (event.target as HTMLElement).classList?.contains("files") &&
-      (!event.ctrlKey || !event.metaKey)
-    ) {
-      console.log("onFilesAreaClick", event);
-      this.clearAllSelections(event);
-    }
-  }
-
-  /**
-   * Called when the user clicks on a file.
-   * If the user held the Ctrl key while clicking, then toggle the file's
-   * selection state.
-   * @param event
-   * @param file
-   */
-  public onFileClick(event: MouseEvent, file: IFile): void {
-    if (event.ctrlKey || event.metaKey) {
-      file.isSelected = !file.isSelected;
-
-      this.checkUnavailableFiles();
-    }
-  }
+  // #endregion
 
   // #region File DND
 
@@ -511,6 +515,6 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   public ngOnDestroy(): void {
     this.clearAllSelections();
-    this.removeSelection();
+    this.destroyViselect();
   }
 }
