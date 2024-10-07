@@ -35,7 +35,6 @@ import { timer } from "rxjs";
     NxAngularTabComponent,
   ],
   templateUrl: "./nx-angular-file-manager.component.html",
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NxAngularFileManagerComponent implements OnInit {
   public iconSet: { [key: string]: string } = {
@@ -47,8 +46,6 @@ export class NxAngularFileManagerComponent implements OnInit {
   public sidebarGroups: IFileGroup[] = [];
   public files: IFile[] = [];
   public tabs: ITab[] = [];
-
-  public constructor(private chnageDetectorRef: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.sidebarGroups = Array.from({ length: 10 }).map((_, i) => ({
@@ -112,26 +109,28 @@ export class NxAngularFileManagerComponent implements OnInit {
       (tab: ITab) => tab === targetTab
     );
 
-    targetTab.isSelected = false;
-
-    this.chnageDetectorRef.detectChanges();
-
     this.tabs = this.tabs.filter((tab: ITab) => tab !== targetTab);
 
-    timer(100).subscribe(() => {
-      if (this.tabs[targetTabIndex]) {
-        this.tabs.forEach((tab: ITab, index: number) => {
-          tab.isSelected = index === targetTabIndex;
-        });
-      } else if (this.tabs[this.tabs.length + 1]) {
-        this.tabs.forEach((tab: ITab, index: number) => {
-          tab.isSelected = index === this.tabs.length + 1;
-        });
-      } else if (this.tabs[0]) {
-        this.tabs.forEach((tab: ITab, index: number) => {
-          tab.isSelected = index === 0;
-        });
-      }
-    });
+    // if this tab is selected
+    if (targetTab.isSelected) {
+      targetTab.isSelected = false;
+
+      // select closest tab
+      timer(100).subscribe(() => {
+        if (this.tabs[targetTabIndex]) {
+          this.tabs.forEach((tab: ITab, index: number) => {
+            tab.isSelected = index === targetTabIndex;
+          });
+        } else if (this.tabs[this.tabs.length - 1]) {
+          this.tabs.forEach((tab: ITab, index: number) => {
+            tab.isSelected = index === this.tabs.length - 1;
+          });
+        } else if (this.tabs[this.tabs.length + 1]) {
+          this.tabs.forEach((tab: ITab, index: number) => {
+            tab.isSelected = index === this.tabs.length + 1;
+          });
+        }
+      });
+    }
   }
 }

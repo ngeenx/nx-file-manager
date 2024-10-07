@@ -48,7 +48,9 @@ export class NxAngularTabsComponent implements AfterContentInit {
     this.addNewTab.emit();
   }
 
-  public onTabClose(targetTab: ITab): void {
+  public onTabClose(event: MouseEvent, targetTab: ITab): void {
+    event.stopPropagation();
+
     this.tabClose.emit(targetTab);
   }
 }

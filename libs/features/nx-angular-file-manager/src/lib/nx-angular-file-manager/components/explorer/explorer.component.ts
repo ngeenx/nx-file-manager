@@ -8,6 +8,7 @@ import {
   AfterViewInit,
   SimpleChanges,
   OnChanges,
+  OnDestroy,
 } from "@angular/core";
 import { FileType, IFile, ITab, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
@@ -22,7 +23,7 @@ import tippy, { Instance, Props } from "tippy.js";
   standalone: true,
   providers: [FileActionsService],
 })
-export class ExplorerComponent implements AfterViewInit, OnChanges {
+export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
   // #region ViewChilds and HostListeners
 
   @HostListener("document:keydown", ["$event"])
@@ -495,4 +496,9 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
   }
 
   // #endregion
+
+  public ngOnDestroy(): void {
+    this.clearAllSelections();
+    this.removeSelection();
+  }
 }
