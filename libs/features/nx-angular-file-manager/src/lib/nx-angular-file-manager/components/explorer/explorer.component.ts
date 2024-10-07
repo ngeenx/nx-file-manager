@@ -45,8 +45,6 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
   @Input()
   public iconSet!: { [key: string]: string };
 
-  @Input()
-  public files?: IFile[] = [];
 
   @Input()
   public isFreezed = true;
@@ -249,7 +247,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
           (fileElement: Element) => fileElement.id
         );
 
-        this.files?.forEach((file: IFile) => {
+        this.tabData.files?.forEach((file: IFile) => {
           if (selectedFileIds?.includes(file.id.toString())) {
             file.isSelected = true;
           }
@@ -259,7 +257,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
           ?.map((fileElement: Element) => fileElement.id)
           .filter((fileId: string) => !selectedFileIds?.includes(fileId));
 
-        this.files?.forEach((file: IFile) => {
+        this.tabData.files?.forEach((file: IFile) => {
           if (removedFileIds?.includes(file.id.toString())) {
             file.isSelected = false;
           }
@@ -270,7 +268,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
           (fileElement: Element) => fileElement.id
         );
 
-        this.files?.forEach((file: IFile) => {
+        this.tabData.files?.forEach((file: IFile) => {
           return (file.isSelected = selectedFileIds?.includes(
             file.id.toString()
           ));
@@ -404,12 +402,19 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
 
       this.checkUnavailableFiles();
 
-      this.files = this.files?.filter((file: IFile) => !file.isSelected);
+      this.tabData.files = this.tabData.files?.filter((file: IFile) => !file.isSelected);
 
       this.clearAllSelections();
     }
   }
 
+  /**
+   * Update the position of the drag ghost element.
+   * This method is called when the user drags a file.
+   * It updates the position of the drag ghost element so that it is
+   * positioned at the correct location on the page.
+   * @param event
+   */
   private updateGhostPosition(event: MouseEvent): void {
     const dragGhostElement = this.dragGhost?.nativeElement,
       filesContainerRect =
@@ -437,14 +442,14 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
    */
   private checkUnavailableFiles(): void {
     this.selectedFiles =
-      this.files?.filter((file: IFile) => file.isSelected) || [];
+      this.tabData.files?.filter((file: IFile) => file.isSelected) || [];
 
     const selectedFileIds: string[] = this.selectedFiles?.map((file: IFile) =>
       file.id.toString()
     );
 
     if (this.selectedFiles.length > 0) {
-      this.files?.forEach((file: IFile) => {
+      this.tabData.files?.forEach((file: IFile) => {
         file.isDropUnavailable =
           file.type !== FileType.FOLDER &&
           !selectedFileIds?.includes(file.id.toString());
@@ -465,7 +470,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
       this.selection?.clearSelection();
       this.selectedFiles = [];
 
-      this.files?.forEach((file: IFile) => {
+      this.tabData.files?.forEach((file: IFile) => {
         file.isSelected = false;
         file.isDroppable = false;
         file.isDropUnavailable = false;

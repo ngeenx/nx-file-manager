@@ -12,7 +12,7 @@
     <nx-angular-tab [tabData]="tab">
       <nx-angular-explorer
         [iconSet]="iconSet"
-        [files]="tab.files"
+        [tabData]="tab"
         [isFreezed]="tab.isSelected || false"
       />
     </nx-angular-tab>

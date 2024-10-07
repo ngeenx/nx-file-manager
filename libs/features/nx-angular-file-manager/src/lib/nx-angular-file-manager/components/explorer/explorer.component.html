@@ -4,7 +4,7 @@
     class="files grid-view"
     (click)="onFilesAreaClick($event)"
   >
-    @for (file of files; track $index) {
+    @for (file of tabData.files; track $index) {
     <button
       [id]="file.id"
       class="file"
