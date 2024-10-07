@@ -75,11 +75,13 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (!changes["isFreezed"].currentValue) {
-      this.clearAllSelections();
-      this.removeSelection();
-    } else {
-      this.initSelection();
+    if (changes["isFreezed"]) {
+      if (!changes["isFreezed"]?.currentValue) {
+        this.clearAllSelections();
+        this.removeSelection();
+      } else {
+        this.initSelection();
+      }
     }
   }
 

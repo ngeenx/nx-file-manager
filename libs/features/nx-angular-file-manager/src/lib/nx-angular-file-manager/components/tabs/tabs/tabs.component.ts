@@ -24,6 +24,9 @@ export class NxAngularTabsComponent implements AfterContentInit {
   @Output()
   public tabClick: EventEmitter<ITab> = new EventEmitter();
 
+  @Output()
+  public tabClose: EventEmitter<ITab> = new EventEmitter();
+
   public ngAfterContentInit(): void {
     if (
       this.tabs?.filter((tab: NxAngularTabComponent) => tab.tabData.isSelected)
@@ -43,5 +46,9 @@ export class NxAngularTabsComponent implements AfterContentInit {
 
   public onNewTabClick(): void {
     this.addNewTab.emit();
+  }
+
+  public onTabClose(targetTab: ITab): void {
+    this.tabClose.emit(targetTab);
   }
 }
