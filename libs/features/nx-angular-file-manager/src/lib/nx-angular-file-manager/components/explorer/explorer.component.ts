@@ -335,6 +335,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
         file.isSelected = true;
 
         this.selectedFiles.push(file);
+        console.log("~~~~~~~", file, this.selectedFiles);
       }
     }
 

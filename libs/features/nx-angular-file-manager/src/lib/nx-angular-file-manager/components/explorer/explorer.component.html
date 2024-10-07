@@ -47,9 +47,7 @@
         <path [attr.d]="iconSet['fileMultipleIconData']" />
       </svg>
 
-      <span>
-        {{ selectedFiles ? selectedFiles.length : 0 }} files selected
-      </span>
+      <span> {{ selectedFiles.length || 1 }} files selected </span>
     </div>
   </div>
 </div>
