@@ -6,12 +6,7 @@ import {
   fileMultipleIconData,
 } from "@ngeenx/nx-file-manager-icons";
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
-import {
-  FileType,
-  IFile,
-  IFileGroup,
-  ITab,
-} from "@ngeenx/nx-file-manager-utils";
+import { FileType, IFileGroup, ITab } from "@ngeenx/nx-file-manager-utils";
 import { ExplorerComponent } from "./components/explorer/explorer.component";
 import { NxAngularTabsComponent } from "./components/tabs/tabs/tabs.component";
 import { NxAngularTabComponent } from "./components/tabs/tab/tab.component";

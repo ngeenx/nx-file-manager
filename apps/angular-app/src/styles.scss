@@ -3,5 +3,7 @@
 @tailwind utilities;
 
 @import "../../../node_modules/tippy.js/dist/tippy.css";
+@import '@angular/cdk/overlay-prebuilt.css';
+@import '../../../node_modules/@perfectmemory/ngx-contextmenu/src/assets/stylesheets/base.scss';
 
 @import "../../../libs/utils/nx-file-manager-utils/src/styles/index.scss";

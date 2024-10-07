@@ -16,12 +16,14 @@ import { timer } from "rxjs";
 import { FileActionsService } from "../../services/file-actions.service";
 import { createToast, ToastOptions } from "vercel-toast";
 import tippy, { Instance, Props } from "tippy.js";
+import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
 
 @Component({
   selector: "nx-angular-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
   providers: [FileActionsService],
+  imports: [ContextMenuModule],
 })
 export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
   // #region ViewChilds and HostListeners
@@ -335,7 +337,6 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
         file.isSelected = true;
 
         this.selectedFiles.push(file);
-        console.log("~~~~~~~", file, this.selectedFiles);
       }
     }
 
@@ -448,6 +449,14 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
       dragGhostElement.style.top =
         event.pageY - filesContainerRect.top + scrollTop + "px";
     }
+  }
+
+  // #endregion
+
+  // #region File Context Menu
+
+  public execute(text: string, value: unknown): void {
+    console.log(text, value);
   }
 
   // #endregion
