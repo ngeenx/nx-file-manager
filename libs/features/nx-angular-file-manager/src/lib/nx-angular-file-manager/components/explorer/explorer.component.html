@@ -19,7 +19,7 @@
       }"
       [draggable]="true"
       [attr.data-tippy-content]="file.name"
-      (dragstart)="onFileDragStart($event)"
+      (dragstart)="onFileDragStart($event, file)"
       (drag)="onFileDragging($event)"
       (dragend)="onFileDragEnd($event)"
       (dragover)="onFileDragOver($event, file)"

@@ -320,7 +320,21 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
 
   // #region File DND
 
-  public onFileDragStart(event: DragEvent): void {
+  public onFileDragStart(event: DragEvent, file: IFile): void {
+    if (!file.isSelected) {
+      if (this.selectedFiles.length > 0) {
+        event.preventDefault();
+
+        this.dragGhost?.nativeElement?.classList?.remove("dragging");
+
+        return;
+      } else {
+        file.isSelected = true;
+
+        this.selectedFiles.push(file);
+      }
+    }
+
     if (event.dataTransfer) {
       event.dataTransfer.setDragImage(new Image(), 0, 0);
       event.dataTransfer.effectAllowed = "copyMove";
