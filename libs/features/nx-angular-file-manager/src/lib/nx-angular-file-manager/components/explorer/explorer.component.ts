@@ -45,7 +45,6 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
   @Input()
   public iconSet!: { [key: string]: string };
 
-
   @Input()
   public isFreezed = true;
 
@@ -297,7 +296,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
   public onFilesAreaClick(event: MouseEvent): void {
     if (
       (event.target as HTMLElement).classList?.contains("files") &&
-      !event.ctrlKey
+      (!event.ctrlKey || !event.metaKey)
     ) {
       console.log("onFilesAreaClick", event);
       this.clearAllSelections(event);
@@ -312,8 +311,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
    * @param file
    */
   public onFileClick(event: MouseEvent, file: IFile): void {
-    // console.log("!!!!!", event.ctrlKey);
-    if (event.ctrlKey) {
+    if (event.ctrlKey || event.metaKey) {
       file.isSelected = !file.isSelected;
 
       this.checkUnavailableFiles();
@@ -402,7 +400,9 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
 
       this.checkUnavailableFiles();
 
-      this.tabData.files = this.tabData.files?.filter((file: IFile) => !file.isSelected);
+      this.tabData.files = this.tabData.files?.filter(
+        (file: IFile) => !file.isSelected
+      );
 
       this.clearAllSelections();
     }
@@ -460,7 +460,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges {
   private clearAllSelections(
     mouseEvent: MouseEvent | TouchEvent | null | undefined = undefined
   ): void {
-    if (mouseEvent && mouseEvent.ctrlKey) {
+    if (mouseEvent && (mouseEvent.ctrlKey || mouseEvent.metaKey)) {
       return;
     }
 
