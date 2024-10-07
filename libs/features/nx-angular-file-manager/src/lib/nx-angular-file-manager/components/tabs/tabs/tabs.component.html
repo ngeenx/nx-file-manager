@@ -10,6 +10,7 @@
     >
       {{ tab.tabData.name }}
 
+      @if (tabs.length > 1) {
       <button class="tab-close" (click)="onTabClose(tab.tabData)">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <title>rhombus</title>
@@ -18,6 +19,7 @@
           />
         </svg>
       </button>
+      }
     </li>
     }
 
