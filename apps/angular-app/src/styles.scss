@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "../../../node_modules/tippy.js/dist/tippy.css";
+
 @import "../../../libs/utils/nx-file-manager-utils/src/styles/index.scss";

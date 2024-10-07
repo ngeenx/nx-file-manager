@@ -5,12 +5,14 @@ import {
   Input,
   OnInit,
   ViewChild,
+  AfterViewInit,
 } from "@angular/core";
 import { FileType, IFile, UrlUtils } from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
 import { timer } from "rxjs";
 import { FileActionsService } from "../../services/file-actions.service";
 import { createToast, ToastOptions } from "vercel-toast";
+import tippy, { Instance, Props } from "tippy.js";
 
 @Component({
   selector: "nx-angular-explorer",
@@ -18,7 +20,7 @@ import { createToast, ToastOptions } from "vercel-toast";
   standalone: true,
   providers: [FileActionsService],
 })
-export class ExplorerComponent implements OnInit {
+export class ExplorerComponent implements OnInit, AfterViewInit {
   // #region ViewChilds and HostListeners
 
   @HostListener("document:keydown", ["$event"])
@@ -52,11 +54,23 @@ export class ExplorerComponent implements OnInit {
   public isFileDragging = false;
 
   private selection: SelectionArea | undefined;
+  private tippyInstance: Instance<Props>[] | undefined;
 
   public constructor(private fileActionsService: FileActionsService) {}
 
   public ngOnInit(): void {
     this.initSelection();
+  }
+
+  public ngAfterViewInit(): void {
+    this.tippyInstance = tippy("[data-tippy-content]", {
+      delay: [1000, 100],
+      arrow: false,
+      placement: "bottom",
+      hideOnClick: true,
+      offset: [0, 5],
+      maxWidth: 300,
+    });
   }
 
   /**
@@ -302,6 +316,12 @@ export class ExplorerComponent implements OnInit {
     const dragGhostElement = this.dragGhost?.nativeElement;
     dragGhostElement?.classList?.add("dragging");
 
+    timer(300).subscribe(() => {
+      this.tippyInstance?.forEach((tippyInstance: Instance) => {
+        tippyInstance.disable();
+      });
+    });
+
     this.isFileDragging = true;
   }
 
@@ -319,6 +339,12 @@ export class ExplorerComponent implements OnInit {
     }
 
     this.dragGhost?.nativeElement?.classList?.remove("dragging");
+
+    timer(300).subscribe(() => {
+      this.tippyInstance?.forEach((tippyInstance: Instance) => {
+        tippyInstance.enable();
+      });
+    });
 
     this.isFileDragging = false;
   }

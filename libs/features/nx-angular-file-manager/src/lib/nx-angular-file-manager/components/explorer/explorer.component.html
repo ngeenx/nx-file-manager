@@ -17,10 +17,8 @@
         'drop-unavailable':
           selectedFiles.length > 0 && !file.isSelected && file.isDropUnavailable
       }"
-      [disabled]="
-        selectedFiles.length > 0 && !file.isSelected && file.isDropUnavailable
-      "
       [draggable]="true"
+      [attr.data-tippy-content]="file.name"
       (dragstart)="onFileDragStart($event)"
       (drag)="onFileDragging($event)"
       (dragend)="onFileDragEnd($event)"
