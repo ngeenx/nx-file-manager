@@ -4,5 +4,11 @@
   <nx-angular-sidebar [iconSet]="iconSet" [sidebarGroups]="sidebarGroups" />
 
   <!-- Content -->
-  <nx-angular-explorer [iconSet]="iconSet" [files]="files" />
+  <nx-angular-tabs (addNewTab)="onNewTabClick()">
+    @for (tab of tabs; track $index) {
+    <nx-angular-tab [tabData]="tab">
+      <nx-angular-explorer [iconSet]="iconSet" [files]="tab.files" />
+    </nx-angular-tab>
+    }
+  </nx-angular-tabs>
 </div>

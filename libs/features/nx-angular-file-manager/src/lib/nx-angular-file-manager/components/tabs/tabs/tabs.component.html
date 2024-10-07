@@ -1,0 +1,35 @@
+<div class="nx-file-manager-tabs">
+  <ul class="tabs">
+    @for (tab of tabs; track $index) {
+    <li
+      class="tab"
+      [class]="{
+        selected: tab.tabData.isSelected
+      }"
+      (click)="onTabSelect(tab)"
+    >
+      {{ tab.tabData.name }}
+
+      <button class="tab-close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>rhombus</title>
+          <path
+            d="M2.59,12.5L11.5,3.59L20.41,12.5L11.5,21.41L2.59,12.5M11.5,5L4,12.5L11.5,20L19,12.5L11.5,5Z"
+          />
+        </svg>
+      </button>
+    </li>
+    }
+
+    <li class="new-tab">
+      <button (click)="onNewTabClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>plus</title>
+          <path d="M5,13V12H11V6H12V12H18V13H12V19H11V13H5Z" />
+        </svg>
+      </button>
+    </li>
+  </ul>
+
+  <ng-content></ng-content>
+</div>

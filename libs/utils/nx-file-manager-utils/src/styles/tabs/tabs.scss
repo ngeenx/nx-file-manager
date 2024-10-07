@@ -1,0 +1,56 @@
+nx-angular-tabs {
+  @apply w-full;
+}
+
+.nx-file-manager-tabs {
+  @apply w-full h-full;
+
+  .tabs {
+    @apply flex flex-row gap-1 items-center w-full
+      border-b border-gray-300 pt-2 px-2;
+
+    .tab {
+      @apply flex flex-row gap-2 items-center
+        px-2 py-1.5 border border-gray-200 border-b-0
+        bg-gray-100 rounded-tl-md rounded-tr-md
+        text-xs text-gray-800 cursor-pointer
+        transition-all duration-300 ease-in-out;
+
+      &.selected {
+        @apply bg-yellow-200/70 border-yellow-200;
+
+        &:hover {
+          @apply bg-yellow-200;
+        }
+      }
+
+      .tab-close {
+        svg {
+          @apply size-3;
+        }
+
+        &:hover {
+          @apply scale-125;
+        }
+      }
+    }
+
+    .new-tab {
+      @apply flex flex-row gap-1 items-center;
+
+      svg {
+        @apply size-5;
+      }
+
+      &:hover {
+        svg {
+          @apply scale-125;
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    @apply h-full w-full;
+  }
+}
