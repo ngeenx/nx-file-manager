@@ -339,7 +339,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     if (event.dataTransfer) {
-      event.dataTransfer.setDragImage(new Image(), 0, 0);
+      event.dataTransfer.setDragImage(this.dragGhost?.nativeElement, 0, 0);
       event.dataTransfer.effectAllowed = "copyMove";
     }
 
@@ -433,6 +433,8 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
    * @param event
    */
   private updateGhostPosition(event: MouseEvent): void {
+    // TODO: remove if not needed
+    return;
     const dragGhostElement = this.dragGhost?.nativeElement,
       filesContainerRect =
         this.filesContainer?.nativeElement?.getBoundingClientRect(),

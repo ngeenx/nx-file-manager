@@ -66,8 +66,8 @@
     }
 
     .drag-ghost {
-      @apply absolute hidden bg-yellow-100/50 backdrop-blur-sm border border-yellow-300
-        size-24 rounded-md text-center text-xs p-3;
+      @apply absolute hidden bg-yellow-100/80 backdrop-blur-md border border-yellow-300
+        size-24 rounded-md text-center text-xs p-3 left-[-99999px] top-[-99999px];
 
       svg {
         @apply size-7;
