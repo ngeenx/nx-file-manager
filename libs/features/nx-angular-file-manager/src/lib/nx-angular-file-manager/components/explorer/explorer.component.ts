@@ -25,7 +25,7 @@ import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
   providers: [FileActionsService],
   imports: [ContextMenuModule],
 })
-export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   // #region ViewChilds and HostListeners
 
   @HostListener("document:keydown", ["$event"])
@@ -67,14 +67,7 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
   public constructor(private fileActionsService: FileActionsService) {}
 
   public ngAfterViewInit(): void {
-    this.tippyInstance = tippy("[data-tippy-content]", {
-      delay: [1000, 100],
-      arrow: false,
-      placement: "bottom",
-      hideOnClick: true,
-      offset: [0, 5],
-      maxWidth: 300,
-    });
+    timer(200).subscribe(() => this.initTippy());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -327,6 +320,27 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   // #endregion
 
+  // #region Tippy
+
+  private initTippy(): void {
+    this.tippyInstance = tippy("[data-tippy-content]", {
+      delay: [1000, 100],
+      arrow: false,
+      placement: "bottom",
+      hideOnClick: true,
+      offset: [0, 5],
+      maxWidth: 300,
+    });
+  }
+
+  private destroyTippy(): void {
+    this.tippyInstance?.forEach((tippyInstance: Instance) => {
+      tippyInstance.destroy();
+    });
+  }
+
+  // #endregion
+
   // #region File DND
 
   public onFileDragStart(event: DragEvent, file: IFile): void {
@@ -516,5 +530,6 @@ export class ExplorerComponent implements AfterViewInit, OnChanges, OnDestroy {
   public ngOnDestroy(): void {
     this.clearAllSelections();
     this.destroyViselect();
+    this.destroyTippy();
   }
 }
