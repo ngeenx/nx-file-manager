@@ -440,8 +440,6 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = "copyMove";
     }
-
-    this.updateGhostPosition(event);
   }
 
   public onFileDragEnd(event: DragEvent): void {
@@ -507,30 +505,6 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
       );
 
       this.clearAllSelections();
-    }
-  }
-
-  /**
-   * Update the position of the drag ghost element.
-   * This method is called when the user drags a file.
-   * It updates the position of the drag ghost element so that it is
-   * positioned at the correct location on the page.
-   * @param event
-   */
-  private updateGhostPosition(event: MouseEvent): void {
-    // TODO: remove if not needed
-    return;
-    const dragGhostElement = this.dragGhost?.nativeElement,
-      filesContainerRect =
-        this.filesContainer?.nativeElement?.getBoundingClientRect(),
-      scrollTop = this.filesContainer?.nativeElement?.scrollTop,
-      scrollLeft = this.filesContainer?.nativeElement?.scrollLeft;
-
-    if (dragGhostElement) {
-      dragGhostElement.style.left =
-        event.pageX - filesContainerRect.left + scrollLeft + "px";
-      dragGhostElement.style.top =
-        event.pageY - filesContainerRect.top + scrollTop + "px";
     }
   }
 
