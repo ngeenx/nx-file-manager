@@ -60,6 +60,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public isSelecting = false;
   public selectedFiles: IFile[] = [];
   public isFileDragging = false;
+  public isDragZoneActive = false;
 
   private selection: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
@@ -361,6 +362,11 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     if (event.dataTransfer) {
       event.dataTransfer.setDragImage(this.dragGhost?.nativeElement, 0, 0);
       event.dataTransfer.effectAllowed = "copyMove";
+
+      event.dataTransfer.setData(
+        "text/plain",
+        JSON.stringify(this.selectedFiles)
+      );
     }
 
     const dragGhostElement = this.dragGhost?.nativeElement;
@@ -475,6 +481,39 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #endregion
 
+  // #region Files DND
+
+  public onFilesDragEnter(event: DragEvent): void {
+    event.preventDefault();
+
+    console.log(
+      "FILES DRAG ENTER",
+      this.isContentDraggingFromOutsideOfWindow(event)
+    );
+
+    this.isDragZoneActive = this.isContentDraggingFromOutsideOfWindow(event);
+  }
+
+  public onFilesDrop(event: DragEvent): void {
+    event.preventDefault();
+
+    this.isDragZoneActive = false;
+
+    // TODO: handle file upload
+  }
+
+  public onFilesDragLeave(event: DragEvent): void {
+    event.preventDefault();
+
+    this.isDragZoneActive = false;
+  }
+
+  private isContentDraggingFromOutsideOfWindow(event: DragEvent): boolean {
+    return event.dataTransfer?.types?.includes("Files") || false;
+  }
+
+  // #endregion
+
   // #region File Context Menu
 
   public execute(text: string, value: unknown): void {
@@ -527,6 +566,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         file.isDropUnavailable = false;
       });
     }
+
+    this.isDragZoneActive = false;
   }
 
   // #endregion
