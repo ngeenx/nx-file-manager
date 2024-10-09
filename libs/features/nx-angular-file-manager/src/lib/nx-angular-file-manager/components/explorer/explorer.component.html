@@ -3,10 +3,10 @@
     #filesContainer
     class="files grid-view"
     (click)="onFilesAreaClick($event)"
-    (dragenter)="onFilesDragEnter($event)"
-    (dragover)="onFilesDragEnter($event)"
-    (drop)="onFilesDrop($event)"
-    (dragleave)="onFilesDragLeave($event)"
+    (dragenter)="onFilesAreaDragEnter($event)"
+    (dragover)="onFilesAreaDragEnter($event)"
+    (drop)="onFilesAreaDrop($event)"
+    (dragleave)="onFilesAreaDragLeave($event)"
   >
     @for (file of tabData.files; track $index) {
     <button
@@ -52,8 +52,12 @@
       [class]="{
         active: isDragZoneActive
       }"
+      (dragover)="onFilesAreaDragEnter($event)"
+      (dragleave)="onFilesAreaDragLeave($event)"
     >
-      <h1 class="title">Drop files here</h1>
+      <div class="drag-zone-inner">
+        <h1 class="title">Drop files here</h1>
+      </div>
     </div>
 
     <!-- Drag Ghost -->

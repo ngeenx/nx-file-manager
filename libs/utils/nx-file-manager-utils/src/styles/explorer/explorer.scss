@@ -62,18 +62,22 @@
     }
 
     .drag-zone {
-      @apply absolute hidden w-[98%] h-full -z-10 top-0 left-0 m-2.5
-        border-2 border-dashed border-blue-500 rounded-lg
-        bg-blue-50/70
-        transition-all duration-300 ease-in-out;
+      @apply fixed hidden w-full h-full z-20 top-0 left-0 p-2.5 backdrop-blur-[2px];
 
       &.active {
         @apply block;
       }
 
-      .title {
-        @apply absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-          text-2xl text-gray-500 select-none;
+      .drag-zone-inner {
+        @apply w-[98%] h-[100%]
+          border-2 border-dashed border-yellow-500 rounded-lg backdrop-blur-[2px]
+          bg-yellow-50/50 transition-all duration-300 ease-in-out;
+
+        .title {
+          @apply absolute text-center
+          top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+          text-2xl text-gray-600 select-none;
+        }
       }
     }
 

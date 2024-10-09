@@ -484,7 +484,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #region Files DND
 
-  public onFilesDragEnter(event: DragEvent): void {
+  public onFilesAreaDragEnter(event: DragEvent): void {
     event.preventDefault();
 
     console.log(
@@ -493,12 +493,20 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     );
 
     this.isDragZoneActive = this.isContentDraggingFromOutsideOfWindow(event);
+
+    this.isFileDragging = true;
   }
 
-  public onFilesDrop(event: DragEvent): void {
+  public onFilesAreaDrop(event: DragEvent): void {
     event.preventDefault();
 
     this.isDragZoneActive = false;
+
+    if (this.isFileDragging) {
+      timer(700).subscribe(() => {
+        this.isFileDragging = false;
+      });
+    }
 
     console.log(event.dataTransfer?.files, event.dataTransfer?.types);
 
@@ -507,15 +515,15 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
       if (items.length > 0) {
         for (const element of items) {
+          // @docs: https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry
           const entry = element.webkitGetAsEntry();
 
           if (entry) {
             if (entry.isDirectory) {
               console.log("Dropped folder:", entry);
+              this.listFolderContents(entry);
             } else if (entry.isFile) {
               console.log("Dropped file:", entry);
-
-              this.listFolderContents(entry);
             }
           }
         }
@@ -527,7 +535,18 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     // TODO: handle file upload
   }
 
-  public listFolderContents(directoryEntry: FileSystemEntry): void {
+  public onFilesAreaDragLeave(event: DragEvent): void {
+    event.preventDefault();
+
+    this.isDragZoneActive = false;
+    this.isFileDragging = false;
+  }
+
+  private isContentDraggingFromOutsideOfWindow(event: DragEvent): boolean {
+    return event.dataTransfer?.types?.includes("Files") || false;
+  }
+
+  private listFolderContents(directoryEntry: FileSystemEntry): void {
     const directoryReader = (
       directoryEntry as FileSystemDirectoryEntry
     ).createReader();
@@ -552,16 +571,6 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         }
       }
     });
-  }
-
-  public onFilesDragLeave(event: DragEvent): void {
-    event.preventDefault();
-
-    this.isDragZoneActive = false;
-  }
-
-  private isContentDraggingFromOutsideOfWindow(event: DragEvent): boolean {
-    return event.dataTransfer?.types?.includes("Files") || false;
   }
 
   // #endregion

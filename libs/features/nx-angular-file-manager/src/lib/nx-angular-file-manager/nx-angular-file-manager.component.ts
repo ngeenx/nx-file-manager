@@ -48,7 +48,7 @@ export class NxAngularFileManagerComponent implements OnInit {
       isCollapsed: false,
     }));
 
-    const files = Array.from({ length: 20 }).map((_, i) => ({
+    const files = Array.from({ length: 100 }).map((_, i) => ({
       id: i + 1,
       icon: i % 2 === 0 ? "fileIconData" : "folderIconData",
       name: `File file File file File ${i + 1}`,
@@ -73,7 +73,7 @@ export class NxAngularFileManagerComponent implements OnInit {
   }
 
   public onNewTabClick(): void {
-    const files = Array.from({ length: 20 }).map((_, i) => ({
+    const files = Array.from({ length: 100 }).map((_, i) => ({
       id: i + 1,
       icon: i % 2 === 0 ? "fileIconData" : "folderIconData",
       name: `File file File file File ${i + 1}`,
