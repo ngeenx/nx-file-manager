@@ -61,6 +61,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public selectedFiles: IFile[] = [];
   public isFileDragging = false;
   public isDragZoneActive = false;
+  public droppedExternalFiles: (File | FileSystemEntry)[] = [];
 
   private selection: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
@@ -499,7 +500,58 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     this.isDragZoneActive = false;
 
+    console.log(event.dataTransfer?.files, event.dataTransfer?.types);
+
+    if (event.dataTransfer) {
+      const items = Array.from(event.dataTransfer.items);
+
+      if (items.length > 0) {
+        for (const element of items) {
+          const entry = element.webkitGetAsEntry();
+
+          if (entry) {
+            if (entry.isDirectory) {
+              console.log("Dropped folder:", entry);
+            } else if (entry.isFile) {
+              console.log("Dropped file:", entry);
+
+              this.listFolderContents(entry);
+            }
+          }
+        }
+      } else {
+        console.log("No items detected.");
+      }
+    }
+
     // TODO: handle file upload
+  }
+
+  public listFolderContents(directoryEntry: FileSystemEntry): void {
+    const directoryReader = (
+      directoryEntry as FileSystemDirectoryEntry
+    ).createReader();
+
+    directoryReader.readEntries((entries: FileSystemEntry[]) => {
+      for (const element of entries) {
+        const entry = element;
+
+        if (entry.isFile) {
+          (entry as FileSystemFileEntry).file((file) => {
+            console.log("File in folder:", file.name);
+            this.droppedExternalFiles.push(file);
+          });
+        } else if (entry.isDirectory) {
+          console.log("Subfolder:", entry.name);
+          const li = document.createElement("li");
+          li.textContent = `Subfolder: ${entry.name}`;
+          this.droppedExternalFiles.push(entry);
+
+          // Alt klasör varsa, alt klasörü de listele
+          this.listFolderContents(entry);
+        }
+      }
+    });
   }
 
   public onFilesDragLeave(event: DragEvent): void {
