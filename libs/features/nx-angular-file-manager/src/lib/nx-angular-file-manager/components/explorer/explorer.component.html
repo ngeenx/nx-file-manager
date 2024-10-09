@@ -75,22 +75,46 @@
 </div>
 
 <context-menu #fileContextMenu>
-  <ng-template contextMenuItem (execute)="execute('Rename', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute(FileActionType.RENAME, $event)"
+    let-value
+  >
     Rename
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Cut', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute(FileActionType.CUT, $event)"
+    let-value
+  >
     Cut
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Copy', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute(FileActionType.COPY, $event)"
+    let-value
+  >
     Copy
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Paste', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute(FileActionType.PASTE, $event)"
+    let-value
+  >
     Paste
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Move', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute(FileActionType.MOVE, $event)"
+    let-value
+  >
     Move
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Delete', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute(FileActionType.DELETE, $event)"
+    let-value
+  >
     Delete
   </ng-template>
 </context-menu>
