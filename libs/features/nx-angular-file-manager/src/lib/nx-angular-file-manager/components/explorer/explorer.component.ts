@@ -9,7 +9,13 @@ import {
   OnChanges,
   OnDestroy,
 } from "@angular/core";
-import { FileType, IFile, ITab, UrlUtils } from "@ngeenx/nx-file-manager-utils";
+import {
+  FileActionType,
+  FileType,
+  IFile,
+  ITab,
+  UrlUtils,
+} from "@ngeenx/nx-file-manager-utils";
 import SelectionArea, { SelectionEvent } from "@viselect/vanilla";
 import { timer } from "rxjs";
 import { FileActionsService } from "../../services/file-actions.service";
@@ -56,6 +62,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   // #endregion
 
   public UrlUtils: typeof UrlUtils = UrlUtils;
+  public FileActionType: typeof FileActionType = FileActionType;
+
   public FileType: typeof FileType = FileType;
   public isSelecting = false;
   public selectedFiles: IFile[] = [];
@@ -577,8 +585,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #region File Context Menu
 
-  public execute(text: string, value: unknown): void {
-    console.log(text, value);
+  public execute(fileActionType: FileActionType, value: unknown): void {
+    console.log(fileActionType, value);
   }
 
   // #endregion
