@@ -72,7 +72,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public droppedExternalFiles: (File | FileSystemEntry)[] = [];
   public lastClickedElement: HTMLElement | undefined;
 
-  private selection: SelectionArea | undefined;
+  private viselectInstance: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
 
   public constructor(private readonly fileActionsService: FileActionsService) {}
@@ -162,7 +162,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
    * clicks outside of the selection area.
    */
   private initViselect(): void {
-    this.selection = new SelectionArea({
+    this.viselectInstance = new SelectionArea({
       // Class for the selection-area itself (the element).
       selectionAreaClass: "selection-area",
 
@@ -272,7 +272,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
       );
     };
 
-    this.selection
+    this.viselectInstance
       .on("beforestart", (event: SelectionEvent) => {
         console.group("BEFORESTART");
 
@@ -371,7 +371,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   private destroyViselect(): void {
-    this.selection?.destroy();
+    this.viselectInstance?.destroy();
   }
 
   // #endregion
@@ -646,7 +646,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     if (!this.isSelecting && this.selectedFiles.length) {
       console.log("CLEARALL");
       this.isSelecting = false;
-      this.selection?.clearSelection();
+      this.viselectInstance?.clearSelection();
       this.selectedFiles = [];
 
       this.tabData.files?.forEach((file: IFile) => {
