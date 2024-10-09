@@ -1,8 +1,8 @@
-<div class="nx-file-manager-explorer">
+<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)">
   <div
     #filesContainer
     class="files grid-view"
-    (click)="onFilesAreaClick($event)"
+    (mousedown)="onFilesAreaClick($event)"
     (dragenter)="onFilesAreaDragEnter($event)"
     (dragover)="onFilesAreaDragEnter($event)"
     (drop)="onFilesAreaDrop($event)"
@@ -28,7 +28,7 @@
       (dragover)="onFileDragOver($event, file)"
       (dragleave)="onFileDropLeave($event, file)"
       (drop)="onFileDrop($event, file)"
-      (click)="onFileClick($event, file)"
+      (mousedown)="onFileClick($event, file)"
       [contextMenu]="fileContextMenu"
       [contextMenuValue]="file"
     >

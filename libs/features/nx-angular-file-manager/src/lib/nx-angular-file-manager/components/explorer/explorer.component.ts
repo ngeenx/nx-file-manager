@@ -62,6 +62,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public isFileDragging = false;
   public isDragZoneActive = false;
   public droppedExternalFiles: (File | FileSystemEntry)[] = [];
+  public lastClickedElement: HTMLElement | undefined;
 
   private selection: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
@@ -75,7 +76,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes["isFreezed"]) {
       if (!changes["isFreezed"]?.currentValue) {
-        this.clearAllSelections();
+        // this.clearAllSelections();
         this.destroyViselect();
       } else {
         this.initViselect();
@@ -92,7 +93,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public onFilesAreaClick(event: MouseEvent): void {
     if (
       (event.target as HTMLElement).classList?.contains("files") &&
-      (!event.ctrlKey || !event.metaKey)
+      (!event.ctrlKey || !event.metaKey) &&
+      !this.isSelecting
     ) {
       console.log("onFilesAreaClick", event);
       this.clearAllSelections(event);
@@ -107,12 +109,26 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
    * @param file
    */
   public onFileClick(event: MouseEvent, file: IFile): void {
+    this.lastClickedElement = event.target as HTMLElement;
+
+    console.log("~~~~~ file clicked ~~~~~~");
+
     if (event.ctrlKey || event.metaKey) {
       file.isSelected = !file.isSelected;
 
       this.checkUnavailableFiles();
     }
   }
+
+  // #region Explorer
+
+  public onExplorerClick(event: MouseEvent): void {
+    this.lastClickedElement = event.target as HTMLElement;
+
+    console.log("----->", this.lastClickedElement);
+  }
+
+  // #endregion
 
   // #region Viselect
 
@@ -235,37 +251,67 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
       },
     });
 
-    const isTargetElementFile = (event: SelectionEvent): boolean =>
-      (event.event?.target as HTMLElement)?.parentElement?.classList?.contains(
-        "file"
-      ) ||
-      (event.event?.target as HTMLElement)?.classList?.contains("file") ||
-      false;
+    const isTargetElementFile = (element: HTMLElement | undefined): boolean => {
+      console.log({
+        ee: element,
+        xx: (element as HTMLElement)?.parentElement?.classList,
+        yy: (element as HTMLElement)?.classList,
+      });
+      return (
+        element?.parentElement?.classList?.contains("file") ||
+        element?.classList?.contains("file") ||
+        false
+      );
+    };
 
     this.selection
       .on("beforestart", (event: SelectionEvent) => {
-        if (isTargetElementFile(event) || this.isFileDragging) {
+        console.group("BEFORESTART");
+
+        console.log(
+          "is target element file ",
+          isTargetElementFile(this.lastClickedElement)
+        );
+
+        if (
+          isTargetElementFile(this.lastClickedElement) ||
+          this.isFileDragging
+        ) {
           this.isSelecting = false;
+
+          console.groupEnd();
 
           return false;
         }
-
-        console.log("BEFORESTART");
 
         this.clearAllSelections(event.event);
 
         this.isSelecting = true;
 
+        console.groupEnd();
+
         return true;
       })
       .on("beforedrag", (event: SelectionEvent) => {
-        if (isTargetElementFile(event)) {
+        console.group("BEFOREDRAG");
+
+        console.log(
+          "is target element file ",
+          isTargetElementFile(this.lastClickedElement),
+          event,
+        );
+
+        if (isTargetElementFile(this.lastClickedElement)) {
           this.isSelecting = false;
+
+          console.groupEnd();
 
           return false;
         }
 
         this.isSelecting = true;
+
+        console.groupEnd();
 
         return true;
       })
