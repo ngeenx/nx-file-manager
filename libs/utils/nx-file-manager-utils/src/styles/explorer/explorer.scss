@@ -59,6 +59,14 @@
       &.drop-unavailable {
         @apply opacity-50;
       }
+
+      &.waiting-for-upload {
+        @apply border-dashed bg-yellow-100/70 border border-yellow-300 #{!important};
+      }
+
+      &.uploading {
+        @apply bg-yellow-200/70 border border-yellow-300 animate-pulse #{!important};
+      }
     }
 
     .drag-zone {

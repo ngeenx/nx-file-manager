@@ -34,7 +34,34 @@ export interface IFileUi {
   isDropUnavailable?: boolean;
 }
 
-export interface IFile extends IFileUi {
+export interface IFileUploadUi {
+  /**
+   * Candidate for upload
+   */
+  isReadyForUpload?: boolean;
+
+  /**
+   * Is this file uploading to the server
+   */
+  isUploading?: boolean;
+
+  /**
+   * Is this file uploading failed
+   */
+  isUploadingFailed?: boolean;
+
+  /**
+   * Is this file uploading success
+   */
+  isUploadingSuccess?: boolean;
+
+  /**
+   * File upload destination
+   */
+  targetFolder?: IFile;
+}
+
+export interface IFile extends IFileUi, IFileUploadUi {
   id: string | number;
   icon: string;
   name: string;

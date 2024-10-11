@@ -18,7 +18,11 @@
         'drop-not-allowed': file.isDroppable && !file.isDropAllowed,
         'drop-allowed': file.isDroppable && file.isDropAllowed,
         'drop-unavailable':
-          selectedFiles.length > 0 && !file.isSelected && file.isDropUnavailable
+          selectedFiles.length > 0 &&
+          !file.isSelected &&
+          file.isDropUnavailable,
+        uploading: file.isUploading,
+        'waiting-for-upload': file.isReadyForUpload
       }"
       [draggable]="true"
       [attr.data-tippy-content]="file.name"

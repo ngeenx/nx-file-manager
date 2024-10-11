@@ -22,6 +22,7 @@ import { FileActionsService } from "../../services/file-actions.service";
 import { createToast, ToastOptions } from "vercel-toast";
 import tippy, { Instance, Props } from "tippy.js";
 import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
+import { FileUploaderService } from "../../services/file-uploader.service";
 
 @Component({
   selector: "nx-angular-explorer",
@@ -75,7 +76,10 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   private viselectInstance: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
 
-  public constructor(private readonly fileActionsService: FileActionsService) {}
+  public constructor(
+    private readonly fileActionsService: FileActionsService,
+    private readonly fileUploaderService: FileUploaderService
+  ) {}
 
   public ngAfterViewInit(): void {
     timer(200).subscribe(() => this.initTippy());
@@ -306,7 +310,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         console.log(
           "is target element file ",
           isTargetElementFile(this.lastClickedElement),
-          event,
+          event
         );
 
         if (isTargetElementFile(this.lastClickedElement)) {
@@ -510,7 +514,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #endregion
 
-  // #region Files DND
+  // #region Drop Zone DND
 
   public onFilesAreaDragEnter(event: DragEvent): void {
     event.preventDefault();
@@ -526,6 +530,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   public onFilesAreaDrop(event: DragEvent): void {
+    console.group("onFilesAreaDrop");
+
     event.preventDefault();
 
     this.isDragZoneActive = false;
@@ -542,7 +548,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
       const items = Array.from(event.dataTransfer.items);
 
       if (items.length > 0) {
-        for (const element of items) {
+        items.forEach((element) => {
           // @docs: https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry
           const entry = element.webkitGetAsEntry();
 
@@ -553,14 +559,27 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
             } else if (entry.isFile) {
               console.log("Dropped file:", entry);
             }
+
+            const newUploadingFile = <IFile>{
+              id: this.tabData.files.length + 1,
+              icon: "fileIconData",
+              name: entry.name,
+              path: entry.fullPath,
+              type: !entry.isDirectory ? FileType.FILE : FileType.FOLDER,
+              isReadyForUpload: true,
+            };
+
+            this.tabData.files.push(newUploadingFile);
+
+            this.fileUploaderService.addFileToQueue(newUploadingFile);
           }
-        }
+        });
       } else {
         console.log("No items detected.");
       }
     }
 
-    // TODO: handle file upload
+    console.groupEnd();
   }
 
   public onFilesAreaDragLeave(event: DragEvent): void {
