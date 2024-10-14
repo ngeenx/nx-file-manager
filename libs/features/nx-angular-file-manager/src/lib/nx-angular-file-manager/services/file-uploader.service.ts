@@ -41,7 +41,7 @@ export class FileUploaderService {
 
       file.isUploading = false;
       callback(success ? null : new Error("Upload failed"));
-    }, Math.random() * 1567);
+    }, Math.random() * 3456);
   }
 
   public addFileToQueue(file: IFile, priority = 1) {

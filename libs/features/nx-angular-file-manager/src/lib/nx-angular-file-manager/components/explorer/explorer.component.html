@@ -6,7 +6,6 @@
     (dragenter)="onFilesAreaDragEnter($event)"
     (dragover)="onFilesAreaDragEnter($event)"
     (drop)="onFilesAreaDrop($event)"
-    (dragleave)="onFilesAreaDragLeave($event)"
   >
     @for (file of tabData.files; track $index) {
     <button

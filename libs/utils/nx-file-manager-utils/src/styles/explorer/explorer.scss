@@ -61,7 +61,7 @@
       }
 
       &.waiting-for-upload {
-        @apply border-dashed bg-yellow-100/70 border border-yellow-300 #{!important};
+        @apply border-dashed bg-gray-100/70 opacity-50 border border-gray-300 #{!important};
       }
 
       &.uploading {
