@@ -44,6 +44,9 @@ importers:
       async:
         specifier: ^3.2.6
         version: 3.2.6
+      lucide-angular:
+        specifier: ^0.454.0
+        version: 0.454.0(@angular/common@18.2.10(@angular/core@18.2.10(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.10(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs:
         specifier: ~7.8.1
         version: 7.8.1
@@ -5890,6 +5893,12 @@ packages:
   lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
+
+  lucide-angular@0.454.0:
+    resolution: {integrity: sha512-06vsaqHWSXqXDlo1851727oEbm6eXPNBLOdQAyKgxprDJirGnk80x77CDms/VS7qWy0ld25pgrCXMA7czaCS0w==}
+    peerDependencies:
+      '@angular/common': 13.x - 18.x
+      '@angular/core': 13.x - 18.x
 
   luxon@3.5.0:
     resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
@@ -15782,6 +15791,12 @@ snapshots:
       yallist: 4.0.0
 
   lru-cache@7.18.3: {}
+
+  lucide-angular@0.454.0(@angular/common@18.2.10(@angular/core@18.2.10(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@18.2.10(rxjs@7.8.1)(zone.js@0.14.10)):
+    dependencies:
+      '@angular/common': 18.2.10(@angular/core@18.2.10(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
+      '@angular/core': 18.2.10(rxjs@7.8.1)(zone.js@0.14.10)
+      tslib: 2.8.1
 
   luxon@3.5.0: {}
 
