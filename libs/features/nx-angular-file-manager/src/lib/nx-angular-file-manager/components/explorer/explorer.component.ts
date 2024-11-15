@@ -23,15 +23,29 @@ import { createToast, ToastOptions } from "vercel-toast";
 import tippy, { Instance, Props } from "tippy.js";
 import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
 import { FileUploaderService } from "../../services/file-uploader.service";
+import {
+  LucideAngularModule,
+  FolderPen,
+  Scissors,
+  Copy,
+  ClipboardPaste,
+  Trash2,
+} from "lucide-angular";
 
 @Component({
   selector: "nx-angular-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
   providers: [FileActionsService],
-  imports: [ContextMenuModule],
+  imports: [ContextMenuModule, LucideAngularModule],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
+  public readonly FolderPen = FolderPen;
+  public readonly Scissors = Scissors;
+  public readonly Copy = Copy;
+  public readonly ClipboardPaste = ClipboardPaste;
+  public readonly Trash2 = Trash2;
+
   // #region ViewChilds and HostListeners
 
   @HostListener("document:keydown", ["$event"])
@@ -86,6 +100,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    console.log(33);
     if (changes["isFreezed"]) {
       if (!changes["isFreezed"]?.currentValue) {
         // this.clearAllSelections();
