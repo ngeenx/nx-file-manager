@@ -21,10 +21,10 @@ nx-angular-tabs {
       }
 
       &.selected {
-        @apply bg-yellow-200/70 border-yellow-200 shadow-lg;
+        @apply bg-nx-theme-200 border-nx-theme-200 shadow-lg;
 
         &:hover {
-          @apply bg-yellow-200 border-b border-yellow-200;
+          @apply bg-nx-theme-200 border-b border-nx-theme-200;
         }
       }
 

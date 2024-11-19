@@ -41,10 +41,10 @@
       }
 
       &.selected {
-        @apply bg-yellow-100/70 border border-yellow-300 #{!important};
+        @apply bg-nx-theme-100 border border-nx-theme-300 #{!important};
 
         &:hover {
-          @apply bg-yellow-200/70 border border-yellow-400/80 #{!important};
+          @apply bg-nx-theme-200 border border-nx-theme-400 #{!important};
         }
       }
 
@@ -65,7 +65,7 @@
       }
 
       &.uploading {
-        @apply bg-yellow-200/70 border border-yellow-300 animate-pulse #{!important};
+        @apply bg-nx-theme-200 border border-nx-theme-300 animate-pulse #{!important};
       }
     }
 
@@ -78,8 +78,8 @@
 
       .drag-zone-inner {
         @apply w-[98%] h-[100%]
-          border-2 border-dashed border-yellow-500 rounded-lg backdrop-blur-[2px]
-          bg-yellow-50/50 transition-all duration-300 ease-in-out;
+          border-2 border-dashed border-nx-theme-500 rounded-lg backdrop-blur-[2px]
+          bg-nx-theme-50 transition-all duration-300 ease-in-out;
 
         .title {
           @apply absolute text-center
@@ -90,7 +90,7 @@
     }
 
     .drag-ghost {
-      @apply absolute hidden bg-yellow-100/80 backdrop-blur-md border border-yellow-300
+      @apply absolute hidden bg-nx-theme-100 backdrop-blur-md border border-nx-theme-300
         size-24 rounded-md text-center text-xs p-3 left-[-99999px] top-[-99999px];
 
       svg {

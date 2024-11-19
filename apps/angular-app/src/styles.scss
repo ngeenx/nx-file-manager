@@ -3,7 +3,22 @@
 @tailwind utilities;
 
 @import "../../../node_modules/tippy.js/dist/tippy.css";
-@import '@angular/cdk/overlay-prebuilt.css';
-@import '../../../node_modules/@perfectmemory/ngx-contextmenu/src/assets/stylesheets/base.scss';
+@import "@angular/cdk/overlay-prebuilt.css";
+@import "../../../node_modules/@perfectmemory/ngx-contextmenu/src/assets/stylesheets/base.scss";
 
 @import "../../../libs/utils/nx-file-manager-utils/src/styles/index.scss";
+
+:root {
+  --nx-theme-50: #fefce8;
+  --nx-theme-100: #fffac2;
+  --nx-theme-200: #fff089;
+  --nx-theme-300: #ffdc2e;
+  --nx-theme-400: #fdcc12;
+  --nx-theme-500: #ecb206;
+  --nx-theme-600: #cc8902;
+  --nx-theme-700: #a36105;
+  --nx-theme-800: #864c0d;
+  --nx-theme-900: #723e11;
+  --nx-theme-950: #431f05;
+  --nx-theme-1000: #fdcc123e;
+}
