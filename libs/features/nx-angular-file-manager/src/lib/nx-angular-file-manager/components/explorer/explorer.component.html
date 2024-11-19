@@ -1,17 +1,9 @@
 <div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)">
-  <div
-    #filesContainer
-    class="files grid-view"
-    (mousedown)="onFilesAreaClick($event)"
-    (dragenter)="onFilesAreaDragEnter($event)"
-    (dragover)="onFilesAreaDragEnter($event)"
-    (drop)="onFilesAreaDrop($event)"
-  >
+  <div #filesContainer class="files grid-view" (mousedown)="onFilesAreaClick($event)"
+    (dragenter)="onFilesAreaDragEnter($event)" (dragover)="onFilesAreaDragEnter($event)"
+    (drop)="onFilesAreaDrop($event)">
     @for (file of tabData.files; track $index) {
-    <button
-      [id]="file.id"
-      class="file"
-      [class]="{
+    <button [id]="file.id" class="file" [class]="{
         selected: file.isSelected,
         hoverable: !isSelecting,
         'drop-not-allowed': file.isDroppable && !file.isDropAllowed,
@@ -22,25 +14,18 @@
           file.isDropUnavailable,
         uploading: file.isUploading,
         'waiting-for-upload': file.isReadyForUpload
-      }"
-      [draggable]="true"
-      [attr.data-tippy-content]="file.name"
-      (dragstart)="onFileDragStart($event, file)"
-      (drag)="onFileDragging($event)"
-      (dragend)="onFileDragEnd($event)"
-      (dragover)="onFileDragOver($event, file)"
-      (dragleave)="onFileDropLeave($event, file)"
-      (drop)="onFileDrop($event, file)"
-      (mousedown)="onFileClick($event, file)"
-      [contextMenu]="fileContextMenu"
-      [contextMenuValue]="file"
-    >
+      }" [draggable]="true" [attr.data-tippy-content]="file.name" (dragstart)="onFileDragStart($event, file)"
+      (drag)="onFileDragging($event)" (dragend)="onFileDragEnd($event)" (dragover)="onFileDragOver($event, file)"
+      (dragleave)="onFileDropLeave($event, file)" (drop)="onFileDrop($event, file)"
+      (mousedown)="onFileClick($event, file)" [contextMenu]="fileContextMenu" [contextMenuValue]="file">
       @if (UrlUtils.isHttpUrl(file.icon)) {
       <img [src]="file.icon" class="icon image" [alt]="file.name" />
       } @else {
-      <svg viewBox="0 0 24 24" width="20" class="icon">
-        <path [attr.d]="iconSet[file.icon]" />
-      </svg>
+      @if (file.type === FileType.FOLDER) {
+      <lucide-icon [img]="file.icon" class="icon icon-folder" [size]="30"></lucide-icon>
+      } @else {
+      <lucide-icon [img]="file.icon" class="icon icon-file" [size]="30"></lucide-icon>
+      }
       }
 
       <span class="name">
@@ -50,14 +35,9 @@
     }
 
     <!-- Drag Zone -->
-    <div
-      class="drag-zone"
-      [class]="{
+    <div class="drag-zone" [class]="{
         active: isDragZoneActive
-      }"
-      (dragover)="onFilesAreaDragEnter($event)"
-      (dragleave)="onFilesAreaDragLeave($event)"
-    >
+      }" (dragover)="onFilesAreaDragEnter($event)" (dragleave)="onFilesAreaDragLeave($event)">
       <div class="drag-zone-inner">
         <h1 class="title">Drop files here</h1>
       </div>
@@ -65,9 +45,7 @@
 
     <!-- Drag Ghost -->
     <div #dragGhost class="drag-ghost">
-      <svg viewBox="0 0 24 24" width="20" class="icon">
-        <path [attr.d]="iconSet['fileMultipleIconData']" />
-      </svg>
+      <lucide-icon [img]="Files" class="icon icon-file" [size]="30"></lucide-icon>
 
       <span>
         {{ selectedFiles.length || 1 }}
@@ -78,55 +56,35 @@
 </div>
 
 <context-menu #fileContextMenu>
-  <ng-template
-    contextMenuItem
-    (execute)="execute(FileActionType.RENAME, $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute(FileActionType.RENAME, $event)" let-value>
     <div class="custom-menu-item">
       <i-lucide [img]="FolderPen" class="my-icon"></i-lucide>
 
       <span> Rename </span>
     </div>
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute(FileActionType.CUT, $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute(FileActionType.CUT, $event)" let-value>
     <div class="custom-menu-item">
       <i-lucide [img]="Scissors" class="my-icon"></i-lucide>
 
       <span> Cut </span>
     </div>
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute(FileActionType.COPY, $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute(FileActionType.COPY, $event)" let-value>
     <div class="custom-menu-item">
       <i-lucide [img]="Copy" class="my-icon"></i-lucide>
 
       <span> Copy </span>
     </div>
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute(FileActionType.PASTE, $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute(FileActionType.PASTE, $event)" let-value>
     <div class="custom-menu-item">
       <i-lucide [img]="ClipboardPaste" class="my-icon"></i-lucide>
 
       <span> Paste </span>
     </div>
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute(FileActionType.DELETE, $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute(FileActionType.DELETE, $event)" let-value>
     <div class="custom-menu-item">
       <i-lucide [img]="Trash2" class="my-icon"></i-lucide>
 

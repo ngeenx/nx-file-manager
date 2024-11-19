@@ -18,6 +18,18 @@
           &.image {
             @apply object-cover w-full rounded-sm;
           }
+
+          .icon-folder {
+            @apply fill-nx-theme-500 stroke-nx-theme-600;
+          }
+
+          .icon-file {
+            @apply fill-blue-100 stroke-blue-300;
+          }
+
+          svg {
+            stroke-width: 1;
+          }
         }
 
         .name {
@@ -95,6 +107,8 @@
 
       svg {
         @apply size-7;
+
+        stroke-width: 1;
       }
 
       &.dragging {

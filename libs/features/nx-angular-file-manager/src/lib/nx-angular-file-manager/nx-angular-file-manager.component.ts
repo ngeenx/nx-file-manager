@@ -1,16 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {
-  folderIconData,
-  fileIconData,
-  fileMultipleIconData,
-} from "@ngeenx/nx-file-manager-icons";
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
 import { FileType, IFileGroup, ITab } from "@ngeenx/nx-file-manager-utils";
 import { ExplorerComponent } from "./components/explorer/explorer.component";
 import { NxAngularTabsComponent } from "./components/tabs/tabs/tabs.component";
 import { NxAngularTabComponent } from "./components/tabs/tab/tab.component";
 import { timer } from "rxjs";
+import { LucideAngularModule, Folder, File } from "lucide-angular";
 
 @Component({
   selector: "nx-angular-file-manager",
@@ -21,15 +17,13 @@ import { timer } from "rxjs";
     ExplorerComponent,
     NxAngularTabsComponent,
     NxAngularTabComponent,
+    LucideAngularModule,
   ],
   templateUrl: "./nx-angular-file-manager.component.html",
 })
 export class NxAngularFileManagerComponent implements OnInit {
-  public iconSet: { [key: string]: string } = {
-    folderIconData,
-    fileIconData,
-    fileMultipleIconData,
-  };
+  public Folder = Folder;
+  public File = File;
 
   public sidebarGroups: IFileGroup[] = [];
   public tabs: ITab[] = [];
@@ -40,7 +34,7 @@ export class NxAngularFileManagerComponent implements OnInit {
       name: `Group ${i + 1}`,
       items: Array.from({ length: 10 }).map((_, j) => ({
         id: j + 1,
-        icon: "folderIconData",
+        icon: this.Folder,
         name: `Item ${j + 1}`,
         path: `item-${j + 1}`,
         type: FileType.FOLDER,
@@ -50,7 +44,7 @@ export class NxAngularFileManagerComponent implements OnInit {
 
     const files = Array.from({ length: 10 }).map((_, i) => ({
       id: i + 1,
-      icon: i % 2 === 0 ? "fileIconData" : "folderIconData",
+      icon: i % 2 === 0 ? this.File : this.Folder,
       name: `File file File file File ${i + 1}`,
       path: `file-${i + 1}`,
       type: i % 2 === 0 ? FileType.FILE : FileType.FOLDER,
@@ -76,7 +70,7 @@ export class NxAngularFileManagerComponent implements OnInit {
   public onNewTabClick(): void {
     const files = Array.from({ length: 10 }).map((_, i) => ({
       id: i + 1,
-      icon: i % 2 === 0 ? "fileIconData" : "folderIconData",
+      icon: i % 2 === 0 ? this.File : this.Folder,
       name: `File file File file File ${i + 1}`,
       path: `file-${i + 1}`,
       type: i % 2 === 0 ? FileType.FILE : FileType.FOLDER,

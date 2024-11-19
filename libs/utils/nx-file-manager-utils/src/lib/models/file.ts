@@ -63,7 +63,7 @@ export interface IFileUploadUi {
 
 export interface IFile extends IFileUi, IFileUploadUi {
   id: string | number;
-  icon: string;
+  icon: any;
   name: string;
   path: string;
   type: FileType;

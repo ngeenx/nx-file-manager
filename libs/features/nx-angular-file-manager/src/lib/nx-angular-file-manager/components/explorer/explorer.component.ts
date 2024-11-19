@@ -30,6 +30,8 @@ import {
   Copy,
   ClipboardPaste,
   Trash2,
+  Files,
+  Folder,
 } from "lucide-angular";
 
 @Component({
@@ -45,6 +47,9 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public Copy = Copy;
   public ClipboardPaste = ClipboardPaste;
   public Trash2 = Trash2;
+  public Files = Files;
+  public Folder = Folder;
+  public File = File;
 
   // #region ViewChilds and HostListeners
 
@@ -577,7 +582,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
             const newUploadingFile = <IFile>{
               id: this.tabData.files.length + 1,
-              icon: "fileIconData",
+              icon: !entry.isDirectory ? this.File : this.Folder,
               name: entry.name,
               path: entry.fullPath,
               type: !entry.isDirectory ? FileType.FILE : FileType.FOLDER,
