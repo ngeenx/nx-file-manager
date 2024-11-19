@@ -41,6 +41,10 @@ nx-angular-tabs {
 
     .new-tab {
       @apply flex flex-row gap-1 items-center;
+
+      svg {
+        stroke-width: 1;
+      }
     }
   }
 

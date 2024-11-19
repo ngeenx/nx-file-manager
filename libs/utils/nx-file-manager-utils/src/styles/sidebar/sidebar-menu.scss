@@ -29,6 +29,10 @@
 
           .icon {
             @apply fill-current w-4;
+
+            svg {
+              stroke-width: 1;
+            }
           }
 
           .name {
