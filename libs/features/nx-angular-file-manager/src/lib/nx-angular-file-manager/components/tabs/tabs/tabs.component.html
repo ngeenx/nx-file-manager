@@ -8,7 +8,7 @@
 
       @if (tabs.length > 1) {
       <button class="tab-close" (click)="onTabClose($event, tab.tabData)">
-        <i-lucide [img]="XIcon" class="my-icon"></i-lucide>
+        <i-lucide [img]="XIcon"></i-lucide>
       </button>
       }
     </li>
@@ -16,10 +16,7 @@
 
     <li class="new-tab">
       <button (click)="onNewTabClick()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <title>plus</title>
-          <path d="M5,13V12H11V6H12V12H18V13H12V19H11V13H5Z" />
-        </svg>
+        <i-lucide [img]="Plus" [size]="15"></i-lucide>
       </button>
     </li>
   </ul>

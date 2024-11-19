@@ -41,16 +41,6 @@ nx-angular-tabs {
 
     .new-tab {
       @apply flex flex-row gap-1 items-center;
-
-      svg {
-        @apply size-5;
-      }
-
-      &:hover {
-        svg {
-          @apply scale-125;
-        }
-      }
     }
   }
 

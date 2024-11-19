@@ -9,7 +9,7 @@ import {
 import { NxAngularTabComponent } from "../tab/tab.component";
 import { ITab } from "@ngeenx/nx-file-manager-utils";
 import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
-import { LucideAngularModule, XIcon } from "lucide-angular";
+import { LucideAngularModule, XIcon, Plus } from "lucide-angular";
 
 @Component({
   selector: "nx-angular-tabs",
@@ -31,6 +31,7 @@ export class NxAngularTabsComponent implements AfterContentInit {
   public tabClose: EventEmitter<ITab> = new EventEmitter();
 
   public XIcon = XIcon;
+  public Plus = Plus;
 
   public ngAfterContentInit(): void {
     if (
