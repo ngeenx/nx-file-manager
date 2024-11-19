@@ -40,11 +40,11 @@ import {
   imports: [ContextMenuModule, LucideAngularModule],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
-  public readonly FolderPen = FolderPen;
-  public readonly Scissors = Scissors;
-  public readonly Copy = Copy;
-  public readonly ClipboardPaste = ClipboardPaste;
-  public readonly Trash2 = Trash2;
+  public FolderPen = FolderPen;
+  public Scissors = Scissors;
+  public Copy = Copy;
+  public ClipboardPaste = ClipboardPaste;
+  public Trash2 = Trash2;
 
   // #region ViewChilds and HostListeners
 
