@@ -31,6 +31,7 @@ import {
   ClipboardPaste,
   Trash2,
   Files,
+  File,
   Folder,
 } from "lucide-angular";
 
