@@ -78,7 +78,31 @@ export class AppComponent {
     },
   ];
 
+  public explorerContextMenuItems: IFileContextMenuItem[] = [
+    {
+      label: "Create Folder",
+      icon: FolderPlus,
+      data: "CreateNewFolder",
+      action: (item: IFileContextMenuItem, event: any) =>
+        this.explorerMenuAction(item, event),
+    },
+    {
+      label: "Create Folder",
+      icon: FilePlus,
+      data: "CreateNewFile",
+      action: (item: IFileContextMenuItem, event: any) =>
+        this.explorerMenuAction(item, event),
+    },
+  ];
+
   public fileMenuAction(
+    item: IFileContextMenuItem,
+    event: IFileContextEvent
+  ): void {
+    console.log(item, event);
+  }
+
+  public explorerMenuAction(
     item: IFileContextMenuItem,
     event: IFileContextEvent
   ): void {

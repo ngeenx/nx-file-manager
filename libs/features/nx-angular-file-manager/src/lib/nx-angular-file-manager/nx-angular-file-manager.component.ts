@@ -27,8 +27,15 @@ import { LucideAngularModule, Folder, File } from "lucide-angular";
   templateUrl: "./nx-angular-file-manager.component.html",
 })
 export class NxAngularFileManagerComponent implements OnInit {
+  // #region Inputs
+
   @Input()
   public fileContextMenuItems: IFileContextMenuItem[] = [];
+
+  @Input()
+  public explorerContextMenuItems: IFileContextMenuItem[] = [];
+
+  // #endregion
 
   public Folder = Folder;
   public File = File;

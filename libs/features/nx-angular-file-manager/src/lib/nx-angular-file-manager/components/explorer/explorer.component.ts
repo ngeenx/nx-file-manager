@@ -25,19 +25,7 @@ import { createToast, ToastOptions } from "vercel-toast";
 import tippy, { Instance, Props } from "tippy.js";
 import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
 import { FileUploaderService } from "../../services/file-uploader.service";
-import {
-  LucideAngularModule,
-  FolderPen,
-  Scissors,
-  Copy,
-  ClipboardPaste,
-  Trash2,
-  Files,
-  File,
-  Folder,
-  FolderPlus,
-  FilePlus,
-} from "lucide-angular";
+import { LucideAngularModule, Files, File, Folder } from "lucide-angular";
 import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
 
 @Component({
@@ -48,19 +36,9 @@ import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
   imports: [NxFileInfoBarComponent, ContextMenuModule, LucideAngularModule],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
-  @Input()
-  public fileContextMenuItems: IFileContextMenuItem[] = [];
-
-  public FolderPen = FolderPen;
-  public Scissors = Scissors;
-  public Copy = Copy;
-  public ClipboardPaste = ClipboardPaste;
-  public Trash2 = Trash2;
   public Files = Files;
   public Folder = Folder;
   public File = File;
-  public FolderPlus = FolderPlus;
-  public FilePlus = FilePlus;
 
   // #region ViewChilds and HostListeners
 
@@ -89,6 +67,12 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input()
   public tabData!: ITab;
+
+  @Input()
+  public fileContextMenuItems: IFileContextMenuItem[] = [];
+
+  @Input()
+  public explorerContextMenuItems: IFileContextMenuItem[] = [];
 
   // #endregion
 
@@ -649,6 +633,17 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         }
       }
     });
+  }
+
+  // #endregion
+
+  // #region Explorer Context Menu
+
+  public onExplorerContextMenuClick(
+    menuItem: IFileContextMenuItem,
+    event: unknown
+  ): void {
+    menuItem.action(menuItem, event as any);
   }
 
   // #endregion

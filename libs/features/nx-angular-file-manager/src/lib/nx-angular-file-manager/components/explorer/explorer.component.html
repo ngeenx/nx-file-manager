@@ -1,4 +1,5 @@
-<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)" [contextMenu]="explorerContextMenu">
+<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)" [contextMenu]="explorerContextMenu"
+  [contextMenuValue]="tabData">
   <div #filesContainer class="files grid-view" (mousedown)="onFilesAreaClick($event)"
     (dragenter)="onFilesAreaDragEnter($event)" (dragover)="onFilesAreaDragEnter($event)"
     (drop)="onFilesAreaDrop($event)">
@@ -59,21 +60,15 @@
 
 <!-- Explorer Context Menu -->
 <context-menu #explorerContextMenu>
-  <ng-template contextMenuItem let-value>
+  @for (explorerContextMenuItem of explorerContextMenuItems; track $index) {
+  <ng-template contextMenuItem (execute)="onExplorerContextMenuClick(explorerContextMenuItem, $event)" let-value>
     <div class="custom-menu-item">
-      <i-lucide [img]="FolderPlus" class="my-icon"></i-lucide>
+      <i-lucide [img]="explorerContextMenuItem.icon"></i-lucide>
 
-      <span> Create Folder </span>
+      <span> {{ explorerContextMenuItem.label }} </span>
     </div>
   </ng-template>
-
-  <ng-template contextMenuItem let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="FilePlus" class="my-icon"></i-lucide>
-
-      <span> Create Folder </span>
-    </div>
-  </ng-template>
+  }
 </context-menu>
 
 <!-- File Context Menu -->
