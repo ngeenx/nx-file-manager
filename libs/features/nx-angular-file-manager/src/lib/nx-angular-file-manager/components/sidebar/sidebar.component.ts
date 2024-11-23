@@ -8,7 +8,7 @@ import { NxAngularSidebarGroupComponent } from "./sidebar-group/sidebar-group.co
 import { timer } from "rxjs";
 
 @Component({
-  selector: "nx-angular-sidebar",
+  selector: "nx-fm-sidebar",
   templateUrl: "./sidebar.component.html",
   standalone: true,
   imports: [NxAngularSidebarGroupComponent],

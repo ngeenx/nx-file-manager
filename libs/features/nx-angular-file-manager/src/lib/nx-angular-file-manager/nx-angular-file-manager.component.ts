@@ -9,7 +9,7 @@ import { timer } from "rxjs";
 import { LucideAngularModule, Folder, File } from "lucide-angular";
 
 @Component({
-  selector: "nx-angular-file-manager",
+  selector: "nx-file-manager",
   standalone: true,
   imports: [
     CommonModule,

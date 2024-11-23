@@ -3,7 +3,7 @@ import { IFileGroup } from "@ngeenx/nx-file-manager-utils";
 import { LucideAngularModule } from "lucide-angular";
 
 @Component({
-  selector: "nx-angular-sidebar-group",
+  selector: "nx-fm-sidebar-group",
   templateUrl: "./sidebar-group.component.html",
   standalone: true,
   imports: [LucideAngularModule],

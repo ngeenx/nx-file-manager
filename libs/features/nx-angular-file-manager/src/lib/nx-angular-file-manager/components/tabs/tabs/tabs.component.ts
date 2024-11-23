@@ -12,7 +12,7 @@ import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
 import { LucideAngularModule, XIcon, Plus } from "lucide-angular";
 
 @Component({
-  selector: "nx-angular-tabs",
+  selector: "nx-fm-tabs",
   templateUrl: "./tabs.component.html",
   standalone: true,
   imports: [ContextMenuModule, LucideAngularModule],

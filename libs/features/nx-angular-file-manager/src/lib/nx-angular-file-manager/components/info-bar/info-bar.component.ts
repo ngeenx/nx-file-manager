@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
 
 @Component({
-  selector: "nx-angular-info-bar",
+  selector: "nx-fm-info-bar",
   templateUrl: "./info-bar.component.html",
   standalone: true,
 })

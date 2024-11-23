@@ -37,7 +37,7 @@ import {
 import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
 
 @Component({
-  selector: "nx-angular-explorer",
+  selector: "nx-fm-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
   providers: [FileActionsService],
