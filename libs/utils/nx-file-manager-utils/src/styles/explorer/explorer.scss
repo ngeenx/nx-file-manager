@@ -1,5 +1,5 @@
 .nx-file-manager-explorer {
-  @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
+  @apply relative flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
 
   .files {
     @apply relative flex gap-2 w-full h-full justify-center items-center p-6
@@ -115,5 +115,11 @@
         @apply flex flex-col justify-center items-center gap-2;
       }
     }
+  }
+
+  .info-bar {
+    @apply absolute bottom-0 right-0 left-0 text-sm px-4
+    flex flex-row justify-between items-center bg-white backdrop-blur-lg
+    border-t border-gray-200 h-[25px];
   }
 }

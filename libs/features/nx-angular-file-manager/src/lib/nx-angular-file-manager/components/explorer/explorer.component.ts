@@ -34,13 +34,14 @@ import {
   File,
   Folder,
 } from "lucide-angular";
+import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
 
 @Component({
   selector: "nx-angular-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
   providers: [FileActionsService],
-  imports: [ContextMenuModule, LucideAngularModule],
+  imports: [NxFileInfoBarComponent, ContextMenuModule, LucideAngularModule],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public FolderPen = FolderPen;
