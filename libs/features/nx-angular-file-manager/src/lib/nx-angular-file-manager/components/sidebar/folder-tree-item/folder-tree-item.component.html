@@ -1,0 +1,27 @@
+<ul class="file-list">
+  @for (file of files; track $index) {
+  @if (file.type === 'folder') {
+  <!-- File/Folder -->
+  <li class="file" (click)="onFileClick(file)">
+    <!-- Chevrons -->
+    @if (file.hasItems) {
+    @if (file.isExpanded) {
+    <i-lucide [img]="ChevronUp" class="direction-chevron"></i-lucide>
+    } @else {
+    <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
+    }
+    }
+
+    <lucide-icon [img]="file.icon" [size]="15"></lucide-icon>
+
+    <span class="name">
+      {{ file.name }}
+    </span>
+
+    <!-- @if (item.hasItems) {
+      <nx-fm-sidebar-group [group]="item"></nx-fm-sidebar-group>
+      } -->
+  </li>
+  }
+  }
+</ul>

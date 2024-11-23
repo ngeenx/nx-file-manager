@@ -1,12 +1,13 @@
 import { Component, Input } from "@angular/core";
 import { IFileGroup } from "@ngeenx/nx-file-manager-utils";
 import { LucideAngularModule, ChevronDown, ChevronUp } from "lucide-angular";
+import { NxFolderTreeItemComponent } from "../folder-tree-item/folder-tree-item.component";
 
 @Component({
   selector: "nx-fm-sidebar-group",
   templateUrl: "./sidebar-group.component.html",
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, NxFolderTreeItemComponent],
 })
 export class NxAngularSidebarGroupComponent {
   @Input()

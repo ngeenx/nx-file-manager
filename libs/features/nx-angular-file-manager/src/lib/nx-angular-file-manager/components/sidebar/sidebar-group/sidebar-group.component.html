@@ -14,28 +14,7 @@
   </h2>
 
   @if (group.isExpanded) {
-  <!-- Group Inner Container -->
-  <ul class="file-list">
-    @for (item of group.items; track $index) {
-    <!-- File/Folder -->
-    <li class="file">
-      <!-- Chevrons -->
-      @if (item.hasItems) {
-      <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
-      }
-
-      <lucide-icon [img]="item.icon" [size]="15"></lucide-icon>
-
-      <span class="name">
-        {{ item.name }}
-      </span>
-
-      <!-- @if (item.hasItems) {
-      <nx-fm-sidebar-group [group]="item"></nx-fm-sidebar-group>
-      } -->
-    </li>
-    }
-  </ul>
+  <nx-fm-folder-tree-item [files]="group.items"></nx-fm-folder-tree-item>
   }
 
 </div>
