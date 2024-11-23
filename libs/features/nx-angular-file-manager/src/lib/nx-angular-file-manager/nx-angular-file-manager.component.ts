@@ -38,7 +38,15 @@ export class NxAngularFileManagerComponent implements OnInit {
         name: `Item ${j + 1}`,
         path: `item-${j + 1}`,
         type: FileType.FOLDER,
-        hasItems: true
+        hasItems: true,
+        items: Array.from({ length: 10 }).map((_, k) => ({
+          id: k + 1,
+          icon: this.Folder,
+          name: `Item ${k + 1}`,
+          path: `item-${k + 1}`,
+          type: FileType.FOLDER,
+          hasItems: false,
+        })),
       })),
       isCollapsed: false,
     }));

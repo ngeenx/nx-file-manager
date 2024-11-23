@@ -69,4 +69,5 @@ export interface IFile extends IFileUi, IFileUploadUi {
   type: FileType;
   hasItems?: boolean;
   isExpanded?: boolean;
+  items?: IFile[] | null;
 }

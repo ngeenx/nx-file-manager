@@ -17,11 +17,13 @@
     <span class="name">
       {{ file.name }}
     </span>
-
-    <!-- @if (item.hasItems) {
-      <nx-fm-sidebar-group [group]="item"></nx-fm-sidebar-group>
-      } -->
   </li>
+  }
+
+  @if (file.hasItems && file.isExpanded) {
+  <ul class="file-list">
+    <nx-fm-folder-tree-item [files]="file.items" />
+  </ul>
   }
   }
 </ul>
