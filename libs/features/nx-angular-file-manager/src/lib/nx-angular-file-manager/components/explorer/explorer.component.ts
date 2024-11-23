@@ -33,6 +33,8 @@ import {
   Files,
   File,
   Folder,
+  FolderPlus,
+  FilePlus,
 } from "lucide-angular";
 import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
 
@@ -52,6 +54,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public Files = Files;
   public Folder = Folder;
   public File = File;
+  public FolderPlus = FolderPlus;
+  public FilePlus = FilePlus;
 
   // #region ViewChilds and HostListeners
 

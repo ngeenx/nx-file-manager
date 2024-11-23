@@ -1,4 +1,4 @@
-<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)">
+<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)" [contextMenu]="explorerContextMenu">
   <div #filesContainer class="files grid-view" (mousedown)="onFilesAreaClick($event)"
     (dragenter)="onFilesAreaDragEnter($event)" (dragover)="onFilesAreaDragEnter($event)"
     (drop)="onFilesAreaDrop($event)">
@@ -57,6 +57,26 @@
   <nx-fm-info-bar [files]="selectedFiles" />
 </div>
 
+<!-- Explorer Context Menu -->
+<context-menu #explorerContextMenu>
+  <ng-template contextMenuItem let-value>
+    <div class="custom-menu-item">
+      <i-lucide [img]="FolderPlus" class="my-icon"></i-lucide>
+
+      <span> Create Folder </span>
+    </div>
+  </ng-template>
+
+  <ng-template contextMenuItem let-value>
+    <div class="custom-menu-item">
+      <i-lucide [img]="FilePlus" class="my-icon"></i-lucide>
+
+      <span> Create Folder </span>
+    </div>
+  </ng-template>
+</context-menu>
+
+<!-- File Context Menu -->
 <context-menu #fileContextMenu>
   <ng-template contextMenuItem (execute)="execute(FileActionType.RENAME, $event)" let-value>
     <div class="custom-menu-item">
