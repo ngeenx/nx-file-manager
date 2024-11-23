@@ -9,7 +9,7 @@ export interface IFileGroup {
   name: string;
   items?: IFile[];
   preview?: string;
-  isCollapsed?: boolean;
+  isExpanded?: boolean;
 }
 
 export interface IFileUi {
@@ -67,4 +67,6 @@ export interface IFile extends IFileUi, IFileUploadUi {
   name: string;
   path: string;
   type: FileType;
+  hasItems?: boolean;
+  isExpanded?: boolean;
 }

@@ -38,6 +38,7 @@ export class NxAngularFileManagerComponent implements OnInit {
         name: `Item ${j + 1}`,
         path: `item-${j + 1}`,
         type: FileType.FOLDER,
+        hasItems: true
       })),
       isCollapsed: false,
     }));

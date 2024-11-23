@@ -1,21 +1,41 @@
 <!-- Group -->
 <div [id]="'group-' + group.id" class="group">
   <!-- Group Title -->
-  <h2 [id]="'group-title-' + group.id" class="title">
-    Group Group {{ group.id }}
+  <h2 [id]="'group-title-' + group.id" class="title" (click)="onGroupClick(group)">
+    @if (group.isExpanded) {
+    <i-lucide [img]="ChevronUp" class="direction-chevron"></i-lucide>
+    } @else {
+    <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
+    }
+
+    <span>
+      Group Group {{ group.id }}
+    </span>
   </h2>
 
+  @if (group.isExpanded) {
   <!-- Group Inner Container -->
   <ul class="file-list">
     @for (item of group.items; track $index) {
     <!-- File/Folder -->
     <li class="file">
+      <!-- Chevrons -->
+      @if (item.hasItems) {
+      <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
+      }
+
       <lucide-icon [img]="item.icon" [size]="15"></lucide-icon>
 
       <span class="name">
         {{ item.name }}
       </span>
+
+      <!-- @if (item.hasItems) {
+      <nx-fm-sidebar-group [group]="item"></nx-fm-sidebar-group>
+      } -->
     </li>
     }
   </ul>
+  }
+
 </div>
