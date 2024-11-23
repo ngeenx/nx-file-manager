@@ -7,7 +7,8 @@
   <nx-fm-tabs (addNewTab)="onNewTabClick()" (tabClick)="onTabClick($event)" (tabClose)="onTabClose($event)">
     @for (tab of tabs; track $index) {
     <nx-fm-tab [tabData]="tab">
-      <nx-fm-explorer [tabData]="tab" [isFreezed]="tab.isSelected || false" />
+      <nx-fm-explorer [tabData]="tab" [isFreezed]="tab.isSelected || false"
+        [fileContextMenuItems]="fileContextMenuItems" />
     </nx-fm-tab>
     }
   </nx-fm-tabs>

@@ -13,6 +13,8 @@ import {
   FileActionType,
   FileType,
   IFile,
+  IFileContextEvent,
+  IFileContextMenuItem,
   ITab,
   UrlUtils,
 } from "@ngeenx/nx-file-manager-utils";
@@ -46,6 +48,9 @@ import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
   imports: [NxFileInfoBarComponent, ContextMenuModule, LucideAngularModule],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
+  @Input()
+  public fileContextMenuItems: IFileContextMenuItem[] = [];
+
   public FolderPen = FolderPen;
   public Scissors = Scissors;
   public Copy = Copy;
@@ -650,8 +655,11 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #region File Context Menu
 
-  public execute(fileActionType: FileActionType, value: unknown): void {
-    console.log(fileActionType, value);
+  public onFileContextMenuClick(
+    menuItem: IFileContextMenuItem,
+    event: unknown
+  ): void {
+    menuItem.action(menuItem, event as IFileContextEvent);
   }
 
   // #endregion

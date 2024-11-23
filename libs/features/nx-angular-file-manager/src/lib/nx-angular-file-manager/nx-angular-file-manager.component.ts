@@ -1,7 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
-import { FileType, IFileGroup, ITab } from "@ngeenx/nx-file-manager-utils";
+import {
+  FileType,
+  IFileContextMenuItem,
+  IFileGroup,
+  ITab,
+} from "@ngeenx/nx-file-manager-utils";
 import { ExplorerComponent } from "./components/explorer/explorer.component";
 import { NxAngularTabsComponent } from "./components/tabs/tabs/tabs.component";
 import { NxAngularTabComponent } from "./components/tabs/tab/tab.component";
@@ -22,6 +27,9 @@ import { LucideAngularModule, Folder, File } from "lucide-angular";
   templateUrl: "./nx-angular-file-manager.component.html",
 })
 export class NxAngularFileManagerComponent implements OnInit {
+  @Input()
+  public fileContextMenuItems: IFileContextMenuItem[] = [];
+
   public Folder = Folder;
   public File = File;
 

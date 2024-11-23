@@ -78,39 +78,13 @@
 
 <!-- File Context Menu -->
 <context-menu #fileContextMenu>
-  <ng-template contextMenuItem (execute)="execute(FileActionType.RENAME, $event)" let-value>
+  @for (fileContentMenuItem of fileContextMenuItems; track $index) {
+  <ng-template contextMenuItem (execute)="onFileContextMenuClick(fileContentMenuItem, $event)" let-value>
     <div class="custom-menu-item">
-      <i-lucide [img]="FolderPen" class="my-icon"></i-lucide>
+      <i-lucide [img]="fileContentMenuItem.icon"></i-lucide>
 
-      <span> Rename </span>
+      <span> {{ fileContentMenuItem.label }} </span>
     </div>
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute(FileActionType.CUT, $event)" let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="Scissors" class="my-icon"></i-lucide>
-
-      <span> Cut </span>
-    </div>
-  </ng-template>
-  <ng-template contextMenuItem (execute)="execute(FileActionType.COPY, $event)" let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="Copy" class="my-icon"></i-lucide>
-
-      <span> Copy </span>
-    </div>
-  </ng-template>
-  <ng-template contextMenuItem (execute)="execute(FileActionType.PASTE, $event)" let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="ClipboardPaste" class="my-icon"></i-lucide>
-
-      <span> Paste </span>
-    </div>
-  </ng-template>
-  <ng-template contextMenuItem (execute)="execute(FileActionType.DELETE, $event)" let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="Trash2" class="my-icon"></i-lucide>
-
-      <span> Delete </span>
-    </div>
-  </ng-template>
+  }
 </context-menu>

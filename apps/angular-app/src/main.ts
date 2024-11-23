@@ -12,8 +12,6 @@ Ray.useDefaultSettings({
 
 (window as any).ray = ray;
 
-ray("Hello from Angular!");
-
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err)
 );
