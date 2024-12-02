@@ -87,7 +87,7 @@ export class AppComponent {
         this.explorerMenuAction(item, event),
     },
     {
-      label: "Create Folder",
+      label: "Create File",
       icon: FilePlus,
       data: "CreateNewFile",
       action: (item: IFileContextMenuItem, event: any) =>

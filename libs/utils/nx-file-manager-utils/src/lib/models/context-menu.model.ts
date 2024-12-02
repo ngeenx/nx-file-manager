@@ -1,5 +1,5 @@
-import { FileActionType } from "./action";
-import { IFile } from "./file";
+import { FileActionType } from "./action.model";
+import { IFile } from "./file.model";
 
 export interface IFileContextEvent {
   event: MouseEvent;
