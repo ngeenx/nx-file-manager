@@ -1,5 +1,5 @@
-<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)" [contextMenu]="explorerContextMenu"
-  [contextMenuValue]="tabData">
+<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)"
+  [contextMenu]="!selectedFiles.length ? explorerContextMenu : undefined" [contextMenuValue]="tabData">
   <div #filesContainer class="files grid-view" (mousedown)="onFilesAreaClick($event)"
     (dragenter)="onFilesAreaDragEnter($event)" (dragover)="onFilesAreaDragEnter($event)"
     (drop)="onFilesAreaDrop($event)">
