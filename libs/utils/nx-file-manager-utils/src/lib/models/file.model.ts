@@ -32,6 +32,13 @@ export interface IFileUi {
    * Is this file/folder unavailable to drop
    */
   isDropUnavailable?: boolean;
+
+  /**
+   * Is this file/folder available to open context menu
+   * For example if user is selecting other files but this one is not selected
+   * but user wants to open context menu for this file. We can prevent opening the context menu
+   */
+  isContextMenuAvailable?: boolean;
 }
 
 export interface IFileUploadUi {

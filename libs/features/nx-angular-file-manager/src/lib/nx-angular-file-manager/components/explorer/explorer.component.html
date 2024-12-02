@@ -18,7 +18,8 @@
       }" [draggable]="true" [attr.data-tippy-content]="file.name" (dragstart)="onFileDragStart($event, file)"
       (drag)="onFileDragging($event)" (dragend)="onFileDragEnd($event)" (dragover)="onFileDragOver($event, file)"
       (dragleave)="onFileDropLeave($event, file)" (drop)="onFileDrop($event, file)"
-      (mousedown)="onFileClick($event, file)" [contextMenu]="fileContextMenu" [contextMenuValue]="file">
+      (mousedown)="onFileClick($event, file)" [contextMenu]="file.isContextMenuAvailable ? fileContextMenu : undefined"
+      [contextMenuValue]="file">
       @if (UrlUtils.isHttpUrl(file.icon)) {
       <img [src]="file.icon" class="icon image" [alt]="file.name" />
       } @else {

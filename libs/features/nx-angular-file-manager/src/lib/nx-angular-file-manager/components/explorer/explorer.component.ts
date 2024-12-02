@@ -13,7 +13,7 @@ import {
   FileActionType,
   FileType,
   IFile,
-  IFileContextEvent,
+  IFileContextMenuEvent,
   IFileContextMenuItem,
   ITab,
   UrlUtils,
@@ -369,14 +369,16 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         });
       })
       .on("stop", (event: SelectionEvent) => {
+        // get selected file ids
         const selectedFileIds: string[] = event.store.selected?.map(
           (fileElement: Element) => fileElement.id
         );
 
+        // update all files
         this.tabData.files?.forEach((file: IFile) => {
-          return (file.isSelected = selectedFileIds?.includes(
-            file.id.toString()
-          ));
+          const isFileSelected = selectedFileIds?.includes(file.id.toString());
+
+          file.isSelected = isFileSelected;
         });
 
         console.log("STOP");
@@ -641,7 +643,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   public onExplorerContextMenuClick(
     menuItem: IFileContextMenuItem,
-    event: unknown
+    event: any
   ): void {
     menuItem.action(menuItem, event as any);
   }
@@ -652,9 +654,12 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   public onFileContextMenuClick(
     menuItem: IFileContextMenuItem,
-    event: unknown
+    event: any
   ): void {
-    menuItem.action(menuItem, event as IFileContextEvent);
+    menuItem.action(menuItem, {
+      nativeEvent: event.event,
+      value: this.selectedFiles || event.value,
+    });
   }
 
   // #endregion
@@ -680,6 +685,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         file.isDropUnavailable =
           file.type !== FileType.FOLDER &&
           !selectedFileIds?.includes(file.id.toString());
+
+        file.isContextMenuAvailable = file.isSelected;
       });
     }
   }

@@ -4,7 +4,7 @@ import { NxAngularFileManagerComponent } from "@ngeenx/nx-angular-file-manager";
 import {
   FileActionType,
   IFile,
-  IFileContextEvent,
+  IFileContextMenuEvent,
   IFileContextMenuItem,
 } from "@ngeenx/nx-file-manager-utils";
 import {
@@ -45,35 +45,35 @@ export class AppComponent {
       label: "Rename",
       icon: FolderPen,
       data: FileActionType.RENAME,
-      action: (item: IFileContextMenuItem, event: IFileContextEvent) =>
+      action: (item: IFileContextMenuItem, event: IFileContextMenuEvent) =>
         this.fileMenuAction(item, event),
     },
     {
       label: "Cut",
       icon: Scissors,
       data: FileActionType.CUT,
-      action: (item: IFileContextMenuItem, event: IFileContextEvent) =>
+      action: (item: IFileContextMenuItem, event: IFileContextMenuEvent) =>
         this.fileMenuAction(item, event),
     },
     {
       label: "Copy",
       icon: Copy,
       data: FileActionType.COPY,
-      action: (item: IFileContextMenuItem, event: IFileContextEvent) =>
+      action: (item: IFileContextMenuItem, event: IFileContextMenuEvent) =>
         this.fileMenuAction(item, event),
     },
     {
       label: "Paste",
       icon: ClipboardPaste,
       data: FileActionType.PASTE,
-      action: (item: IFileContextMenuItem, event: IFileContextEvent) =>
+      action: (item: IFileContextMenuItem, event: IFileContextMenuEvent) =>
         this.fileMenuAction(item, event),
     },
     {
       label: "Delete",
       icon: Trash2,
       data: FileActionType.DELETE,
-      action: (item: IFileContextMenuItem, event: IFileContextEvent) =>
+      action: (item: IFileContextMenuItem, event: IFileContextMenuEvent) =>
         this.fileMenuAction(item, event),
     },
   ];
@@ -97,14 +97,14 @@ export class AppComponent {
 
   public fileMenuAction(
     item: IFileContextMenuItem,
-    event: IFileContextEvent
+    event: IFileContextMenuEvent
   ): void {
     console.log(item, event);
   }
 
   public explorerMenuAction(
     item: IFileContextMenuItem,
-    event: IFileContextEvent
+    event: IFileContextMenuEvent
   ): void {
     console.log(item, event);
   }
