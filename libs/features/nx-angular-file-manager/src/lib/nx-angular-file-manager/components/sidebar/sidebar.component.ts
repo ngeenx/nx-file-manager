@@ -4,14 +4,14 @@ import {
   ScrollPosition,
   ScrollUtils,
 } from "@ngeenx/nx-file-manager-utils";
-import { NxAngularSidebarGroupComponent } from "./sidebar-group/sidebar-group.component";
+import { NxFmFolderTreeComponent } from "./folder-tree/folder-tree.component";
 import { timer } from "rxjs";
 
 @Component({
   selector: "nx-fm-sidebar",
   templateUrl: "./sidebar.component.html",
   standalone: true,
-  imports: [NxAngularSidebarGroupComponent],
+  imports: [NxFmFolderTreeComponent],
 })
 export class NxAngularSidebarComponent implements AfterViewInit {
   @Input()

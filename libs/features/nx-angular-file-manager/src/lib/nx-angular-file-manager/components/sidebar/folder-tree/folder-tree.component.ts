@@ -5,11 +5,11 @@ import { NxFolderTreeItemComponent } from "../folder-tree-item/folder-tree-item.
 
 @Component({
   selector: "nx-fm-sidebar-group",
-  templateUrl: "./sidebar-group.component.html",
+  templateUrl: "./folder-tree.component.html",
   standalone: true,
   imports: [LucideAngularModule, NxFolderTreeItemComponent],
 })
-export class NxAngularSidebarGroupComponent {
+export class NxFmFolderTreeComponent {
   @Input()
   public group!: IFileGroup;
 
