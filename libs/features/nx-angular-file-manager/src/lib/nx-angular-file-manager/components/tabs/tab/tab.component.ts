@@ -3,7 +3,7 @@ import { Component, Input } from "@angular/core";
 import { ITab } from "@ngeenx/nx-file-manager-utils";
 
 @Component({
-  selector: "nx-angular-tab",
+  selector: "nx-fm-tab",
   templateUrl: "./tab.component.html",
   standalone: true,
   imports: [CommonModule],

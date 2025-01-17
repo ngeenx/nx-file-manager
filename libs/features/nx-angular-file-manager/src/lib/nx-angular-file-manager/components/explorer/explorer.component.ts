@@ -13,6 +13,8 @@ import {
   FileActionType,
   FileType,
   IFile,
+  IFileContextMenuEvent,
+  IFileContextMenuItem,
   ITab,
   UrlUtils,
 } from "@ngeenx/nx-file-manager-utils";
@@ -22,15 +24,22 @@ import { FileActionsService } from "../../services/file-actions.service";
 import { createToast, ToastOptions } from "vercel-toast";
 import tippy, { Instance, Props } from "tippy.js";
 import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
+import { FileUploaderService } from "../../services/file-uploader.service";
+import { LucideAngularModule, Files, File, Folder } from "lucide-angular";
+import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
 
 @Component({
-  selector: "nx-angular-explorer",
+  selector: "nx-fm-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
   providers: [FileActionsService],
-  imports: [ContextMenuModule],
+  imports: [NxFileInfoBarComponent, ContextMenuModule, LucideAngularModule],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
+  public Files = Files;
+  public Folder = Folder;
+  public File = File;
+
   // #region ViewChilds and HostListeners
 
   @HostListener("document:keydown", ["$event"])
@@ -59,6 +68,12 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input()
   public tabData!: ITab;
 
+  @Input()
+  public fileContextMenuItems: IFileContextMenuItem[] = [];
+
+  @Input()
+  public explorerContextMenuItems: IFileContextMenuItem[] = [];
+
   // #endregion
 
   public UrlUtils: typeof UrlUtils = UrlUtils;
@@ -72,16 +87,20 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public droppedExternalFiles: (File | FileSystemEntry)[] = [];
   public lastClickedElement: HTMLElement | undefined;
 
-  private selection: SelectionArea | undefined;
+  private viselectInstance: SelectionArea | undefined;
   private tippyInstance: Instance<Props>[] | undefined;
 
-  public constructor(private readonly fileActionsService: FileActionsService) {}
+  public constructor(
+    private readonly fileActionsService: FileActionsService,
+    private readonly fileUploaderService: FileUploaderService
+  ) {}
 
   public ngAfterViewInit(): void {
     timer(200).subscribe(() => this.initTippy());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
+    console.log(33);
     if (changes["isFreezed"]) {
       if (!changes["isFreezed"]?.currentValue) {
         // this.clearAllSelections();
@@ -162,7 +181,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
    * clicks outside of the selection area.
    */
   private initViselect(): void {
-    this.selection = new SelectionArea({
+    this.viselectInstance = new SelectionArea({
       // Class for the selection-area itself (the element).
       selectionAreaClass: "selection-area",
 
@@ -272,7 +291,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
       );
     };
 
-    this.selection
+    this.viselectInstance
       .on("beforestart", (event: SelectionEvent) => {
         console.group("BEFORESTART");
 
@@ -306,7 +325,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         console.log(
           "is target element file ",
           isTargetElementFile(this.lastClickedElement),
-          event,
+          event
         );
 
         if (isTargetElementFile(this.lastClickedElement)) {
@@ -350,14 +369,16 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         });
       })
       .on("stop", (event: SelectionEvent) => {
+        // get selected file ids
         const selectedFileIds: string[] = event.store.selected?.map(
           (fileElement: Element) => fileElement.id
         );
 
+        // update all files
         this.tabData.files?.forEach((file: IFile) => {
-          return (file.isSelected = selectedFileIds?.includes(
-            file.id.toString()
-          ));
+          const isFileSelected = selectedFileIds?.includes(file.id.toString());
+
+          file.isSelected = isFileSelected;
         });
 
         console.log("STOP");
@@ -371,7 +392,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   private destroyViselect(): void {
-    this.selection?.destroy();
+    this.viselectInstance?.destroy();
   }
 
   // #endregion
@@ -510,7 +531,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #endregion
 
-  // #region Files DND
+  // #region Drop Zone DND
 
   public onFilesAreaDragEnter(event: DragEvent): void {
     event.preventDefault();
@@ -526,6 +547,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   public onFilesAreaDrop(event: DragEvent): void {
+    console.group("onFilesAreaDrop");
+
     event.preventDefault();
 
     this.isDragZoneActive = false;
@@ -542,7 +565,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
       const items = Array.from(event.dataTransfer.items);
 
       if (items.length > 0) {
-        for (const element of items) {
+        items.forEach((element) => {
           // @docs: https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry
           const entry = element.webkitGetAsEntry();
 
@@ -553,14 +576,27 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
             } else if (entry.isFile) {
               console.log("Dropped file:", entry);
             }
+
+            const newUploadingFile = <IFile>{
+              id: this.tabData.files.length + 1,
+              icon: !entry.isDirectory ? this.File : this.Folder,
+              name: entry.name,
+              path: entry.fullPath,
+              type: !entry.isDirectory ? FileType.FILE : FileType.FOLDER,
+              isReadyForUpload: true,
+            };
+
+            this.tabData.files.push(newUploadingFile);
+
+            this.fileUploaderService.addFileToQueue(newUploadingFile);
           }
-        }
+        });
       } else {
         console.log("No items detected.");
       }
     }
 
-    // TODO: handle file upload
+    console.groupEnd();
   }
 
   public onFilesAreaDragLeave(event: DragEvent): void {
@@ -603,10 +639,27 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   // #endregion
 
+  // #region Explorer Context Menu
+
+  public onExplorerContextMenuClick(
+    menuItem: IFileContextMenuItem,
+    event: any
+  ): void {
+    menuItem.action(menuItem, event as any);
+  }
+
+  // #endregion
+
   // #region File Context Menu
 
-  public execute(fileActionType: FileActionType, value: unknown): void {
-    console.log(fileActionType, value);
+  public onFileContextMenuClick(
+    menuItem: IFileContextMenuItem,
+    event: any
+  ): void {
+    menuItem.action(menuItem, {
+      nativeEvent: event.event,
+      value: this.selectedFiles || event.value,
+    });
   }
 
   // #endregion
@@ -632,6 +685,8 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
         file.isDropUnavailable =
           file.type !== FileType.FOLDER &&
           !selectedFileIds?.includes(file.id.toString());
+
+        file.isContextMenuAvailable = file.isSelected;
       });
     }
   }
@@ -646,7 +701,7 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
     if (!this.isSelecting && this.selectedFiles.length) {
       console.log("CLEARALL");
       this.isSelecting = false;
-      this.selection?.clearSelection();
+      this.viselectInstance?.clearSelection();
       this.selectedFiles = [];
 
       this.tabData.files?.forEach((file: IFile) => {

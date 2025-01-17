@@ -1,4 +1,4 @@
-nx-angular-tabs {
+nx-fm-tabs {
   @apply w-full;
 }
 
@@ -17,14 +17,14 @@ nx-angular-tabs {
         transition-all duration-300 ease-in-out;
 
       &:hover {
-        @apply scale-110 border-b-0 bg-gray-200;
+        @apply bg-gray-200;
       }
 
       &.selected {
-        @apply bg-yellow-200/70 border-yellow-200;
+        @apply bg-nx-theme-200 border-nx-theme-200;
 
         &:hover {
-          @apply bg-yellow-200 border-b border-yellow-200;
+          @apply bg-nx-theme-200 border-nx-theme-200;
         }
       }
 
@@ -43,13 +43,7 @@ nx-angular-tabs {
       @apply flex flex-row gap-1 items-center;
 
       svg {
-        @apply size-5;
-      }
-
-      &:hover {
-        svg {
-          @apply scale-125;
-        }
+        stroke-width: 1;
       }
     }
   }

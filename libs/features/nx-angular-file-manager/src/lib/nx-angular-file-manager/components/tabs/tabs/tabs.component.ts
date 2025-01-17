@@ -9,12 +9,13 @@ import {
 import { NxAngularTabComponent } from "../tab/tab.component";
 import { ITab } from "@ngeenx/nx-file-manager-utils";
 import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
+import { LucideAngularModule, X, Plus } from "lucide-angular";
 
 @Component({
-  selector: "nx-angular-tabs",
+  selector: "nx-fm-tabs",
   templateUrl: "./tabs.component.html",
   standalone: true,
-  imports: [ContextMenuModule],
+  imports: [ContextMenuModule, LucideAngularModule],
 })
 export class NxAngularTabsComponent implements AfterContentInit {
   @ContentChildren(NxAngularTabComponent)
@@ -28,6 +29,9 @@ export class NxAngularTabsComponent implements AfterContentInit {
 
   @Output()
   public tabClose: EventEmitter<ITab> = new EventEmitter();
+
+  public XIcon = X;
+  public Plus = Plus;
 
   public ngAfterContentInit(): void {
     if (

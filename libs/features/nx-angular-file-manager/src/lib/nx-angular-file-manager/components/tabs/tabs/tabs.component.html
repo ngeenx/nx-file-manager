@@ -1,25 +1,14 @@
 <div class="nx-file-manager-tabs">
   <ul class="tabs">
     @for (tab of tabs; track $index) {
-    <li
-      class="tab"
-      [class]="{
+    <li class="tab" [class]="{
         selected: tab.tabData.isSelected
-      }"
-      (click)="onTabSelect(tab)"
-      [contextMenu]="tabContextMenu"
-      [contextMenuValue]="tab"
-    >
+      }" (click)="onTabSelect(tab)" [contextMenu]="tabContextMenu" [contextMenuValue]="tab">
       {{ tab.tabData.name }}
 
       @if (tabs.length > 1) {
       <button class="tab-close" (click)="onTabClose($event, tab.tabData)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <title>rhombus</title>
-          <path
-            d="M2.59,12.5L11.5,3.59L20.41,12.5L11.5,21.41L2.59,12.5M11.5,5L4,12.5L11.5,20L19,12.5L11.5,5Z"
-          />
-        </svg>
+        <i-lucide [img]="XIcon"></i-lucide>
       </button>
       }
     </li>
@@ -27,10 +16,7 @@
 
     <li class="new-tab">
       <button (click)="onNewTabClick()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <title>plus</title>
-          <path d="M5,13V12H11V6H12V12H18V13H12V19H11V13H5Z" />
-        </svg>
+        <i-lucide [img]="Plus" [size]="15"></i-lucide>
       </button>
     </li>
   </ul>
@@ -42,32 +28,16 @@
   <ng-template contextMenuItem (execute)="execute('Close', $event)" let-value>
     Close
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute('Close Right', $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute('Close Right', $event)" let-value>
     Close Right
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute('Close Left', $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute('Close Left', $event)" let-value>
     Close Left
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute('Close All', $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute('Close All', $event)" let-value>
     Close All
   </ng-template>
-  <ng-template
-    contextMenuItem
-    (execute)="execute('Close Others', $event)"
-    let-value
-  >
+  <ng-template contextMenuItem (execute)="execute('Close Others', $event)" let-value>
     Close Others
   </ng-template>
 </context-menu>

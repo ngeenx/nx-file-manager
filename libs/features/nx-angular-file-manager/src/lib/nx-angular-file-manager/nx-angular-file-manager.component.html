@@ -1,22 +1,15 @@
 <!-- Container -->
 <div class="nx-file-manager custom-scrollbar">
   <!-- Sidebar -->
-  <nx-angular-sidebar [iconSet]="iconSet" [sidebarGroups]="sidebarGroups" />
+  <nx-fm-sidebar [sidebarGroups]="sidebarGroups" />
 
   <!-- Content -->
-  <nx-angular-tabs
-    (addNewTab)="onNewTabClick()"
-    (tabClick)="onTabClick($event)"
-    (tabClose)="onTabClose($event)"
-  >
+  <nx-fm-tabs (addNewTab)="onNewTabClick()" (tabClick)="onTabClick($event)" (tabClose)="onTabClose($event)">
     @for (tab of tabs; track $index) {
-    <nx-angular-tab [tabData]="tab">
-      <nx-angular-explorer
-        [iconSet]="iconSet"
-        [tabData]="tab"
-        [isFreezed]="tab.isSelected || false"
-      />
-    </nx-angular-tab>
+    <nx-fm-tab [tabData]="tab">
+      <nx-fm-explorer [tabData]="tab" [isFreezed]="tab.isSelected || false"
+        [fileContextMenuItems]="fileContextMenuItems" [explorerContextMenuItems]="explorerContextMenuItems" />
+    </nx-fm-tab>
     }
-  </nx-angular-tabs>
+  </nx-fm-tabs>
 </div>

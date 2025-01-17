@@ -1,0 +1,17 @@
+.ngx-contextmenu {
+  .ngx-context-menu-item {
+    @apply px-3 transition-all duration-200 ease-in-out #{!important};
+
+    .custom-menu-item {
+      @apply flex flex-row gap-3 items-center;
+
+      svg {
+        @apply w-4 h-4;
+      }
+
+      span {
+        @apply text-xs;
+      }
+    }
+  }
+}

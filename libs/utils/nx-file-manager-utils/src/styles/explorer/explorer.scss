@@ -1,5 +1,5 @@
 .nx-file-manager-explorer {
-  @apply flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
+  @apply relative flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
 
   .files {
     @apply relative flex gap-2 w-full h-full pr-3 justify-center items-center
@@ -17,6 +17,18 @@
 
           &.image {
             @apply object-cover w-full rounded-sm;
+          }
+
+          .icon-folder {
+            @apply fill-nx-theme-500 stroke-nx-theme-600;
+          }
+
+          .icon-file {
+            @apply fill-blue-100 stroke-blue-300;
+          }
+
+          svg {
+            stroke-width: 1;
           }
         }
 
@@ -41,10 +53,10 @@
       }
 
       &.selected {
-        @apply bg-yellow-100/70 border border-yellow-300 #{!important};
+        @apply bg-nx-theme-100 border border-nx-theme-300 #{!important};
 
         &:hover {
-          @apply bg-yellow-200/70 border border-yellow-400/80 #{!important};
+          @apply bg-nx-theme-200 border border-nx-theme-400 #{!important};
         }
       }
 
@@ -59,6 +71,14 @@
       &.drop-unavailable {
         @apply opacity-50;
       }
+
+      &.waiting-for-upload {
+        @apply border-dashed bg-gray-100/70 opacity-50 border border-gray-300 #{!important};
+      }
+
+      &.uploading {
+        @apply bg-nx-theme-200 border border-nx-theme-300 animate-pulse #{!important};
+      }
     }
 
     .drag-zone {
@@ -70,8 +90,8 @@
 
       .drag-zone-inner {
         @apply w-[98%] h-[100%]
-          border-2 border-dashed border-yellow-500 rounded-lg backdrop-blur-[2px]
-          bg-yellow-50/50 transition-all duration-300 ease-in-out;
+          border-2 border-dashed border-nx-theme-500 rounded-lg backdrop-blur-[2px]
+          bg-nx-theme-50 transition-all duration-300 ease-in-out;
 
         .title {
           @apply absolute text-center
@@ -82,16 +102,24 @@
     }
 
     .drag-ghost {
-      @apply absolute hidden bg-yellow-100/80 backdrop-blur-md border border-yellow-300
+      @apply absolute hidden bg-nx-theme-100 backdrop-blur-md border border-nx-theme-300
         size-24 rounded-md text-center text-xs p-3 left-[-99999px] top-[-99999px];
 
       svg {
         @apply size-7;
+
+        stroke-width: 1;
       }
 
       &.dragging {
         @apply flex flex-col justify-center items-center gap-2;
       }
     }
+  }
+
+  .info-bar {
+    @apply absolute bottom-0 right-0 left-0 text-sm px-4
+    flex flex-row justify-between items-center bg-white backdrop-blur-lg
+    border-t border-gray-200 h-[25px];
   }
 }
