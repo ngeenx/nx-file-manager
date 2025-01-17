@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
-import { ChevronDown, ChevronUp, LucideAngularModule } from "lucide-angular";
+import { ChevronRight, ChevronDown, LucideAngularModule } from "lucide-angular";
 
 @Component({
   selector: "nx-fm-tree-item",
@@ -12,8 +12,8 @@ export class TreeItemComponent {
   @Input()
   public file!: IFile;
 
+  public ChevronRight = ChevronRight;
   public ChevronDown = ChevronDown;
-  public ChevronUp = ChevronUp;
 
   public onItemClick(file: IFile): void {
     file.isExpanded = !file.isExpanded;

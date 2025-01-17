@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
-import { LucideAngularModule, ChevronDown, ChevronUp } from "lucide-angular";
+import { LucideAngularModule, ChevronRight, ChevronDown } from "lucide-angular";
 import { TreeItemComponent } from "../tree-item/tree-item.component";
 
 @Component({
@@ -13,8 +13,8 @@ export class StickyTreeItemComponent {
   @Input()
   public file!: IFile;
 
+  public ChevronRight = ChevronRight;
   public ChevronDown = ChevronDown;
-  public ChevronUp = ChevronUp;
 
   public onItemClick(file: IFile): void {
     file.isExpanded = !file.isExpanded;
