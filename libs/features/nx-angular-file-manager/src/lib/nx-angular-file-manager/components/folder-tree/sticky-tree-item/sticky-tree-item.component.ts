@@ -18,5 +18,13 @@ export class StickyTreeItemComponent {
 
   public onItemClick(file: IFile): void {
     file.isExpanded = !file.isExpanded;
+
+    if (!file.isExpanded) {
+      // document.querySelector()?.scrollIntoView({
+      //   behavior: "smooth",
+      //   block: "start",
+      //   inline: "nearest",
+      // });
+    }
   }
 }

@@ -7,7 +7,6 @@ import {
 } from "@angular/core";
 import {
   IFile,
-  IFileGroup,
   ScrollPosition,
   ScrollUtils,
 } from "@ngeenx/nx-file-manager-utils";
@@ -32,12 +31,10 @@ export class FolderTreeComponent implements AfterViewInit {
   public ScrollPosition: typeof ScrollPosition = ScrollPosition;
 
   public ngAfterViewInit() {
-    setInterval(() => {
-      timer(100).subscribe(() => this.checkHasScroll());
-    }, 500);
+    timer(100).subscribe(() => this.checkHasScroll());
   }
 
-  public onGroupContainerScroll(event: Event): void {
+  public onFolderTreeScroll(event: Event): void {
     if (event.target) {
       this.groupScrollPosition = ScrollUtils.isScrollbarClosestTo(
         event.target as HTMLElement,
@@ -45,14 +42,14 @@ export class FolderTreeComponent implements AfterViewInit {
       );
     }
 
-    const scrollHeightTop = (event.target as HTMLElement).scrollTop,
-      currentElement = ScrollUtils.getTopVisibleElement(event);
+    const currentElement = ScrollUtils.getTopVisibleElement(event);
 
     let curentElementTitleId = (currentElement as HTMLElement).querySelector(
       ".title"
     )?.id;
 
-    if (scrollHeightTop < 15) {
+    // reset current element id
+    if ((event.target as HTMLElement).scrollTop < 15) {
       curentElementTitleId = "none";
     }
 
@@ -70,10 +67,10 @@ export class FolderTreeComponent implements AfterViewInit {
   }
 
   private checkHasScroll(): void {
-    const groupContainer = this.folderTreeContainerRef?.nativeElement;
+    const folderTreeElement = this.folderTreeContainerRef?.nativeElement;
 
-    if (groupContainer) {
-      this.hasScrollableArea = ScrollUtils.hasScrollbar(groupContainer);
+    if (folderTreeElement) {
+      this.hasScrollableArea = ScrollUtils.hasScrollbar(folderTreeElement);
     }
   }
 }
