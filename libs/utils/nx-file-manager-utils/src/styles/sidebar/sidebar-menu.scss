@@ -1,3 +1,4 @@
 .nx-file-manager-sidebar {
-  @apply flex flex-col w-[300px] h-full gap-5 pl-4 py-6 pr-4 bg-gray-50/90 backdrop-blur-lg;
+  @apply flex flex-col w-[300px] h-full gap-5 pl-4 py-6 pr-4 bg-gray-50/90 backdrop-blur-lg
+    border-r border-gray-200;
 }
