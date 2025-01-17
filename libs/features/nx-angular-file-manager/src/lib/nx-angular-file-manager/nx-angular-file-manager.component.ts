@@ -46,21 +46,40 @@ export class NxAngularFileManagerComponent implements OnInit {
   public ngOnInit(): void {
     this.sidebarFolderTreeFiles = Array.from({ length: 10 }).map((_, i) => ({
       id: i + 1,
-      name: `Group ${i + 1}`,
-      items: Array.from({ length: 10 }).map((_, j) => ({
+      name: `i ${i + 1}`,
+      items: Array.from({ length: 5 }).map((_, j) => ({
         id: j + 1,
         icon: this.Folder,
-        name: `Item ${j + 1}`,
-        path: `item-${j + 1}`,
+        name: `j ${j + 1}`,
+        path: `j-${j + 1}`,
         type: FileType.FOLDER,
         hasItems: true,
-        items: Array.from({ length: 10 }).map((_, k) => ({
+        isExpanded: true,
+        items: Array.from({ length: 5 }).map((_, k) => ({
           id: k + 1,
           icon: this.Folder,
-          name: `Item ${k + 1}`,
-          path: `item-${k + 1}`,
+          name: `k ${k + 1}`,
+          path: `k-${k + 1}`,
           type: FileType.FOLDER,
-          hasItems: false,
+          hasItems: true,
+          isExpanded: false,
+          items: Array.from({ length: 5 }).map((_, l) => ({
+            id: l + 1,
+            icon: this.Folder,
+            name: `l ${l + 1}`,
+            path: `l-${l + 1}`,
+            type: FileType.FOLDER,
+            hasItems: true,
+            isExpanded: false,
+            items: Array.from({ length: 5 }).map((_, m) => ({
+              id: m + 1,
+              icon: this.Folder,
+              name: `m ${m + 1}`,
+              path: `m-${m + 1}`,
+              type: FileType.FOLDER,
+              hasItems: false,
+            })),
+          })),
         })),
       })),
       isExpanded: true,

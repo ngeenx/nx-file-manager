@@ -10,7 +10,7 @@ nx-fm-folder-tree {
     @apply flex flex-col gap-1;
 
     .direction-chevron {
-      @apply size-4 mr-2;
+      @apply size-4 mr-1 text-gray-600;
     }
 
     .title {
@@ -29,8 +29,8 @@ nx-fm-folder-tree {
     .tree {
       @apply flex flex-col gap-0.5 pl-2;
 
-      .file-list {
-        @apply pl-3.5;
+      .tree {
+        @apply pl-4;
       }
 
       .file {
@@ -41,14 +41,10 @@ nx-fm-folder-tree {
 
         .icon {
           @apply fill-current w-4;
-
-          svg {
-            stroke-width: 1;
-          }
         }
 
         .name {
-          @apply truncate text-xs;
+          @apply truncate text-xs ml-0.5;
         }
       }
     }

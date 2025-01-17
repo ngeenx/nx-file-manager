@@ -1,7 +1,7 @@
-<ul class="tree">
+<div class="tree">
   @for (file of file.items; track $index) {
   @if (file.type === 'folder') {
-  <li class="file" (click)="onItemClick(file)">
+  <div class="file" (click)="onItemClick(file)">
     <!-- Chevrons -->
     @if (file.hasItems) {
     @if (file.isExpanded) {
@@ -16,13 +16,13 @@
     <span class="name">
       {{ file.name }}
     </span>
-  </li>
+  </div>
   }
 
   @if (file.hasItems && file.isExpanded) {
-  <ul class="tree">
+  <div class="tree">
     <nx-fm-tree-item [file]="file" />
-  </ul>
+  </div>
   }
   }
-</ul>
+</div>
