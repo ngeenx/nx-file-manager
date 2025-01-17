@@ -12,6 +12,13 @@ import { NxAngularTabsComponent } from "./components/tabs/tabs/tabs.component";
 import { NxAngularTabComponent } from "./components/tabs/tab/tab.component";
 import { timer } from "rxjs";
 import { LucideAngularModule, Folder, File } from "lucide-angular";
+import INxFileManagerOptions from "libs/utils/nx-file-manager-utils/src/lib/models/options.model";
+
+const defaultOptions = {
+  sidebar: {
+    visibility: true,
+  },
+};
 
 @Component({
   selector: "nx-file-manager",
@@ -34,6 +41,9 @@ export class NxAngularFileManagerComponent implements OnInit {
 
   @Input()
   public explorerContextMenuItems: IFileContextMenuItem[] = [];
+
+  @Input()
+  public options: Partial<INxFileManagerOptions> = defaultOptions;
 
   // #endregion
 

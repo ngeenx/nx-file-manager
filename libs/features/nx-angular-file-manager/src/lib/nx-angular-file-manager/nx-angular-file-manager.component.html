@@ -1,7 +1,9 @@
 <!-- Container -->
 <div class="nx-file-manager custom-scrollbar">
   <!-- Sidebar -->
-  <nx-fm-sidebar [files]="sidebarFolderTreeFiles" />
+  <ng-template [ngIf]="options.sidebar?.visibility">
+    <nx-fm-sidebar [files]="sidebarFolderTreeFiles" />
+  </ng-template>
 
   <!-- Content -->
   <nx-fm-tabs (addNewTab)="onNewTabClick()" (tabClick)="onTabClick($event)" (tabClose)="onTabClose($event)">

@@ -1,3 +1,4 @@
+export * from "./lib/models/options.model";
 export * from "./lib/utils/scroll.util";
 export * from "./lib/utils/url.util";
 export * from "./lib/models/file.model";
