@@ -1,0 +1,25 @@
+<!-- Group -->
+<div [id]="'group-' + file.id" class="sticky-tree-item">
+  <!-- Group Title -->
+  <h2 [id]="'group-title-' + file.id" class="title" (click)="onGroupClick(file)">
+    @if (file.isExpanded) {
+    <i-lucide [img]="ChevronUp" class="direction-chevron"></i-lucide>
+    } @else {
+    <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
+    }
+
+    <span>
+      {{ file.name }}
+    </span>
+  </h2>
+
+  @if (file.isExpanded) {
+  @if (file.hasItems){
+  @for (_file of file.items; track $index) {
+  <nx-fm-tree-item [file]="_file" />
+  }
+  } @else {
+  <nx-fm-tree-item [file]="file" />
+  }
+  }
+</div>

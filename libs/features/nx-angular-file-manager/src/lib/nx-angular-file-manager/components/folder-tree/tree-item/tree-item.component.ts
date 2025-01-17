@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { IFile, IFileGroup } from "@ngeenx/nx-file-manager-utils";
+import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { ChevronDown, ChevronUp, LucideAngularModule } from "lucide-angular";
 
 @Component({
-  selector: "nx-fm-folder-tree-item",
-  templateUrl: "./folder-tree-item.component.html",
+  selector: "nx-fm-tree-item",
+  templateUrl: "./tree-item.component.html",
   standalone: true,
   imports: [LucideAngularModule],
 })
-export class NxFolderTreeItemComponent implements OnInit {
+export class TreeItemComponent implements OnInit {
   @Input()
-  public files!: IFile[] | undefined | null;
+  public file!: IFile;
 
   public ChevronDown = ChevronDown;
   public ChevronUp = ChevronUp;

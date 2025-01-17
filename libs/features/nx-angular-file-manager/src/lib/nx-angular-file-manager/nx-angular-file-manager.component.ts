@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
 import {
   FileType,
+  IFile,
   IFileContextMenuItem,
   IFileGroup,
   ITab,
@@ -40,7 +41,7 @@ export class NxAngularFileManagerComponent implements OnInit {
   public Folder = Folder;
   public File = File;
 
-  public sidebarGroups: IFileGroup[] = [];
+  public sidebarGroups: IFile[] = [];
   public tabs: ITab[] = [];
 
   public ngOnInit(): void {
@@ -63,8 +64,8 @@ export class NxAngularFileManagerComponent implements OnInit {
           hasItems: false,
         })),
       })),
-      isCollapsed: false,
-    }));
+      isExpanded: false,
+    })) as IFile[];
 
     const files = Array.from({ length: 10 }).map((_, i) => ({
       id: i + 1,

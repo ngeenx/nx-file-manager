@@ -2,15 +2,5 @@
   <!-- Sidebar Title -->
   <h1 class="text-lg font-bold">nx-file-manger</h1>
 
-  <!-- Group Container -->
-  <div id="group-container" class="group-container" [class]="{
-      'bottom-scrollable-area-shadow':
-        hasScrollableArea &&
-        (groupScrollPosition === ScrollPosition.TOP ||
-          groupScrollPosition === ScrollPosition.MIDDLE)
-    }" (scroll)="onGroupContainerScroll($event)">
-    @for (group of sidebarGroups; track $index) {
-    <nx-fm-sidebar-group [group]="group" [iconSet]="iconSet" />
-    }
-  </div>
+  <nx-fm-folder-tree [files]="files" />
 </div>

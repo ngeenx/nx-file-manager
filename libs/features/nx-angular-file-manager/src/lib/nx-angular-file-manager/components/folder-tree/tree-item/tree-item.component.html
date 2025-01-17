@@ -1,5 +1,5 @@
-<ul class="file-list">
-  @for (file of files; track $index) {
+<ul class="tree">
+  @for (file of file.items; track $index) {
   @if (file.type === 'folder') {
   <!-- File/Folder -->
   <li class="file" (click)="onFileClick(file)">
@@ -22,7 +22,7 @@
 
   @if (file.hasItems && file.isExpanded) {
   <ul class="file-list">
-    <nx-fm-folder-tree-item [files]="file.items" />
+    <nx-fm-tree-item [file]="file" />
   </ul>
   }
   }
