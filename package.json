@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "angular:start": "nx serve angular-app"
+    "angular:start": "nx serve angular-app",
+    "angular:storybook": "nx run nx-angular-file-manager:storybook"
   },
   "private": false,
   "devDependencies": {
@@ -32,6 +33,13 @@
     "@nx/workspace": "20.1.4",
     "@playwright/test": "^1.49.0",
     "@schematics/angular": "~18.2.12",
+    "@storybook/addon-essentials": "^8.2.8",
+    "@storybook/addon-interactions": "^8.2.8",
+    "@storybook/angular": "^8.2.8",
+    "@storybook/core-server": "^8.2.8",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/test-runner": "^0.13.0",
+    "@storybook/testing-library": "^0.2.2",
     "@swc-node/register": "~1.10.9",
     "@swc/core": "~1.9.3",
     "@swc/helpers": "~0.5.15",
@@ -89,6 +97,8 @@
     "async": "^3.2.6",
     "axios": "^1.6.0",
     "lucide-angular": "^0.462.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.1",
     "tippy.js": "^6.3.7",
