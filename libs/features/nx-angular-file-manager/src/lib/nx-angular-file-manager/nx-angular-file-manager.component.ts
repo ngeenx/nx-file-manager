@@ -5,7 +5,6 @@ import {
   FileType,
   IFile,
   IFileContextMenuItem,
-  IFileGroup,
   ITab,
 } from "@ngeenx/nx-file-manager-utils";
 import { ExplorerComponent } from "./components/explorer/explorer.component";

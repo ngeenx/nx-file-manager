@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef } from "@angular/core";
-import { IFile, IFileGroup } from "@ngeenx/nx-file-manager-utils";
+import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { FolderTreeComponent } from "../folder-tree/folder-tree.component";
 
 @Component({

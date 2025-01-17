@@ -4,14 +4,6 @@ export enum FileType {
   SYMLINK = "symlink",
 }
 
-export interface IFileGroup {
-  id: string | number;
-  name: string;
-  items?: IFile[];
-  preview?: string;
-  isExpanded?: boolean;
-}
-
 export interface IFileUi {
   /**
    * Is selected for any action (cut, copy, paste, move, etc.)
