@@ -82,7 +82,7 @@ export class NxAngularFileManagerComponent implements OnInit {
           })),
         })),
       })),
-      isExpanded: true,
+      isExpanded: false,
     })) as IFile[];
 
     const files = Array.from({ length: 10 }).map((_, i) => ({

@@ -9,8 +9,12 @@ nx-fm-folder-tree {
   .sticky-tree-item {
     @apply flex flex-col gap-1;
 
-    .direction-chevron {
-      @apply size-4 mr-1 text-gray-600;
+    .btn-chevron {
+      @apply size-4 mr-1;
+
+      .direction-chevron {
+        @apply size-4 text-gray-600;
+      }
     }
 
     .title {

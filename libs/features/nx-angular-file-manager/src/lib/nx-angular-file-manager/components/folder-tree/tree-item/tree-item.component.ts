@@ -20,8 +20,15 @@ export class TreeItemComponent {
     private folderTreeContextMenuService: FolderTreeContextMenuService
   ) {}
 
-  public onItemClick(file: IFile): void {
-    file.isExpanded = !file.isExpanded;
+  public onItemClick(_file: IFile): void {
+    _file.isExpanded = !_file.isExpanded;
+  }
+
+  public onChevronClick(event: MouseEvent, _file: IFile): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.onItemClick(_file);
   }
 
   public onContextMenu(event: MouseEvent, _file: IFile): void {

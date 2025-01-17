@@ -21,18 +21,25 @@ export class StickyTreeItemComponent {
     private folderTreeContextMenuService: FolderTreeContextMenuService
   ) {}
 
-  public onItemClick(file: IFile): void {
-    file.isExpanded = !file.isExpanded;
+  public onItemClick(): void {
+    this.file.isExpanded = !this.file.isExpanded;
 
-    if (!file.isExpanded) {
+    if (!this.file.isExpanded) {
       const thisStickyTreeItem = document.getElementById(
-        `nx-fm-sticky-title-${file.id}`
+        `nx-fm-sticky-title-${this.file.id}`
       );
 
       if (thisStickyTreeItem?.parentElement) {
         thisStickyTreeItem?.classList.remove("fixed-title");
       }
     }
+  }
+
+  public onChevronClick(event: MouseEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.onItemClick();
   }
 
   public onContextMenu(event: MouseEvent): void {

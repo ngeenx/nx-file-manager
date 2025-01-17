@@ -2,14 +2,15 @@
   @for (_file of file.items; track $index) {
   @if (_file.type === 'folder') {
   <div class="file" (click)="onItemClick(_file)" (contextmenu)="onContextMenu($event, _file)">
-    <!-- Chevrons -->
-    @if (_file.hasItems) {
-    @if (_file.isExpanded) {
-    <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
-    } @else {
-    <i-lucide [img]="ChevronRight" class="direction-chevron"></i-lucide>
-    }
-    }
+    <button class="btn-chevron" (click)="onChevronClick($event, _file)">
+      @if (_file.hasItems) {
+      @if (_file.isExpanded) {
+      <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
+      } @else {
+      <i-lucide [img]="ChevronRight" class="direction-chevron"></i-lucide>
+      }
+      }
+    </button>
 
     <lucide-icon [img]="_file.icon" [size]="15"></lucide-icon>
 
