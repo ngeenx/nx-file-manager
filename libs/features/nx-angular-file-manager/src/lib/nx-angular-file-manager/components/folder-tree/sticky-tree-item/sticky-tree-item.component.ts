@@ -20,11 +20,13 @@ export class StickyTreeItemComponent {
     file.isExpanded = !file.isExpanded;
 
     if (!file.isExpanded) {
-      // document.querySelector()?.scrollIntoView({
-      //   behavior: "smooth",
-      //   block: "start",
-      //   inline: "nearest",
-      // });
+      const thisStickyTreeItem = document.getElementById(
+        `nx-fm-sticky-title-${file.id}`
+      );
+
+      if (thisStickyTreeItem?.parentElement) {
+        thisStickyTreeItem?.classList.remove("fixed-title");
+      }
     }
   }
 }
