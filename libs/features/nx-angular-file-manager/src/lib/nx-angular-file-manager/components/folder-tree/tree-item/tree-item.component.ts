@@ -15,7 +15,7 @@ export class TreeItemComponent {
   public ChevronDown = ChevronDown;
   public ChevronUp = ChevronUp;
 
-  public onFileClick(file: IFile): void {
+  public onItemClick(file: IFile): void {
     file.isExpanded = !file.isExpanded;
   }
 }
