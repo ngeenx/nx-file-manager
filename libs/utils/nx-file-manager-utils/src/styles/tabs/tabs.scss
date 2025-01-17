@@ -49,6 +49,6 @@ nx-fm-tabs {
   }
 
   .tab-content {
-    @apply h-[calc(100%-66px)] w-full p-3;
+    @apply h-[calc(100%-66px)] w-full;
   }
 }
