@@ -1,27 +1,27 @@
 <div class="tree">
-  @for (file of file.items; track $index) {
-  @if (file.type === 'folder') {
-  <div class="file" (click)="onItemClick(file)">
+  @for (_file of file.items; track $index) {
+  @if (_file.type === 'folder') {
+  <div class="file" (click)="onItemClick(_file)" (contextmenu)="onContextMenu($event, _file)">
     <!-- Chevrons -->
-    @if (file.hasItems) {
-    @if (file.isExpanded) {
+    @if (_file.hasItems) {
+    @if (_file.isExpanded) {
     <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
     } @else {
     <i-lucide [img]="ChevronRight" class="direction-chevron"></i-lucide>
     }
     }
 
-    <lucide-icon [img]="file.icon" [size]="15"></lucide-icon>
+    <lucide-icon [img]="_file.icon" [size]="15"></lucide-icon>
 
     <span class="name">
-      {{ file.name }}
+      {{ _file.name }}
     </span>
   </div>
   }
 
-  @if (file.hasItems && file.isExpanded) {
+  @if (_file.hasItems && _file.isExpanded) {
   <div class="tree">
-    <nx-fm-tree-item [file]="file" />
+    <nx-fm-tree-item [file]="_file" />
   </div>
   }
   }

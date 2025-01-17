@@ -1,6 +1,7 @@
 <div class="sticky-tree-item">
   <!-- Sticky Title -->
-  <h2 [id]="'nx-fm-sticky-title-' + file.id" class="title" (click)="onItemClick(file)">
+  <h2 [id]="'nx-fm-sticky-title-' + file.id" class="title" (click)="onItemClick(file)"
+    (contextmenu)="onContextMenu($event)">
     @if (file.isExpanded) {
     <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
     } @else {

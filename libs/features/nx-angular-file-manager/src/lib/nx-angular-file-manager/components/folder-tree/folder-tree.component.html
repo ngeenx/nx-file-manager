@@ -1,4 +1,3 @@
-<!-- Group Container -->
 <div #folderTreeContainer class="nx-fm-folder-tree" [class]="{
       'bottom-scrollable-area-shadow':
         hasScrollableArea &&
@@ -9,3 +8,13 @@
   <nx-fm-sticky-tree-item [file]="file" />
   }
 </div>
+
+<context-menu #folderTreeContextMenu>
+  <ng-template contextMenuItem (execute)="onFolderTreeContextMenuClick($event)">
+    <div class="custom-menu-item">
+      <!-- <i-lucide [img]="explorerContextMenuItem.icon"></i-lucide> -->
+
+      <span> testa </span>
+    </div>
+  </ng-template>
+</context-menu>
