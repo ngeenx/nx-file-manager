@@ -7,6 +7,6 @@
           groupScrollPosition === ScrollPosition.MIDDLE)
     }" (scroll)="onGroupContainerScroll($event)">
   @for (file of files; track $index) {
-  <nx-fm-sticky-tree-item [file]="file" [iconSet]="iconSet" />
+  <nx-fm-sticky-tree-item [file]="file" />
   }
 </div>

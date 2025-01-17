@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { ChevronDown, ChevronUp, LucideAngularModule } from "lucide-angular";
 
@@ -8,16 +8,12 @@ import { ChevronDown, ChevronUp, LucideAngularModule } from "lucide-angular";
   standalone: true,
   imports: [LucideAngularModule],
 })
-export class TreeItemComponent implements OnInit {
+export class TreeItemComponent {
   @Input()
   public file!: IFile;
 
   public ChevronDown = ChevronDown;
   public ChevronUp = ChevronUp;
-
-  constructor() {}
-
-  ngOnInit() {}
 
   public onFileClick(file: IFile): void {
     file.isExpanded = !file.isExpanded;

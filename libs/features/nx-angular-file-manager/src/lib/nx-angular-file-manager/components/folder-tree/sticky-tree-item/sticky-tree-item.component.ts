@@ -13,13 +13,10 @@ export class StickyTreeItemComponent {
   @Input()
   public file!: IFile;
 
-  @Input()
-  public iconSet!: { [key: string]: string };
-
   public ChevronDown = ChevronDown;
   public ChevronUp = ChevronUp;
 
-  public onGroupClick(file: IFile): void {
+  public onItemClick(file: IFile): void {
     file.isExpanded = !file.isExpanded;
   }
 }

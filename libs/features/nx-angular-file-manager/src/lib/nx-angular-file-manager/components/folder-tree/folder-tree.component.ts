@@ -25,9 +25,6 @@ export class FolderTreeComponent implements AfterViewInit {
   private folderTreeContainerRef!: ElementRef;
 
   @Input()
-  public iconSet!: { [key: string]: string };
-
-  @Input()
   public files!: IFile[];
 
   public hasScrollableArea = false;

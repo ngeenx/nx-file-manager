@@ -1,7 +1,7 @@
 <!-- Container -->
 <div class="nx-file-manager custom-scrollbar">
   <!-- Sidebar -->
-  <nx-fm-sidebar [files]="sidebarGroups" />
+  <nx-fm-sidebar [files]="sidebarFolderTreeFiles" />
 
   <!-- Content -->
   <nx-fm-tabs (addNewTab)="onNewTabClick()" (tabClick)="onTabClick($event)" (tabClose)="onTabClose($event)">

@@ -41,11 +41,11 @@ export class NxAngularFileManagerComponent implements OnInit {
   public Folder = Folder;
   public File = File;
 
-  public sidebarGroups: IFile[] = [];
+  public sidebarFolderTreeFiles: IFile[] = [];
   public tabs: ITab[] = [];
 
   public ngOnInit(): void {
-    this.sidebarGroups = Array.from({ length: 10 }).map((_, i) => ({
+    this.sidebarFolderTreeFiles = Array.from({ length: 10 }).map((_, i) => ({
       id: i + 1,
       name: `Group ${i + 1}`,
       items: Array.from({ length: 10 }).map((_, j) => ({
