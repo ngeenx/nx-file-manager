@@ -21,7 +21,7 @@ nx-angular-tabs {
       }
 
       &.selected {
-        @apply bg-yellow-200/70 border-yellow-200 shadow-lg;
+        @apply bg-yellow-200/70 border-yellow-200;
 
         &:hover {
           @apply bg-yellow-200 border-b border-yellow-200;
@@ -55,6 +55,6 @@ nx-angular-tabs {
   }
 
   .tab-content {
-    @apply h-full w-full;
+    @apply h-[calc(100%-66px)] w-full p-3;
   }
 }
