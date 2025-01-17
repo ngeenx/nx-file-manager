@@ -12,28 +12,33 @@
       @apply flex flex-col gap-1;
 
       .direction-chevron {
-        @apply size-4;
+        @apply size-4 mr-2;
       }
 
       .title {
-        @apply flex flex-row items-center px-2 py-1 text-xs font-bold transition-all duration-300
-          ease-in-out rounded-md bg-gray-50 cursor-pointer hover:bg-gray-200/60;
+        @apply flex flex-row items-center px-2 py-2 text-xs z-50 font-bold
+          transition-all duration-300 ease-in-out rounded-md
+          border border-transparent bg-gray-50/50 cursor-pointer
+          hover:border-nx-theme-1050 hover:bg-nx-theme-1020 backdrop-blur-md;
 
         &.fixed-title {
-          @apply sticky top-0 shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px];
+          @apply sticky top-0 shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px]
+            border-gray-200 hover:border-nx-theme-1050;
         }
       }
 
       .file-list {
-        @apply flex flex-col gap-1 pl-2;
+        @apply flex flex-col gap-0.5 pl-2;
 
         .file-list {
           @apply pl-3.5;
         }
 
         .file {
-          @apply flex flex-row items-center gap-1 px-2 py-1 text-gray-800
-            transition-all duration-300 ease-in-out rounded cursor-pointer hover:bg-gray-200/60;
+          @apply flex flex-row items-center gap-1 px-2 py-2 text-gray-800
+            transition-all duration-200 ease-in-out rounded cursor-pointer
+            border border-transparent
+            hover:border-nx-theme-1040 hover:bg-nx-theme-1020 backdrop-blur-md;
 
           .icon {
             @apply fill-current w-4;
