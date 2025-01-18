@@ -54,7 +54,8 @@
         "outputDir": "dist/storybook/nx-angular-file-manager",
         "configDir": "libs/features/nx-angular-file-manager/.storybook",
         "browserTarget": "nx-angular-file-manager:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["libs\\features\\nx-angular-file-manager\\src\\styles.scss"]
       },
       "configurations": {
         "ci": {

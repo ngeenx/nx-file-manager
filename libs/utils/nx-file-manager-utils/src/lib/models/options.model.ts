@@ -1,4 +1,4 @@
-export default interface INxFileManagerOptions {
+export interface INxFileManagerOptions {
   sidebar: {
     /**
      * Visibility of the sidebar
@@ -6,3 +6,9 @@ export default interface INxFileManagerOptions {
     visibility: boolean;
   };
 }
+
+export const defaultOptions = {
+  sidebar: {
+    visibility: true,
+  },
+};

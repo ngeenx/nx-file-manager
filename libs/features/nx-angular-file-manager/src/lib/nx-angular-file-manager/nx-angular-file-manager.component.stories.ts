@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { NxAngularFileManagerComponent } from './nx-angular-file-manager.component';
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import type { Meta, StoryObj } from "@storybook/angular";
+import { NxAngularFileManagerComponent } from "./nx-angular-file-manager.component";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { defaultOptions } from "@ngeenx/nx-file-manager-utils";
 
 const meta: Meta<NxAngularFileManagerComponent> = {
   component: NxAngularFileManagerComponent,
-  title: 'NxAngularFileManagerComponent',
+  title: "NxAngularFileManagerComponent",
 };
 export default meta;
 type Story = StoryObj<NxAngularFileManagerComponent>;

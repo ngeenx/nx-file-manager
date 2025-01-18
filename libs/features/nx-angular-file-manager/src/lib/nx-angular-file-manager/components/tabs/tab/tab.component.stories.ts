@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { NxAngularTabComponent } from './tab.component';
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import type { Meta, StoryObj } from "@storybook/angular";
+import { NxAngularTabComponent } from "./tab.component";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { ITab } from "@ngeenx/nx-file-manager-utils";
 
 const meta: Meta<NxAngularTabComponent> = {
   component: NxAngularTabComponent,
-  title: 'NxAngularTabComponent',
+  title: "NxAngularTabComponent",
 };
 export default meta;
 type Story = StoryObj<NxAngularTabComponent>;
