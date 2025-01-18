@@ -48,7 +48,7 @@
 
       &.hoverable {
         &:hover {
-          @apply hover:bg-gray-100/70 hover:border hover:border-gray-300;
+          @apply hover:bg-nx-theme-1040 hover:border hover:border-nx-theme-300;
         }
       }
 
@@ -90,8 +90,8 @@
 
       .drag-zone-inner {
         @apply w-[98%] h-[100%]
-          border-2 border-dashed border-nx-theme-500 rounded-lg backdrop-blur-[2px]
-          bg-nx-theme-50 transition-all duration-300 ease-in-out;
+          border-2 border-dashed border-nx-theme-300 rounded-lg backdrop-blur-[2px]
+          bg-nx-theme-1030 transition-all duration-300 ease-in-out;
 
         .title {
           @apply absolute text-center
