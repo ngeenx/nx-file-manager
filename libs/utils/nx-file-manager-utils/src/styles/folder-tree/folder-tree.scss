@@ -1,6 +1,6 @@
 .nx-fm-folder-tree,
 nx-fm-folder-tree {
-  @apply relative flex flex-col gap-2 overflow-auto;
+  @apply relative flex flex-col gap-2 overflow-auto select-none;
 
   &.bottom-scrollable-area-shadow {
     @apply shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px];
