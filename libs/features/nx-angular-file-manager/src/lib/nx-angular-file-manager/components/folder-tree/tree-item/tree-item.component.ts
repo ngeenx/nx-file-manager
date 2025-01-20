@@ -22,6 +22,10 @@ export class TreeItemComponent {
 
   public onItemClick(_file: IFile): void {
     _file.isExpanded = !_file.isExpanded;
+
+    if (!_file.isExpanded) {
+      this.collapseAllChildren(_file);
+    }
   }
 
   public onChevronClick(event: MouseEvent, _file: IFile): void {
@@ -40,5 +44,14 @@ export class TreeItemComponent {
       file: _file,
       parent: this.file,
     });
+  }
+
+  private collapseAllChildren(file: IFile): void {
+    if (file.items) {
+      file.items.forEach((item) => {
+        item.isExpanded = false;
+        this.collapseAllChildren(item);
+      });
+    }
   }
 }

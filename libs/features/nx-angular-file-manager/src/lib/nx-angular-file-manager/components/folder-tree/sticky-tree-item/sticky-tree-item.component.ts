@@ -37,6 +37,8 @@ export class StickyTreeItemComponent {
       if (thisStickyTreeItem?.parentElement) {
         thisStickyTreeItem?.classList.remove("fixed-header");
       }
+
+      this.collapseAllChildren(this.file);
     }
   }
 
@@ -56,5 +58,14 @@ export class StickyTreeItemComponent {
       file: this.file,
       parent: null,
     });
+  }
+
+  private collapseAllChildren(file: IFile): void {
+    if (file.items) {
+      file.items.forEach((item) => {
+        item.isExpanded = false;
+        this.collapseAllChildren(item);
+      });
+    }
   }
 }
