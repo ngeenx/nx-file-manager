@@ -92,6 +92,7 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/mapped-types": "^2.0.6",
     "@nestjs/platform-express": "^10.0.2",
+    "@ngeenx/nx-angular-svg-loaders": "^1.0.3",
     "@perfectmemory/ngx-contextmenu": "^18.0.0",
     "@viselect/vanilla": "^3.7.0",
     "async": "^3.2.6",
