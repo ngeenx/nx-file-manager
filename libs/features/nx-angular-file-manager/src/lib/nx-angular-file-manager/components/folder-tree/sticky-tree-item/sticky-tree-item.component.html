@@ -1,12 +1,15 @@
 <div class="sticky-tree-item">
   <!-- Sticky Title -->
-  <div [id]="'nx-fm-sticky-title-' + file.id" class="title" (click)="onItemClick()"
+  <div
+    [id]="'nx-fm-sticky-title-' + file.id"
+    class="title"
+    (click)="onItemClick()"
     (contextmenu)="onContextMenu($event)">
     <button class="btn-chevron" (click)="onChevronClick($event)">
       @if (file.isExpanded) {
-      <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
+        <i-lucide [img]="ChevronDown" class="direction-chevron"></i-lucide>
       } @else {
-      <i-lucide [img]="ChevronRight" class="direction-chevron"></i-lucide>
+        <i-lucide [img]="ChevronRight" class="direction-chevron"></i-lucide>
       }
     </button>
 
@@ -16,12 +19,12 @@
   </div>
 
   @if (file.isExpanded) {
-  @if (file.hasItems){
-  @for (_file of file.items; track $index) {
-  <nx-fm-tree-item [file]="_file" />
-  }
-  } @else {
-  <nx-fm-tree-item [file]="file" />
-  }
+    @if (file.hasItems) {
+      @for (_file of file.items; track $index) {
+        <nx-fm-tree-item [file]="_file" />
+      }
+    } @else {
+      <nx-fm-tree-item [file]="file" />
+    }
   }
 </div>

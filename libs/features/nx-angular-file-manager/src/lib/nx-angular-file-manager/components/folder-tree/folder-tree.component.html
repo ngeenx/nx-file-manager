@@ -1,11 +1,15 @@
-<div #folderTreeContainer class="nx-fm-folder-tree" [class]="{
-      'bottom-scrollable-area-shadow':
-        hasScrollableArea &&
-        (groupScrollPosition === ScrollPosition.TOP ||
-          groupScrollPosition === ScrollPosition.MIDDLE)
-    }" (scroll)="onFolderTreeScroll($event)">
+<div
+  #folderTreeContainer
+  class="nx-fm-folder-tree"
+  [class]="{
+    'bottom-scrollable-area-shadow':
+      hasScrollableArea &&
+      (groupScrollPosition === ScrollPosition.TOP ||
+        groupScrollPosition === ScrollPosition.MIDDLE),
+  }"
+  (scroll)="onFolderTreeScroll($event)">
   @for (file of files; track $index) {
-  <nx-fm-sticky-tree-item [file]="file" />
+    <nx-fm-sticky-tree-item [file]="file" />
   }
 </div>
 

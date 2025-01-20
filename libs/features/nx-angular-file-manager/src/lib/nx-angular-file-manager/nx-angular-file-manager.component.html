@@ -6,12 +6,18 @@
   </ng-template>
 
   <!-- Content -->
-  <nx-fm-tabs (addNewTab)="onNewTabClick()" (tabClick)="onTabClick($event)" (tabClose)="onTabClose($event)">
+  <nx-fm-tabs
+    (addNewTab)="onNewTabClick()"
+    (tabClick)="onTabClick($event)"
+    (tabClose)="onTabClose($event)">
     @for (tab of tabs; track $index) {
-    <nx-fm-tab [tabData]="tab">
-      <nx-fm-explorer [tabData]="tab" [isFreezed]="tab.isSelected || false"
-        [fileContextMenuItems]="fileContextMenuItems" [explorerContextMenuItems]="explorerContextMenuItems" />
-    </nx-fm-tab>
+      <nx-fm-tab [tabData]="tab">
+        <nx-fm-explorer
+          [tabData]="tab"
+          [isFreezed]="tab.isSelected || false"
+          [fileContextMenuItems]="fileContextMenuItems"
+          [explorerContextMenuItems]="explorerContextMenuItems" />
+      </nx-fm-tab>
     }
   </nx-fm-tabs>
 </div>

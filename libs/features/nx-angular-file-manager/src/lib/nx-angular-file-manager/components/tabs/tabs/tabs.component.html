@@ -1,17 +1,22 @@
 <div class="nx-file-manager-tabs">
   <ul class="tabs">
     @for (tab of tabs; track $index) {
-    <li class="tab" [class]="{
-        selected: tab.tabData.isSelected
-      }" (click)="onTabSelect(tab)" [contextMenu]="tabContextMenu" [contextMenuValue]="tab">
-      {{ tab.tabData.name }}
+      <li
+        class="tab"
+        [class]="{
+          selected: tab.tabData.isSelected,
+        }"
+        (click)="onTabSelect(tab)"
+        [contextMenu]="tabContextMenu"
+        [contextMenuValue]="tab">
+        {{ tab.tabData.name }}
 
-      @if (tabs.length > 1) {
-      <button class="tab-close" (click)="onTabClose($event, tab.tabData)">
-        <i-lucide [img]="XIcon"></i-lucide>
-      </button>
-      }
-    </li>
+        @if (tabs.length > 1) {
+          <button class="tab-close" (click)="onTabClose($event, tab.tabData)">
+            <i-lucide [img]="XIcon"></i-lucide>
+          </button>
+        }
+      </li>
     }
 
     <li class="new-tab">
@@ -28,16 +33,28 @@
   <ng-template contextMenuItem (execute)="execute('Close', $event)" let-value>
     Close
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Close Right', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute('Close Right', $event)"
+    let-value>
     Close Right
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Close Left', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute('Close Left', $event)"
+    let-value>
     Close Left
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Close All', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute('Close All', $event)"
+    let-value>
     Close All
   </ng-template>
-  <ng-template contextMenuItem (execute)="execute('Close Others', $event)" let-value>
+  <ng-template
+    contextMenuItem
+    (execute)="execute('Close Others', $event)"
+    let-value>
     Close Others
   </ng-template>
 </context-menu>

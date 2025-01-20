@@ -1,45 +1,74 @@
-<div class="nx-file-manager-explorer" (mousedown)="onExplorerClick($event)"
-  [contextMenu]="!selectedFiles.length ? explorerContextMenu : undefined" [contextMenuValue]="tabData">
-  <div #filesContainer class="files grid-view" (mousedown)="onFilesAreaClick($event)"
-    (dragenter)="onFilesAreaDragEnter($event)" (dragover)="onFilesAreaDragEnter($event)"
+<div
+  class="nx-file-manager-explorer"
+  (mousedown)="onExplorerClick($event)"
+  [contextMenu]="!selectedFiles.length ? explorerContextMenu : undefined"
+  [contextMenuValue]="tabData">
+  <div
+    #filesContainer
+    class="files grid-view"
+    (mousedown)="onFilesAreaClick($event)"
+    (dragenter)="onFilesAreaDragEnter($event)"
+    (dragover)="onFilesAreaDragEnter($event)"
     (drop)="onFilesAreaDrop($event)">
     @for (file of tabData.files; track $index) {
-    <button [id]="file.id" class="file" [class]="{
-        selected: file.isSelected,
-        hoverable: !isSelecting,
-        'drop-not-allowed': file.isDroppable && !file.isDropAllowed,
-        'drop-allowed': file.isDroppable && file.isDropAllowed,
-        'drop-unavailable':
-          selectedFiles.length > 0 &&
-          !file.isSelected &&
-          file.isDropUnavailable,
-        uploading: file.isUploading,
-        'waiting-for-upload': file.isReadyForUpload
-      }" [draggable]="true" [attr.data-tippy-content]="file.name" (dragstart)="onFileDragStart($event, file)"
-      (drag)="onFileDragging($event)" (dragend)="onFileDragEnd($event)" (dragover)="onFileDragOver($event, file)"
-      (dragleave)="onFileDropLeave($event, file)" (drop)="onFileDrop($event, file)"
-      (mousedown)="onFileClick($event, file)" [contextMenu]="file.isContextMenuAvailable ? fileContextMenu : undefined"
-      [contextMenuValue]="file">
-      @if (UrlUtils.isHttpUrl(file.icon)) {
-      <img [src]="file.icon" class="icon image" [alt]="file.name" />
-      } @else {
-      @if (file.type === FileType.FOLDER) {
-      <lucide-icon [img]="file.icon" class="icon icon-folder" [size]="30"></lucide-icon>
-      } @else {
-      <lucide-icon [img]="file.icon" class="icon icon-file" [size]="30"></lucide-icon>
-      }
-      }
+      <button
+        [id]="file.id"
+        class="file"
+        [class]="{
+          selected: file.isSelected,
+          hoverable: !isSelecting,
+          'drop-not-allowed': file.isDroppable && !file.isDropAllowed,
+          'drop-allowed': file.isDroppable && file.isDropAllowed,
+          'drop-unavailable':
+            selectedFiles.length > 0 &&
+            !file.isSelected &&
+            file.isDropUnavailable,
+          uploading: file.isUploading,
+          'waiting-for-upload': file.isReadyForUpload,
+        }"
+        [draggable]="true"
+        [attr.data-tippy-content]="file.name"
+        (dragstart)="onFileDragStart($event, file)"
+        (drag)="onFileDragging($event)"
+        (dragend)="onFileDragEnd($event)"
+        (dragover)="onFileDragOver($event, file)"
+        (dragleave)="onFileDropLeave($event, file)"
+        (drop)="onFileDrop($event, file)"
+        (mousedown)="onFileClick($event, file)"
+        [contextMenu]="
+          file.isContextMenuAvailable ? fileContextMenu : undefined
+        "
+        [contextMenuValue]="file">
+        @if (UrlUtils.isHttpUrl(file.icon)) {
+          <img [src]="file.icon" class="icon image" [alt]="file.name" />
+        } @else {
+          @if (file.type === FileType.FOLDER) {
+            <lucide-icon
+              [img]="file.icon"
+              class="icon icon-folder"
+              [size]="30"></lucide-icon>
+          } @else {
+            <lucide-icon
+              [img]="file.icon"
+              class="icon icon-file"
+              [size]="30"></lucide-icon>
+          }
+        }
 
-      <span class="name">
-        {{ file.name }}
-      </span>
-    </button>
+        <span class="name">
+          {{ file.name }}
+        </span>
+      </button>
     }
 
     <!-- Drag Zone -->
-    <div class="drag-zone" [class]="{
-        active: isDragZoneActive
-      }" (dragover)="onFilesAreaDragEnter($event)" (dragleave)="onFilesAreaDragLeave($event)">
+    <div
+      class="drag-zone"
+      [class]="{
+        active: isDragZoneActive,
+      }"
+      (dragover)="onFilesAreaDragEnter($event)"
+      (dragleave)="onFilesAreaDragLeave($event)">
       <div class="drag-zone-inner">
         <h1 class="title">Drop files here</h1>
       </div>
@@ -47,7 +76,10 @@
 
     <!-- Drag Ghost -->
     <div #dragGhost class="drag-ghost">
-      <lucide-icon [img]="Files" class="icon icon-file" [size]="30"></lucide-icon>
+      <lucide-icon
+        [img]="Files"
+        class="icon icon-file"
+        [size]="30"></lucide-icon>
 
       <span>
         {{ selectedFiles.length || 1 }}
@@ -62,25 +94,31 @@
 <!-- Explorer Context Menu -->
 <context-menu #explorerContextMenu>
   @for (explorerContextMenuItem of explorerContextMenuItems; track $index) {
-  <ng-template contextMenuItem (execute)="onExplorerContextMenuClick(explorerContextMenuItem, $event)" let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="explorerContextMenuItem.icon"></i-lucide>
+    <ng-template
+      contextMenuItem
+      (execute)="onExplorerContextMenuClick(explorerContextMenuItem, $event)"
+      let-value>
+      <div class="custom-menu-item">
+        <i-lucide [img]="explorerContextMenuItem.icon"></i-lucide>
 
-      <span> {{ explorerContextMenuItem.label }} </span>
-    </div>
-  </ng-template>
+        <span> {{ explorerContextMenuItem.label }} </span>
+      </div>
+    </ng-template>
   }
 </context-menu>
 
 <!-- File Context Menu -->
 <context-menu #fileContextMenu>
   @for (fileContentMenuItem of fileContextMenuItems; track $index) {
-  <ng-template contextMenuItem (execute)="onFileContextMenuClick(fileContentMenuItem, $event)" let-value>
-    <div class="custom-menu-item">
-      <i-lucide [img]="fileContentMenuItem.icon"></i-lucide>
+    <ng-template
+      contextMenuItem
+      (execute)="onFileContextMenuClick(fileContentMenuItem, $event)"
+      let-value>
+      <div class="custom-menu-item">
+        <i-lucide [img]="fileContentMenuItem.icon"></i-lucide>
 
-      <span> {{ fileContentMenuItem.label }} </span>
-    </div>
-  </ng-template>
+        <span> {{ fileContentMenuItem.label }} </span>
+      </div>
+    </ng-template>
   }
 </context-menu>
