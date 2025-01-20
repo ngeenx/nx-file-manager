@@ -49,6 +49,8 @@ export interface IFileUploadUi {
    */
   isUploadingFailed?: boolean;
 
+  isLoading?: boolean;
+
   /**
    * Is this file uploading success
    */

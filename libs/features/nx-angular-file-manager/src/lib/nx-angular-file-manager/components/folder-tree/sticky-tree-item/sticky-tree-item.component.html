@@ -18,6 +18,10 @@
         {{ file.name }}
       </span>
     </div>
+
+    <div class="status">
+      <nx-angular-svg-oval-loader [isLoading]="file.isLoading" [size]="20" />
+    </div>
   </div>
 
   @if (file.isExpanded) {
