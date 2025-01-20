@@ -81,23 +81,23 @@ export class FolderTreeComponent implements AfterViewInit {
 
     const currentElement = ScrollUtils.getTopVisibleElement(event);
 
-    let curentElementTitleId = (currentElement as HTMLElement).querySelector(
-      ".title"
+    let curentElementHeaderId = (currentElement as HTMLElement).querySelector(
+      ".header"
     )?.id;
 
     // reset current element id
     if ((event.target as HTMLElement).scrollTop < 15) {
-      curentElementTitleId = "none";
+      curentElementHeaderId = "none";
     }
 
     if (currentElement) {
       (event.target as HTMLElement)
-        ?.querySelectorAll(".title")
+        ?.querySelectorAll(".header")
         .forEach((element: Element) => {
-          if (element.id === curentElementTitleId) {
-            element.classList.add("fixed-title");
+          if (element.id === curentElementHeaderId) {
+            element.classList.add("fixed-header");
           } else {
-            element.classList.remove("fixed-title");
+            element.classList.remove("fixed-header");
           }
         });
     }

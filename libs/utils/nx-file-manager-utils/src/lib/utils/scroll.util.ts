@@ -10,6 +10,8 @@ export class ScrollUtils {
       throw new Error("onGroupContainerScroll: event.target is undefined");
     }
 
+    console.log(event.target);
+
     const target = event.target as HTMLElement,
       parentRect = target.getBoundingClientRect();
 

@@ -17,16 +17,20 @@ nx-fm-folder-tree {
       }
     }
 
-    .title {
-      @apply flex flex-row items-center px-2 py-2 text-xs z-50 font-bold
-          transition-all duration-300 ease-in-out rounded-md
-          border border-transparent bg-gray-50/50 cursor-pointer
-          hover:border-nx-theme-1050 hover:bg-nx-theme-1030 backdrop-blur-md;
+    .header {
+      @apply flex flex-row z-50  px-2 py-2
+        transition-all duration-300 ease-in-out rounded-md
+        border border-transparent bg-gray-50/50 cursor-pointer
+        hover:border-nx-theme-1050 hover:bg-nx-theme-1030 backdrop-blur-md;
 
-      &.fixed-title {
+      &.fixed-header {
         @apply sticky top-0 shadow-[rgba(0,0,15,0.3)0px_5px_6px_-6px]
-            bg-nx-theme-1020 border-nx-theme-1030 hover:border-nx-theme-1050
-            hover:bg-nx-theme-1040;
+          bg-nx-theme-1020 border-nx-theme-1030 hover:border-nx-theme-1050
+          hover:bg-nx-theme-1040;
+      }
+
+      .title {
+        @apply flex flex-row items-center text-xs font-bold;
       }
     }
 

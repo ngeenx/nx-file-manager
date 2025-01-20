@@ -3,12 +3,13 @@ import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { LucideAngularModule, ChevronRight, ChevronDown } from "lucide-angular";
 import { TreeItemComponent } from "../tree-item/tree-item.component";
 import { FolderTreeContextMenuService } from "../../../services/folder-tree-context-menu.service";
+import { NxOvalLoaderComponent } from "@ngeenx/nx-angular-svg-loaders";
 
 @Component({
   selector: "nx-fm-sticky-tree-item",
   templateUrl: "./sticky-tree-item.component.html",
   standalone: true,
-  imports: [LucideAngularModule, TreeItemComponent],
+  imports: [LucideAngularModule, TreeItemComponent, NxOvalLoaderComponent],
 })
 export class StickyTreeItemComponent {
   @Input()
@@ -26,11 +27,11 @@ export class StickyTreeItemComponent {
 
     if (!this.file.isExpanded) {
       const thisStickyTreeItem = document.getElementById(
-        `nx-fm-sticky-title-${this.file.id}`
+        `nx-fm-sticky-header-${this.file.id}`
       );
 
       if (thisStickyTreeItem?.parentElement) {
-        thisStickyTreeItem?.classList.remove("fixed-title");
+        thisStickyTreeItem?.classList.remove("fixed-header");
       }
     }
   }
