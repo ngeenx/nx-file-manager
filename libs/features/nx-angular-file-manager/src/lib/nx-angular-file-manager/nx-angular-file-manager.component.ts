@@ -42,6 +42,9 @@ export class NxAngularFileManagerComponent implements OnInit {
   @Input()
   public options: Partial<INxFileManagerOptions> = defaultOptions;
 
+  @Input()
+  public theme: "dark" | "light" = "light";
+
   // #endregion
 
   public Folder = Folder;

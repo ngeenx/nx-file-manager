@@ -1,5 +1,5 @@
 <!-- Container -->
-<div class="nx-file-manager custom-scrollbar">
+<div [class]="'nx-file-manager custom-scrollbar ' + theme">
   <!-- Sidebar -->
   <ng-template [ngIf]="options.sidebar?.visibility">
     <nx-fm-sidebar [files]="sidebarFolderTreeFiles" />

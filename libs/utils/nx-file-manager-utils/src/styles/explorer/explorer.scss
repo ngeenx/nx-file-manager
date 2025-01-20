@@ -1,5 +1,6 @@
 .nx-file-manager-explorer {
-  @apply relative flex flex-col bg-white/90 backdrop-blur-lg h-full w-full;
+  @apply relative flex flex-col bg-white/90 dark:bg-gray-900
+    backdrop-blur-lg h-full w-full;
 
   .files {
     @apply relative flex gap-2 w-full h-full p-3 pr-6 justify-center items-center
@@ -44,16 +45,19 @@
 
     .file {
       @apply flex border border-gray-200 z-20
+        dark:border-gray-700 dark:text-gray-300
         transition-all duration-100 ease-in-out;
 
       &.hoverable {
         &:hover {
-          @apply hover:bg-nx-theme-1040 hover:border hover:border-nx-theme-300;
+          @apply hover:bg-nx-theme-1040 hover:border hover:border-nx-theme-300
+            dark:hover:border-nx-theme-600;
         }
       }
 
       &.selected {
-        @apply bg-nx-theme-100 border border-nx-theme-300 #{!important};
+        @apply bg-nx-theme-100 border border-nx-theme-300
+          dark:bg-nx-theme-900 dark:border-nx-theme-400 #{!important};
 
         &:hover {
           @apply bg-nx-theme-200 border border-nx-theme-400 #{!important};

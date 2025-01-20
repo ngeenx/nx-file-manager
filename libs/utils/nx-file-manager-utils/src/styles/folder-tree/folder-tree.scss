@@ -21,6 +21,7 @@ nx-fm-folder-tree {
       @apply flex flex-row z-50 px-2 py-2
         transition-all duration-300 ease-in-out rounded-md
         border border-transparent bg-gray-50/50 cursor-pointer
+        dark:bg-gray-900
         hover:border-nx-theme-1050 hover:bg-nx-theme-1030 backdrop-blur-md;
 
       &.fixed-header {

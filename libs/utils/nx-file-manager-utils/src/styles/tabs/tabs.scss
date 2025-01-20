@@ -3,28 +3,31 @@ nx-fm-tabs {
 }
 
 .nx-file-manager-tabs {
-  @apply w-full h-full;
+  @apply w-full h-full dark:bg-gray-900;
 
   .tabs {
-    @apply flex flex-row gap-2 items-center w-full
-      border-b border-gray-300 pt-2 px-2;
+    @apply flex flex-row gap-2 items-center w-full pt-2 px-2
+      border-b border-gray-300 dark:border-gray-700;
 
     .tab {
       @apply flex flex-row gap-2.5 items-center
         px-2.5 py-1.5 border border-gray-200 border-b-0
         bg-gray-100 rounded-tl-md rounded-tr-md
+        dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300
         text-sm text-gray-800 cursor-pointer
         transition-all duration-300 ease-in-out;
 
       &:hover {
-        @apply bg-gray-200;
+        @apply bg-gray-200 dark:bg-gray-600;
       }
 
       &.selected {
-        @apply bg-nx-theme-200 border-nx-theme-200;
+        @apply bg-nx-theme-200 dark:bg-nx-theme-800 dark:border-nx-theme-700
+          border-nx-theme-200;
 
         &:hover {
-          @apply bg-nx-theme-200 border-nx-theme-200;
+          @apply bg-nx-theme-200 border-nx-theme-200
+            dark:bg-nx-theme-700 dark:border-nx-theme-600;
         }
       }
 
@@ -40,7 +43,7 @@ nx-fm-tabs {
     }
 
     .new-tab {
-      @apply flex flex-row gap-1 items-center;
+      @apply flex flex-row gap-1 items-center dark:text-gray-300;
 
       svg {
         stroke-width: 1;
