@@ -23,6 +23,10 @@ export class StickyTreeItemComponent {
   ) {}
 
   public onItemClick(): void {
+    if (this.file.isLoading) {
+      return;
+    }
+
     this.file.isExpanded = !this.file.isExpanded;
 
     if (!this.file.isExpanded) {
