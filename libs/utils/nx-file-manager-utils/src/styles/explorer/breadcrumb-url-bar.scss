@@ -1,0 +1,14 @@
+.nx-fm-breadcrumb-url-bar {
+  @apply flex flex-row gap-2 items-center p-2
+    border-b border-gray-300;
+
+  .nav-buttons {
+    @apply flex flex-row gap-2 items-center;
+
+    button {
+      @apply border border-gray-200 rounded-md p-1.5
+        transition-all duration-300 ease-in-out
+        hover:border-nx-theme-1050 hover:bg-nx-theme-1030;
+    }
+  }
+}

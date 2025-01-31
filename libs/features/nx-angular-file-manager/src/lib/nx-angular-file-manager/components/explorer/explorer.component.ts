@@ -27,13 +27,19 @@ import { ContextMenuModule } from "@perfectmemory/ngx-contextmenu";
 import { FileUploaderService } from "../../services/file-uploader.service";
 import { LucideAngularModule, Files, File, Folder } from "lucide-angular";
 import { NxFileInfoBarComponent } from "../info-bar/info-bar.component";
+import { BreadcrumbUrlBarComponent } from "./breadcrumb-url-bar/breadcrumb-url-bar.component";
 
 @Component({
   selector: "nx-fm-explorer",
   templateUrl: "./explorer.component.html",
   standalone: true,
   providers: [FileActionsService],
-  imports: [NxFileInfoBarComponent, ContextMenuModule, LucideAngularModule],
+  imports: [
+    NxFileInfoBarComponent,
+    ContextMenuModule,
+    LucideAngularModule,
+    BreadcrumbUrlBarComponent,
+  ],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   public Files = Files;

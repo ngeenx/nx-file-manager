@@ -3,6 +3,8 @@
   (mousedown)="onExplorerClick($event)"
   [contextMenu]="!selectedFiles.length ? explorerContextMenu : undefined"
   [contextMenuValue]="tabData">
+  <nx-fm-breadcrumb-url-bar/>
+
   <div
     #filesContainer
     class="files grid-view"
