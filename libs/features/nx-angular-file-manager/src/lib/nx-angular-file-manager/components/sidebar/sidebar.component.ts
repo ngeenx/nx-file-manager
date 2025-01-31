@@ -1,12 +1,13 @@
 import { Component, Input, HostListener } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { FolderTreeComponent } from "../folder-tree/folder-tree.component";
+import { FolderTreeFluidComponent } from "../folder-tree-fluid/folder-tree-fluid.component";
 
 @Component({
   selector: "nx-fm-sidebar",
   templateUrl: "./sidebar.component.html",
   standalone: true,
-  imports: [FolderTreeComponent],
+  imports: [FolderTreeComponent, FolderTreeFluidComponent],
 })
 export class NxAngularSidebarComponent {
   @HostListener("document:keydown", ["$event"])

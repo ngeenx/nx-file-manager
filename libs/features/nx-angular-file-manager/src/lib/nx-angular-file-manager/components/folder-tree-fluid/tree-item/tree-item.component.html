@@ -1,0 +1,9 @@
+<button class="ngn-fm-fluid-tree-item" (click)="onFileClick()">
+  @if (file.hasItems) {
+    <i-lucide [img]="ChevronRight" [size]="16" class="direction-chevron"></i-lucide>
+  }
+
+  <span>
+    {{ file.name }}
+  </span>
+</button>

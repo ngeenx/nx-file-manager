@@ -57,6 +57,7 @@ export class NxAngularFileManagerComponent implements OnInit {
     this.sidebarFolderTreeFiles = Array.from({ length: 10 }).map((_, i) => ({
       id: i + 1,
       name: `i ${i + 1}`,
+      hasItems: true,
       items: Array.from({ length: 5 }).map((_, j) => ({
         id: j + 1,
         icon: this.Folder,

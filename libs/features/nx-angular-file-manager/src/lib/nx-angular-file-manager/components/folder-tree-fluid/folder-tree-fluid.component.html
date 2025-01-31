@@ -1,3 +1,17 @@
-<p>
-  folder-tree-fluid works!
-</p>
+<div class="nx-fm-fluid-tree">
+  @if (selectedFile) {
+    <button class="parent-file-button" (click)="onParentFileClick()">
+      <i-lucide [img]="ChevronLeft" [size]="18" class="direction-chevron"></i-lucide>
+
+      {{ selectedFile.name }}
+    </button>
+
+    @for (file of selectedFile?.items; track $index) {
+      <nx-fm-fluid-tree-item [file]="file" (fileClick)="onFileClick($event)" />
+    }
+  } @else {
+    @for (file of files; track $index) {
+      <nx-fm-fluid-tree-item [file]="file" (fileClick)="onFileClick($event)" />
+    }
+  }
+</div>
