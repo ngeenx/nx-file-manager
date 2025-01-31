@@ -12,6 +12,10 @@
     }
   }
 
+  .sub-tree {
+    @apply flex flex-col gap-1 py-2 overflow-auto;
+  }
+
   .ngn-fm-fluid-tree-item {
     @apply flex flex-row items-center gap-1
       p-2 w-full

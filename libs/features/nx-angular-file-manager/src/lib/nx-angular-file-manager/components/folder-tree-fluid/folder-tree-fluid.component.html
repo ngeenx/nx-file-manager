@@ -6,12 +6,16 @@
       {{ selectedFile.name }}
     </button>
 
-    @for (file of selectedFile?.items; track $index) {
-      <nx-fm-fluid-tree-item [file]="file" (fileClick)="onFileClick($event)" />
-    }
+    <div class="sub-tree" [ngStyle]="{height: height + 'px'}">
+      @for (file of selectedFile?.items; track $index) {
+        <nx-fm-fluid-tree-item [file]="file" (fileClick)="onFileClick($event)" />
+      }
+    </div>
   } @else {
-    @for (file of files; track $index) {
-      <nx-fm-fluid-tree-item [file]="file" (fileClick)="onFileClick($event)" />
-    }
+    <div class="sub-tree" [ngStyle]="{height: height + 'px'}">
+      @for (file of files; track $index) {
+        <nx-fm-fluid-tree-item [file]="file" (fileClick)="onFileClick($event)" />
+      }
+    </div>
   }
 </div>
