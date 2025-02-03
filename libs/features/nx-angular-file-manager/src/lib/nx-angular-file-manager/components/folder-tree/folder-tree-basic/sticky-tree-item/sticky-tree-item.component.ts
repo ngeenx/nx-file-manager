@@ -2,7 +2,7 @@ import { Component, Input } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { LucideAngularModule, ChevronRight, ChevronDown } from "lucide-angular";
 import { TreeItemComponent } from "../tree-item/tree-item.component";
-import { FolderTreeContextMenuService } from "../../../services/folder-tree-context-menu.service";
+import { FolderTreeContextMenuService } from "../../../../services/folder-tree-context-menu.service";
 import { NxOvalLoaderComponent } from "@ngeenx/nx-angular-svg-loaders";
 
 @Component({

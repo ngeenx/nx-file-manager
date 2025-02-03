@@ -20,7 +20,7 @@ import {
 import {
   FolderTreeContextMenuService,
   IFolderTreeFileContextMenuEvent,
-} from "../../services/folder-tree-context-menu.service";
+} from "../../../services/folder-tree-context-menu.service";
 
 @Component({
   selector: "nx-fm-folder-tree",

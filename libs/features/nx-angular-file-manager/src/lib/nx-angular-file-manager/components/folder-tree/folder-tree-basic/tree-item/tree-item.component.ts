@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
 import { ChevronRight, ChevronDown, LucideAngularModule } from "lucide-angular";
-import { FolderTreeContextMenuService } from "../../../services/folder-tree-context-menu.service";
+import { FolderTreeContextMenuService } from "../../../../services/folder-tree-context-menu.service";
 
 @Component({
   selector: "nx-fm-tree-item",

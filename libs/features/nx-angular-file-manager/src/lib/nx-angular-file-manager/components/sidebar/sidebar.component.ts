@@ -1,7 +1,7 @@
 import { Component, Input, HostListener } from "@angular/core";
 import { IFile } from "@ngeenx/nx-file-manager-utils";
-import { FolderTreeComponent } from "../folder-tree/folder-tree.component";
-import { FolderTreeFluidComponent } from "../folder-tree-fluid/folder-tree-fluid.component";
+import { FolderTreeComponent } from "../folder-tree/folder-tree-basic/folder-tree.component";
+import { FolderTreeFluidComponent } from "../folder-tree/folder-tree-fluid/folder-tree-fluid.component";
 
 @Component({
   selector: "nx-fm-sidebar",
