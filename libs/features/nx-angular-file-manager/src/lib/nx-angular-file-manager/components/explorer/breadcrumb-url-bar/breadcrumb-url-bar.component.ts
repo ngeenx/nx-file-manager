@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IBreadcrumbItem } from "@ngeenx/nx-file-manager-utils";
+import { IBreadcrumbItem, ITab } from "@ngeenx/nx-file-manager-utils";
 import {
   ArrowLeft,
   ArrowRight,
@@ -20,6 +20,11 @@ export class BreadcrumbUrlBarComponent {
 
   @Input()
   public breadcrumbs!: IBreadcrumbItem[];
+
+  @Input()
+  public tab!: ITab;
+
+  public history: IBreadcrumbItem[] = [];
 
   public ChevronRight = ChevronRight;
 

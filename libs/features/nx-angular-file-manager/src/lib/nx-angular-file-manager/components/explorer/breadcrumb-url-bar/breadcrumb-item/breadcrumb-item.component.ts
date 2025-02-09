@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IBreadcrumbItem } from "@ngeenx/nx-file-manager-utils";
+import { IBreadcrumbItem, ITab } from "@ngeenx/nx-file-manager-utils";
 import { LucideAngularModule } from "lucide-angular";
 
 @Component({
@@ -11,4 +11,7 @@ import { LucideAngularModule } from "lucide-angular";
 export class BreadcrumbItemComponent {
   @Input()
   public breadcrumbItem!: IBreadcrumbItem;
+
+  @Input()
+  public tab!: ITab;
 }

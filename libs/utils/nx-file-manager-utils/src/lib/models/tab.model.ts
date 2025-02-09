@@ -12,4 +12,5 @@ export interface ITab {
   // navigation
   rootCrumb: IBreadcrumbItem;
   breadcrumbs: IBreadcrumbItem[];
+  breadcrumbHistory: IBreadcrumbItem[][];
 }

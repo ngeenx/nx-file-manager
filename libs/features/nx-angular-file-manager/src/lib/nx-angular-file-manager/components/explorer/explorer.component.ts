@@ -113,7 +113,6 @@ export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log(33);
     if (changes["isFreezed"]) {
       if (!changes["isFreezed"]?.currentValue) {
         // this.clearAllSelections();

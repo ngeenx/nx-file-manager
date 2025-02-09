@@ -1,9 +1,10 @@
 import { IFile } from "./file.model";
+import { ITab } from "./tab.model";
 
 export interface IBreadcrumbItem {
   file: IFile;
   isLoading?: boolean;
   isDisabled?: boolean;
 
-  onClick: () => void;
+  onClick: (tab: ITab, breadcrumbItem: IBreadcrumbItem) => void;
 }

@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { NxAngularSidebarComponent } from "./components/sidebar/sidebar.component";
 import {
   FileType,
+  IBreadcrumbItem,
   IFile,
   IFileContextMenuItem,
   ITab,
@@ -126,8 +127,10 @@ export class NxAngularFileManagerComponent implements OnInit {
           path: "files",
           type: FileType.FOLDER,
         },
-        onClick: () => {
-          console.log("Files");
+        onClick: (tab: ITab, breadcrumbItem: IBreadcrumbItem) => {
+          console.log("Files", tab, breadcrumbItem);
+          tab.breadcrumbs = [];
+          tab.breadcrumbHistory.push([]);
         },
       },
       breadcrumbs: [
@@ -146,6 +149,7 @@ export class NxAngularFileManagerComponent implements OnInit {
           },
         },
       ],
+      breadcrumbHistory: [],
     });
   }
 
@@ -192,6 +196,7 @@ export class NxAngularFileManagerComponent implements OnInit {
           },
         },
       ],
+      breadcrumbHistory: [],
     });
 
     this.tabs.forEach((tab: ITab, index: number) => {
