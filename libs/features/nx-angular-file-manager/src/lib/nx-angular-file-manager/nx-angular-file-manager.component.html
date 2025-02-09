@@ -14,6 +14,8 @@
       <nx-fm-tab [tabData]="tab">
         <nx-fm-explorer
           [tabData]="tab"
+          [breadcrumbs]="tab.breadcrumbs"
+          [rootCrumb]="tab.rootCrumb"
           [isFreezed]="tab.isSelected || false"
           [fileContextMenuItems]="fileContextMenuItems"
           [explorerContextMenuItems]="explorerContextMenuItems" />

@@ -1,3 +1,4 @@
+import { IBreadcrumbItem } from "./breadcrumb.model";
 import { IFile } from "./file.model";
 
 export interface ITab {
@@ -7,4 +8,8 @@ export interface ITab {
   currentFolder: IFile;
   isSelected?: boolean;
   files: IFile[];
+
+  // navigation
+  rootCrumb: IBreadcrumbItem;
+  breadcrumbs: IBreadcrumbItem[];
 }

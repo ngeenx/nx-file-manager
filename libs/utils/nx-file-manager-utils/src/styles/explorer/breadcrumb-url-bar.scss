@@ -1,5 +1,5 @@
 .nx-fm-breadcrumb-url-bar {
-  @apply flex flex-row gap-2 items-center p-2
+  @apply flex flex-row gap-4 items-center p-2
     border-b border-gray-300;
 
   .nav-buttons {
@@ -9,6 +9,30 @@
       @apply border border-gray-200 rounded-md p-1.5
         transition-all duration-300 ease-in-out text-gray-500
         hover:border-nx-theme-1050 hover:bg-nx-theme-1030;
+    }
+  }
+
+  .breadcrumb-bar {
+    @apply flex flex-row gap-1 items-center border border-gray-200
+      rounded-md w-full p-1.5
+      transition-all duration-200 ease-in-out;
+
+    &:hover {
+      @apply border-gray-300 bg-gray-50;
+    }
+
+    svg {
+      @apply text-gray-500;
+    }
+
+    .breadcrumb-item {
+      @apply flex flex-row gap-2 items-center px-2 py-0.5 rounded-md
+        transition-all duration-200 ease-in-out
+        cursor-pointer text-gray-500;
+
+      &:hover {
+        @apply bg-nx-theme-1050 text-gray-800;
+      }
     }
   }
 }

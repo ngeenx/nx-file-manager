@@ -1,4 +1,5 @@
 <div class="nx-fm-breadcrumb-url-bar">
+  <!-- Nav Buttons -->
   <div class="nav-buttons">
     <button>
       <i-lucide [img]="ArrowLeft" [size]="24"></i-lucide>
@@ -7,5 +8,22 @@
     <button>
       <i-lucide [img]="ArrowRight" [size]="24"></i-lucide>
     </button>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <!-- Root Folder -->
+    <nx-fm-breadcrumb-item [breadcrumbItem]="rootCrumb" />
+
+    <i-lucide [img]="ChevronRight" [size]="24"></i-lucide>
+
+    <!-- Child Folders -->
+    @for (breadcrumb of breadcrumbs; track $index) {
+      <nx-fm-breadcrumb-item [breadcrumbItem]="breadcrumb" />
+
+      @if ($index < breadcrumbs.length - 1) {
+        <i-lucide [img]="ChevronRight" [size]="24"></i-lucide>
+      }
+    }
   </div>
 </div>

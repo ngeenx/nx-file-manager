@@ -12,6 +12,7 @@ import {
 import {
   FileActionType,
   FileType,
+  IBreadcrumbItem,
   IFile,
   IFileContextMenuEvent,
   IFileContextMenuItem,
@@ -42,6 +43,12 @@ import { BreadcrumbUrlBarComponent } from "./breadcrumb-url-bar/breadcrumb-url-b
   ],
 })
 export class ExplorerComponent implements OnChanges, OnDestroy, AfterViewInit {
+  @Input()
+  public rootCrumb!: IBreadcrumbItem;
+
+  @Input()
+  public breadcrumbs: IBreadcrumbItem[] = [];
+
   public Files = Files;
   public Folder = Folder;
   public File = File;

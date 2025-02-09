@@ -118,6 +118,34 @@ export class NxAngularFileManagerComponent implements OnInit {
       path: "files",
       currentFolder: files[0],
       files: files,
+      rootCrumb: {
+        file: {
+          id: 1,
+          name: "My Files",
+          icon: this.Folder,
+          path: "files",
+          type: FileType.FOLDER,
+        },
+        onClick: () => {
+          console.log("Files");
+        },
+      },
+      breadcrumbs: [
+        {
+          file: {
+            id: 1,
+            name: "Files",
+            icon: this.Folder,
+            path: "files",
+            type: FileType.FOLDER,
+          },
+          isLoading: false,
+          isDisabled: false,
+          onClick: () => {
+            console.log("Files");
+          },
+        },
+      ],
     });
   }
 
@@ -136,6 +164,34 @@ export class NxAngularFileManagerComponent implements OnInit {
       path: `tab-${this.tabs.length + 1}`,
       currentFolder: files[0],
       files: files,
+      rootCrumb: {
+        file: {
+          id: 1,
+          name: "My Files",
+          icon: this.Folder,
+          path: "files",
+          type: FileType.FOLDER,
+        },
+        onClick: () => {
+          console.log("Files");
+        },
+      },
+      breadcrumbs: [
+        {
+          file: {
+            id: 1,
+            name: "Files",
+            icon: this.Folder,
+            path: "files",
+            type: FileType.FOLDER,
+          },
+          isLoading: false,
+          isDisabled: false,
+          onClick: () => {
+            console.log("Files");
+          },
+        },
+      ],
     });
 
     this.tabs.forEach((tab: ITab, index: number) => {

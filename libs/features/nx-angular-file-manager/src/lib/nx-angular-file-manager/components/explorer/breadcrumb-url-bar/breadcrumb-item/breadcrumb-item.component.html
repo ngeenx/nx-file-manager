@@ -1,0 +1,11 @@
+<button class="breadcrumb-item">
+  <!-- Icon -->
+  @if (breadcrumbItem.file.icon) {
+    <lucide-icon [img]="breadcrumbItem.file.icon" [size]="14"></lucide-icon>
+  }
+
+  <!-- Name -->
+  <span>
+    {{ breadcrumbItem.file.name }}
+  </span>
+</button>
