@@ -7,6 +7,7 @@
 
     button {
       @apply border border-gray-200 rounded-md p-1.5
+      dark:border-gray-700
         transition-all duration-300 ease-in-out text-gray-500
         hover:border-nx-theme-1050 hover:bg-nx-theme-1030;
 
@@ -17,12 +18,13 @@
   }
 
   .breadcrumb-bar {
-    @apply flex flex-row gap-1 items-center border border-gray-200
-      rounded-md w-full p-1.5
+    @apply flex flex-row gap-1 items-center
+      border border-gray-200 dark:border-gray-700
+      rounded-md w-full p-1.5 cursor-text
       transition-all duration-200 ease-in-out;
 
     &:hover {
-      @apply border-gray-300 bg-gray-50;
+      @apply border-gray-300 bg-gray-50 dark:hover:border-gray-700 dark:bg-gray-800;
     }
 
     svg {
@@ -34,8 +36,16 @@
         transition-all duration-200 ease-in-out
         cursor-pointer text-gray-500;
 
+      svg {
+        @apply transition-all duration-200 ease-in-out;
+      }
+
       &:hover {
-        @apply bg-nx-theme-1050 text-gray-800;
+        @apply bg-nx-theme-1030 text-gray-800 dark:text-gray-300;
+
+        svg {
+          @apply text-gray-800 dark:text-gray-300 transition-all duration-200 ease-in-out;
+        }
       }
     }
   }
