@@ -11,21 +11,38 @@
   </div>
 
   <!-- Breadcrumb -->
-  <div class="breadcrumb-bar">
-    <!-- Root Folder -->
-    <nx-fm-breadcrumb-item [breadcrumbItem]="rootCrumb" [tab]="tab" />
+  @if (!isUrlMode) {
+    <div class="breadcrumb-bar" (click)="onBreadcrumbBarClick($event)">
+      <!-- Root Folder -->
+      <nx-fm-breadcrumb-item
+        [breadcrumbItem]="rootCrumb"
+        [tab]="tab"
+        (click)="onBreadcrumbItemClick($event)" />
 
-    @if (breadcrumbs.length > 0) {
-      <i-lucide [img]="ChevronRight" [size]="24"></i-lucide>
-    }
-
-    <!-- Child Folders -->
-    @for (breadcrumb of breadcrumbs; track $index) {
-      <nx-fm-breadcrumb-item [breadcrumbItem]="breadcrumb" [tab]="tab" />
-
-      @if ($index < breadcrumbs.length - 1) {
+      @if (breadcrumbs.length > 0) {
         <i-lucide [img]="ChevronRight" [size]="24"></i-lucide>
       }
-    }
-  </div>
+
+      <!-- Child Folders -->
+      @for (breadcrumb of breadcrumbs; track $index) {
+        <nx-fm-breadcrumb-item
+          [breadcrumbItem]="breadcrumb"
+          [tab]="tab"
+          (click)="onBreadcrumbItemClick($event)" />
+
+        @if ($index < breadcrumbs.length - 1) {
+          <i-lucide [img]="ChevronRight" [size]="24"></i-lucide>
+        }
+      }
+    </div>
+  } @else {
+    <input
+      #urlBarInput
+      type="text"
+      class="url-bar"
+      [(ngModel)]="breadcrumbsUrl"
+      [ngModelOptions]="{ standalone: true }"
+      (change)="onUrlChange($event)"
+      (blur)="onUrlBarBlur()" />
+  }
 </div>

@@ -49,4 +49,13 @@
       }
     }
   }
+
+  .url-bar {
+    @apply flex flex-row gap-1 items-center
+      dark:bg-gray-800 dark:text-gray-300
+      outline-none
+      border border-gray-200 dark:border-gray-700
+      rounded-md w-full p-2 cursor-text
+      transition-all duration-200 ease-in-out;
+  }
 }
