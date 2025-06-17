@@ -16,7 +16,7 @@ import { LucideAngularModule, Folder, File } from "lucide-angular";
 import {
   INxFileManagerOptions,
   defaultOptions,
-} from "libs/utils/nx-file-manager-utils/src/lib/models/options.model";
+} from "@ngeenx/nx-file-manager-utils";
 
 @Component({
   selector: "nx-file-manager",
